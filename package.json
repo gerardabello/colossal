@@ -1,0 +1,16 @@
+{
+  "name": "analosizer",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "packify": "latest",
+    "jshint":  "latest"
+  },
+  "scripts": {
+    "lint": "jshint --verbose src/scripts/**.js",
+    "packify": "mkdir -p build && cd src && (packify index.html > ../build/analosizer.html)"
+  },
+  "jshintConfig": {
+    "laxcomma": true
+  }
+}
