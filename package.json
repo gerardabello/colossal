@@ -1,16 +1,20 @@
 {
   "name": "analosizer",
   "dependencies": {
+    "ractive": "latest"
   },
   "devDependencies": {
-    "packify": "latest",
+    "browserify": "latest",
     "jshint":  "latest"
   },
   "scripts": {
-    "lint": "jshint --verbose src/scripts/**.js",
-    "packify": "mkdir -p build && cd src && (packify index.html > ../build/analosizer.html)"
+    "build": "mkdir -p build && cp src/index.html build/analosizer.html && npm run browserify",
+    "prebuild": "npm run lint",
+    "lint": "jshint --verbose src/**.js",
+    "browserify": "browserify src/analosizer.js > build/analosizer.js"
   },
   "jshintConfig": {
+    "browserify": true,
     "laxcomma": true
   }
 }
