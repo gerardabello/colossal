@@ -1,8 +1,12 @@
 "use strict";
 
+var Models = require('./analosizer/models.js')
+  , engine = new Models.Engine()
+;
+
 var Ractive = require('ractive')
   , data = {
-        engaged: false
+        engine: engine
     }
   , ractive = new Ractive({
         el: '#app-container'
