@@ -14,3 +14,11 @@ var Ractive = require('ractive')
       , data: data
     })
   ;
+
+ractive.on( 'noteOn', function( rEvent, noteIndex ) {
+  global.console.log( 'Note on: ' + noteIndex );
+});
+
+ractive.on( 'noteOff', function( rEvent, noteIndex ) {
+  global.console.log( 'Note off: ' + noteIndex );
+});

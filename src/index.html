@@ -5,26 +5,25 @@
     <meta charset="UTF-8" />
     <title>Analosizer</title>
     <style>
-      .white-key {
+      .controller-key {
         position: relative;
         display: inline-block;
         vertical-align: top;
-        width: 2em;
-        height: 5em;
         border: solid 1px black;
         text-align: center;
+      }
+      .white-key {
+        background-color: white;
+        color: black;
+        width: 2em;
+        height: 5em;
         margin: 0.5em 0.075em;
       }
       .black-key {
-        position: relative;
-        display: inline-block;
-        vertical-align: top;
         background-color: black;
         color: white;
         width: 1.5em;
         height: 2.5em;
-        border: solid 1px black;
-        text-align: center;
         margin: 0.5em -0.7875em;
         z-index: 1;
       }
@@ -58,34 +57,29 @@
   {{/engine}}
 
   <div id='controller-keyboard'>
-    <a class='white-key' href='javascript:void(0)' id='key-c0'>
-      <span class='control-label'>C</span>
-    </a><a class='black-key' href='javascript:void(0)' id='key-cs0'>
-      <span class='control-label'>C♯</span>
-    </a><a class='white-key' href='javascript:void(0)' id='key-d0'>
-      <span class='control-label'>D</span>
-    </a><a class='black-key' href='javascript:void(0)' id='key-ds0'>
-      <span class='control-label'>D♯</span>
-    </a><a class='white-key' href='javascript:void(0)' id='key-e0'>
-      <span class='control-label'>E</span>
-    </a><a class='white-key' href='javascript:void(0)' id='key-f0'>
-      <span class='control-label'>F</span>
-    </a><a class='black-key' href='javascript:void(0)' id='key-fs0'>
-      <span class='control-label'>F♯</span>
-    </a><a class='white-key' href='javascript:void(0)' id='key-g0'>
-      <span class='control-label'>G</span>
-    </a><a class='black-key' href='javascript:void(0)' id='key-gs0'>
-      <span class='control-label'>G♯</span>
-    </a><a class='white-key' href='javascript:void(0)' id='key-a1'>
-      <span class='control-label'>A</span>
-    </a><a class='black-key' href='javascript:void(0)' id='key-as1'>
-      <span class='control-label'>A♯</span>
-    </a><a class='white-key' href='javascript:void(0)' id='key-b1'>
-      <span class='control-label'>B</span>
-    </a><a class='white-key' href='javascript:void(0)' id='key-c1'>
-      <span class='control-label'>C</span>
-    </a>
+    {{>controllerKey { keyType: 'white', label: 'C',  noteIndex:  0 }
+  }}{{>controllerKey { keyType: 'black', label: 'C♯', noteIndex:  1 }
+  }}{{>controllerKey { keyType: 'white', label: 'D',  noteIndex:  2 }
+  }}{{>controllerKey { keyType: 'black', label: 'D♯', noteIndex:  3 }
+  }}{{>controllerKey { keyType: 'white', label: 'E',  noteIndex:  4 }
+  }}{{>controllerKey { keyType: 'white', label: 'F',  noteIndex:  5 }
+  }}{{>controllerKey { keyType: 'black', label: 'F♯', noteIndex:  6 }
+  }}{{>controllerKey { keyType: 'white', label: 'G',  noteIndex:  7 }
+  }}{{>controllerKey { keyType: 'black', label: 'G♯', noteIndex:  8 }
+  }}{{>controllerKey { keyType: 'white', label: 'A',  noteIndex:  9 }
+  }}{{>controllerKey { keyType: 'black', label: 'A♯', noteIndex: 10 }
+  }}{{>controllerKey { keyType: 'white', label: 'B',  noteIndex: 11 }
+    }}
   </div>
+
+  {{#partial controllerKey}}<a
+    class='controller-key {{keyType}}-key'
+    href='javascript:void(0)'
+    on-mousedown='noteOn:{{noteIndex}}'
+    on-mouseup='noteOff:{{noteIndex}}'
+  >
+    <span class='control-label'>{{label}}</span>
+  </a>{{/partial}}
 </fieldset>
     </script>
 
