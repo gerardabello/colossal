@@ -15,10 +15,10 @@ var Ractive = require('ractive')
     })
   ;
 
-ractive.on( 'noteOn', function( rEvent, noteIndex ) {
-  global.console.log( 'Note on: ' + noteIndex );
+ractive.on( 'noteOn', function( rEvent, noteNum ) {
+  engine.noteOn( noteNum );
 });
 
-ractive.on( 'noteOff', function( rEvent, noteIndex ) {
-  global.console.log( 'Note off: ' + noteIndex );
+ractive.on( 'noteOff', function( rEvent, noteNum ) {
+  engine.noteOff( noteNum );
 });

@@ -5,6 +5,9 @@
     <meta charset="UTF-8" />
     <title>Analosizer</title>
     <style>
+      .controller {
+        position: relative;
+      }
       .controller-key {
         position: relative;
         display: inline-block;
@@ -12,14 +15,14 @@
         border: solid 1px black;
         text-align: center;
       }
-      .white-key {
+      .controller-key.white-key {
         background-color: white;
         color: black;
         width: 2em;
         height: 5em;
         margin: 0.5em 0.075em;
       }
-      .black-key {
+      .controller-key.black-key {
         background-color: black;
         color: white;
         width: 1.5em;
@@ -27,12 +30,37 @@
         margin: 0.5em -0.7875em;
         z-index: 1;
       }
-      .control-label {
+      .controller-key .control-label {
         position: absolute;
         width: 100%;
         left: 0;
         bottom: 0;
         line-height: 2em;
+      }
+      .text-key-control {
+        display: inline-block;
+        position: relative;
+        border: solid 1px black;
+        width: 2em;
+        height: 2em;
+        margin: 0 0.075em;
+        vertical-align: top;
+      }
+      .text-key-control.white-key {
+        background-color: white;
+        color: black;
+        margin-top: 2.25em;
+      }
+      .text-key-control.black-key {
+        background-color: black;
+        color: white;
+        margin: 0 -1.0375em;
+      }
+      .text-key-control .control-label {
+        display: block;
+        width: 100%;
+        line-height: 1.875em;
+        text-align: center
       }
     </style>
   </head>
@@ -56,31 +84,57 @@
     </div>
   {{/engine}}
 
-  <div id='controller-keyboard'>
-    {{>controllerKey { keyType: 'white', label: 'C',  noteIndex:  0 }
-  }}{{>controllerKey { keyType: 'black', label: 'C♯', noteIndex:  1 }
-  }}{{>controllerKey { keyType: 'white', label: 'D',  noteIndex:  2 }
-  }}{{>controllerKey { keyType: 'black', label: 'D♯', noteIndex:  3 }
-  }}{{>controllerKey { keyType: 'white', label: 'E',  noteIndex:  4 }
-  }}{{>controllerKey { keyType: 'white', label: 'F',  noteIndex:  5 }
-  }}{{>controllerKey { keyType: 'black', label: 'F♯', noteIndex:  6 }
-  }}{{>controllerKey { keyType: 'white', label: 'G',  noteIndex:  7 }
-  }}{{>controllerKey { keyType: 'black', label: 'G♯', noteIndex:  8 }
-  }}{{>controllerKey { keyType: 'white', label: 'A',  noteIndex:  9 }
-  }}{{>controllerKey { keyType: 'black', label: 'A♯', noteIndex: 10 }
-  }}{{>controllerKey { keyType: 'white', label: 'B',  noteIndex: 11 }
-    }}
+  <div class='controller' id='controller-keyboard'>
+    {{>controllerKey { keyType: 'white', label: 'C',  noteNum: 60 }
+  }}{{>controllerKey { keyType: 'black', label: 'C♯', noteNum: 61 }
+  }}{{>controllerKey { keyType: 'white', label: 'D',  noteNum: 62 }
+  }}{{>controllerKey { keyType: 'black', label: 'D♯', noteNum: 63 }
+  }}{{>controllerKey { keyType: 'white', label: 'E',  noteNum: 64 }
+  }}{{>controllerKey { keyType: 'white', label: 'F',  noteNum: 65 }
+  }}{{>controllerKey { keyType: 'black', label: 'F♯', noteNum: 66 }
+  }}{{>controllerKey { keyType: 'white', label: 'G',  noteNum: 67 }
+  }}{{>controllerKey { keyType: 'black', label: 'G♯', noteNum: 68 }
+  }}{{>controllerKey { keyType: 'white', label: 'A',  noteNum: 69 }
+  }}{{>controllerKey { keyType: 'black', label: 'A♯', noteNum: 70 }
+  }}{{>controllerKey { keyType: 'white', label: 'B',  noteNum: 71 }
+  }}{{>controllerKey { keyType: 'white', label: 'C',  noteNum: 72 }
+  }}
   </div>
-
-  {{#partial controllerKey}}<a
-    class='controller-key {{keyType}}-key'
-    href='javascript:void(0)'
-    on-mousedown='noteOn:{{noteIndex}}'
-    on-mouseup='noteOff:{{noteIndex}}'
-  >
-    <span class='control-label'>{{label}}</span>
-  </a>{{/partial}}
+  <div class='controller' id='text-key-controls'>
+    {{>textKeyControl { keyType: 'white', label: 'A',  noteNum: 60 }
+  }}{{>textKeyControl { keyType: 'black', label: 'W',  noteNum: 61 }
+  }}{{>textKeyControl { keyType: 'white', label: 'S',  noteNum: 62 }
+  }}{{>textKeyControl { keyType: 'black', label: 'E',  noteNum: 63 }
+  }}{{>textKeyControl { keyType: 'white', label: 'D',  noteNum: 64 }
+  }}{{>textKeyControl { keyType: 'white', label: 'F',  noteNum: 65 }
+  }}{{>textKeyControl { keyType: 'black', label: 'T',  noteNum: 66 }
+  }}{{>textKeyControl { keyType: 'white', label: 'G',  noteNum: 67 }
+  }}{{>textKeyControl { keyType: 'black', label: 'Y',  noteNum: 68 }
+  }}{{>textKeyControl { keyType: 'white', label: 'H',  noteNum: 69 }
+  }}{{>textKeyControl { keyType: 'black', label: 'U',  noteNum: 70 }
+  }}{{>textKeyControl { keyType: 'white', label: 'J',  noteNum: 71 }
+  }}{{>textKeyControl { keyType: 'white', label: 'K',  noteNum: 72 }
+  }}
+  </div>
 </fieldset>
+
+{{#partial controllerKey}}<a
+  class='controller-key {{keyType}}-key'
+  href='javascript:void(0)'
+  on-mousedown='noteOn:{{noteNum}}'
+  on-mouseup='noteOff:{{noteNum}}'
+>
+  <span class='control-label'>{{label}}</span>
+</a>{{/partial}}
+
+{{#partial textKeyControl}}<a
+  class='text-key-control {{keyType}}-key'
+  href='javascript:void(0)'
+  on-mousedown='noteOn:{{noteNum}}'
+  on-mouseup='noteOff:{{noteNum}}'
+>
+  <span class='control-label'>{{label}}</span>
+</a>{{/partial}}
     </script>
 
     <script src='./analosizer.js'></script>
