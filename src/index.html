@@ -74,16 +74,6 @@
 <fieldset class='panel'>
   <legend>Analosizer</legend>
 
-  {{#engine}}
-    <div class='control-group'>
-      <span class='instrument'>
-        <input id='engaged' type='checkbox' checked={{engaged}} />
-        ({{engaged ? '1' : '0'}})
-        <label for='engaged'>Audio engine on/off</label>
-      </span>
-    </div>
-  {{/engine}}
-
   <div class='controller' id='controller-keyboard'>
     {{>controllerKey { keyType: 'white', label: 'C',  noteNum: 60 }
   }}{{>controllerKey { keyType: 'black', label: 'C♯', noteNum: 61 }
