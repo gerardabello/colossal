@@ -58,6 +58,6 @@ ractive.on( 'noteOffForTextKey', function( rEvent ) {
     , noteNum = textKeyNoteMap[ kbdEvent.keyCode ]
   ;
   if( noteNum ) {
-    engine.noteOff();
+    engine.noteOff( noteNum );
   }
 });
