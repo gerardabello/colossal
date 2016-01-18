@@ -40,11 +40,11 @@ from GitHub.
 Change to the newly created ./analosizer directory, and then update the
 npm project.
 
-   npm update
+    npm update
 
 ### Build the Analosizer Run-Time Files
 
-   npm run build
+    npm run build
 
 ### Open Analosizer In Your Browser
 
@@ -60,12 +60,12 @@ Check the box labeled "Audio engine on/off".
 
 To list the development tasks, ...
 
-   npm run
+    npm run
 
 To have the project automatically rebuilt when you modify files in the
 project's ./src directory, in its own terminal window or pane...
 
-   npm run watch
+    npm run watch
 
 This project uses the Ractive.js fraework for tempating and UI data
 binding.  See http://www.ractivejs.org/ for more info.
