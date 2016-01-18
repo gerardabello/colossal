@@ -5,6 +5,14 @@
     <meta charset="UTF-8" />
     <title>Analosizer</title>
     <style>
+      #init-focus {
+        display: block;
+        float: right;
+        height: 1px;
+        width: 1px;
+        margin: 0 0 -1px 0;
+        overflow: hidden;
+      }
       .controller {
         position: relative;
       }
@@ -71,8 +79,9 @@
     </div>
 
     <script id='app-template' type='text/html+ractive'>
-<fieldset class='panel'>
+<fieldset class='panel' on-keydown='noteOnForTextKey' on-keyup='noteOffForTextKey'>
   <legend>Analosizer</legend>
+  <a id='init-focus' href='javascript:void(0)' autofocus='autofocus'>-</a>
 
   <div class='controller' id='controller-keyboard'>
     {{>controllerKey { keyType: 'white', label: 'C',  noteNum: 60 }

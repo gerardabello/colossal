@@ -17,7 +17,7 @@ module.exports = function Engine() {
     var audioContext = audioContextPool.get();
 
     if( voice ) {
-      voice.end_note();
+      voice.endNote();
     }
     voice = new Voice( audioContext, audioContext.destination );
     voice.startNote( noteNum );
