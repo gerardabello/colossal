@@ -1,6 +1,7 @@
 "use strict";
 
-var Engine = require('./analosizer/engine.js')
+var version = '0.1.0'
+  , Engine = require('./analosizer/engine.js')
   , engine = new Engine()
   , textKeyNoteMap = []
 ;
@@ -21,7 +22,8 @@ textKeyNoteMap[75] = 72; // [K] => C-5
 
 var Ractive = require('ractive')
   , data = {
-        engine: engine
+        version: version
+      , engine: engine
     }
   , ractive = new Ractive({
         el: '#app-container'

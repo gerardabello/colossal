@@ -5,6 +5,10 @@
     <meta charset="UTF-8" />
     <title>Analosizer</title>
     <style>
+      .panel {
+        display: block;
+        position: relative;
+      }
       #init-focus {
         display: block;
         float: right;
@@ -70,6 +74,13 @@
         line-height: 1.875em;
         text-align: center
       }
+      .version {
+        display: block;
+        position: absolute;
+        padding: 0.25em 0.5em;
+        bottom: 0;
+        right: 0;
+      }
     </style>
   </head>
 
@@ -115,6 +126,8 @@
   }}{{>textKeyControl { keyType: 'white', label: 'K',  noteNum: 72 }
   }}
   </div>
+
+  <span class='version'>v{{version}}</span>
 </fieldset>
 
 {{#partial controllerKey}}<a
