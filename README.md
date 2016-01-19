@@ -1,12 +1,8 @@
-# Analosizer
+# Analo-sizer (analog-style synthesizer)
 
-A self-contained analog-style synthesizer that runs within a Web browser
+A self-contained analog-style synthesizer that runs within a Web browser.
 
-This program is in the early stages of development, and does not do
-much yet.  So far, it plays a continuous "A" (440Hz) sinewave tone when
-engaged.
-
-## Usage:
+## Usage
 
 Open your compatible Web browser and navigate to
 http://stevecj.github.io/browser-based-apps/analosizer/analosizer.html .
@@ -17,7 +13,23 @@ Note that you can play chords using the computer keyboard, subject to
 the limitations of your keyboard's ability to distinguish combinations
 of simultaneously held keys.
 
-## Making a Build:
+## Known issues and limitations
+
+1. Does not yet have any controlsa yet & only plays sinewave tones with a
+   pre-defined volume envelope at this time.
+2. There is sometimes a delay before the first triggered not starts playing
+   on some browsers.
+3. No visual feedback when notes are played.
+4. Only tested on one mobile browser (Mobile Safari on iOS).
+5. Presents a non-informative dialog to the user on every attempt to play
+   a note on iOS.
+6. The note that plauys on iOS sounds awful and nothing like a sinewave
+   sound.
+7. Does not yet attempt to respond to touch events, so does not play chords
+   using multi-touch.
+8. Visual layout is crappy on iOS.
+
+## Making a Build
 
 Note that the build process requires a `bash`-like environment (generally
 the default on Unix, Linux, BSD, OS X, etc.) not a Windows environment.
@@ -56,10 +68,6 @@ npm project.
 Open a compatible Web browser (a modern browser with WebAudio support) and
 enter the file URL to the analosizer.html file in your build directory
 (e.g. file:///Users/boss/Projects/analosizer/build/analosizer.html).
-
-### Engage Analosizer
-
-Check the box labeled "Audio engine on/off".
 
 ## Development
 

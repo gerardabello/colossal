@@ -2,6 +2,7 @@
 <html>
 
   <head>
+    <title>Analo-sizer (analog-style synthesizer)</title>
     <meta charset="UTF-8" />
     <title>Analosizer</title>
     <style>
@@ -74,12 +75,14 @@
         line-height: 1.875em;
         text-align: center
       }
+      .project-info {
+        float: left;
+        margin-top: 0.75em;
+      }
       .version {
         display: block;
-        position: absolute;
-        padding: 0.25em 0.5em;
-        bottom: 0;
-        right: 0;
+        float: right;
+        margin-top: 0.75em;
       }
     </style>
   </head>
@@ -91,7 +94,7 @@
 
     <script id='app-template' type='text/html+ractive'>
 <fieldset class='panel' on-keydown='noteOnForTextKey' on-keyup='noteOffForTextKey'>
-  <legend>Analosizer</legend>
+  <legend>Analo-sizer (analog-style synthesizer)</legend>
   <a id='init-focus' href='javascript:void(0)' autofocus='autofocus'>-</a>
 
   <div class='controller' id='controller-keyboard'>
@@ -127,7 +130,14 @@
   }}
   </div>
 
-  <span class='version'>v{{version}}</span>
+  <span class='project-info'>
+    Project home: <a href='https://github.com/stevecj/analo-sizer'>
+    https://github.com/stevecj/analo-sizer
+    </a>
+  </span>
+  <span class='version'>
+    v{{version}}
+  </span>
 </fieldset>
 
 {{#partial controllerKey}}<a
