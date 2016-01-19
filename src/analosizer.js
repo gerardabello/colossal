@@ -1,7 +1,7 @@
 "use strict";
 
-var Models = require('./analosizer/models.js')
-  , engine = new Models.Engine()
+var Engine = require('./analosizer/engine.js')
+  , engine = new Engine()
   , textKeyNoteMap = []
 ;
 
