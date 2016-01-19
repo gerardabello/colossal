@@ -15,7 +15,7 @@ of simultaneously held keys.
 
 ## Known issues and limitations
 
-1. Does not yet have any controlsa yet & only plays sinewave tones with a
+1. Does not yet have any controls yet & only plays sinewave tones with a
    pre-defined volume envelope at this time.
 2. There is sometimes a delay before the first triggered not starts playing
    on some browsers.
@@ -23,7 +23,7 @@ of simultaneously held keys.
 4. Only tested on one mobile browser (Mobile Safari on iOS).
 5. Presents a non-informative dialog to the user on every attempt to play
    a note on iOS.
-6. The note that plauys on iOS sounds awful and nothing like a sinewave
+6. The note that plays on iOS sounds awful and nothing like a sinewave
    sound.
 7. Does not yet attempt to respond to touch events, so does not play chords
    using multi-touch.
@@ -93,7 +93,7 @@ The process of publishing a release is currently manual.
 
 1. Edit the .src/analosizer.js file and update the version string.
 2. Commit the change.
-3. Tag the commit with the version number in the form of "v<version>".
+3. Tag the commit with the version number in the form of "v&lt;version>".
 4. Push the changes to the upstream git repository.
 5. Run the build process: `npm run build`.
 6. Copy the files from the ./build directory to the location at which
