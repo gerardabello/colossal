@@ -4,7 +4,8 @@ var version = '0.1.1'
   , Engine = require('./analosizer/engine.js')
   , engine = new Engine()
   , textKeyNoteMap = []
-  , noteTextKeyDownTimes = []
+  , lastNoteKeyActivityAt = 0
+  , noteTextKeysEngaged = []
 ;
 
 textKeyNoteMap[  65 ] = 60; // [A] => C-4 (Middle C)
@@ -55,7 +56,6 @@ ractive.on( 'noteOff', function( rEvent, noteNum ) {
 ractive.on( 'noteOnForTextKey', function( rEvent ) {
   var kbdEvent = rEvent.original
     , noteNum = textKeyNoteMap[ kbdEvent.keyCode ]
-    , newNoteTextKeyDownTimes = []
   ;
 
   if( ! noteNum ) {
@@ -74,20 +74,8 @@ ractive.on( 'noteOnForTextKey', function( rEvent ) {
 
   kbdEvent.stopPropagation();
 
-  // Record or update last time key was pressed or was
-  // repeated because it is being held down.
-  noteTextKeyDownTimes.forEach( function( entry ) {
-    if( entry.keyCode !== kbdEvent.keyCode ) {
-      newNoteTextKeyDownTimes.push( entry );
-    }
-  });
-  noteTextKeyDownTimes = newNoteTextKeyDownTimes;
-  noteTextKeyDownTimes.push({
-      keyCode:   kbdEvent.keyCode
-    , noteNum:   noteNum
-    , timestamp: (new Date()).getTime()
-  });
-
+  lastNoteKeyActivityAt = (new Date()).getTime();
+  noteTextKeysEngaged[ kbdEvent.keyCode ] = true;
   setTimeout( unstickNoteTextKeys, 1505 );
 
   if( ! kbdEvent.repeat ) {
@@ -98,33 +86,27 @@ ractive.on( 'noteOnForTextKey', function( rEvent ) {
 ractive.on( 'noteOffForTextKey', function( rEvent ) {
   var kbdEvent = rEvent.original
     , noteNum = textKeyNoteMap[ kbdEvent.keyCode ]
-    , newNoteTextKeyDownTimes
-    , entry
   ;
 
   if( noteNum ) {
     engine.noteOff( noteNum );
-    newNoteTextKeyDownTimes = [];
-    noteTextKeyDownTimes.forEach( function( entry ) {
-      if( entry.keyCode !== kbdEvent.keyCode ) {
-        newNoteTextKeyDownTimes.push( entry );
-      }
-    });
-    noteTextKeyDownTimes = newNoteTextKeyDownTimes;
+    lastNoteKeyActivityAt = (new Date()).getTime();
+    noteTextKeysEngaged[ kbdEvent.keyCode ] = false;
   }
 });
 
 function unstickNoteTextKeys() {
-  var newNoteTextKeyDownTimes = []
-    , now = (new Date()).getTime()
+  var i
+    , noteNum
   ;
 
-  noteTextKeyDownTimes.forEach( function( entry ) {
-    if( now - entry.timestamp > 1500 ) {
-      engine.noteOff( entry.noteNum );
-    } else {
-      newNoteTextKeyDownTimes.push( entry );
+  if( (new Date()).getTime() - lastNoteKeyActivityAt > 1500 ) {
+    for( i = noteTextKeysEngaged.length; i--; ) {
+      noteNum = textKeyNoteMap[ i ];
+      if( noteNum ) {
+        engine.noteOff( noteNum );
+        noteTextKeysEngaged[ i ] = false;
+      }
     }
-  });
-  noteTextKeyDownTimes = newNoteTextKeyDownTimes;
+  }
 }
