@@ -13,3 +13,7 @@ Version 0.1.1
   to be played so they don't end up also triggering other things
   such as browser plugins for vim-like, keyboard-driven browser
   navigation.
+
+Version 0.1.2
+- Don't stop chord notes playing in attempt to stop playing
+  stuck-key notes.
