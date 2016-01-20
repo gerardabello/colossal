@@ -72,6 +72,8 @@ ractive.on( 'noteOnForTextKey', function( rEvent ) {
     return;
   }
 
+  kbdEvent.stopPropagation();
+
   // Record or update last time key was pressed or was
   // repeated because it is being held down.
   noteTextKeyDownTimes.forEach( function( entry ) {
