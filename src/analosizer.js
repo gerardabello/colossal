@@ -55,6 +55,21 @@ ractive.on( 'noteOnForTextKey', function( rEvent ) {
   var kbdEvent = rEvent.original
     , noteNum = textKeyNoteMap[ kbdEvent.keyCode ]
   ;
+
+  if( ! noteNum ) {
+    return ;
+  }
+
+  // Ignore keypress if any modifier keys are down.
+  if (
+    kbdEvent.shiftKey ||
+    kbdEvent.ctrlKey  ||
+    kbdEvent.altKey   ||
+    kbdEvent.metaKey
+  ) {
+    return;
+  }
+
   if( noteNum ) {
     engine.noteOn( noteNum );
   }
