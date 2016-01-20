@@ -1,6 +1,6 @@
 "use strict";
 
-var version = '0.1.0'
+var version = '0.1.1'
   , Engine = require('./analosizer/engine.js')
   , engine = new Engine()
   , textKeyNoteMap = []

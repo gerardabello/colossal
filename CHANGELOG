@@ -1,0 +1,15 @@
+Version 0.1.0
+- Initial release
+
+Version 0.1.1
+- Extend virual piano keyboard up to E-5
+- Don't pay notes when keys are pressed with modifiers held down
+  so key combinations like ctrl+L (PC) or cmd+L (Mac) to focus
+  URL bar don't also play notes.
+- Unstick notes triggered by text keypress after 1.5 seconds
+  without a keydown event triggerd by auto-repeat while the key
+  is held down.
+- Stop events from bubbling for keydown events that cause notes
+  to be played so they don't end up also triggering other things
+  such as browser plugins for vim-like, keyboard-driven browser
+  navigation.
