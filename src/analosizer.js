@@ -4,6 +4,7 @@ var version = '0.1.0'
   , Engine = require('./analosizer/engine.js')
   , engine = new Engine()
   , textKeyNoteMap = []
+  , noteTextKeyDownTimes = []
 ;
 
 textKeyNoteMap[  65 ] = 60; // [A] => C-4 (Middle C)
@@ -54,10 +55,11 @@ ractive.on( 'noteOff', function( rEvent, noteNum ) {
 ractive.on( 'noteOnForTextKey', function( rEvent ) {
   var kbdEvent = rEvent.original
     , noteNum = textKeyNoteMap[ kbdEvent.keyCode ]
+    , newNoteTextKeyDownTimes = []
   ;
 
   if( ! noteNum ) {
-    return ;
+    return;
   }
 
   // Ignore keypress if any modifier keys are down.
@@ -70,7 +72,23 @@ ractive.on( 'noteOnForTextKey', function( rEvent ) {
     return;
   }
 
-  if( noteNum ) {
+  // Record or update last time key was pressed or was
+  // repeated because it is being held down.
+  noteTextKeyDownTimes.forEach( function( entry ) {
+    if( entry.keyCode !== kbdEvent.keyCode ) {
+      newNoteTextKeyDownTimes.push( entry );
+    }
+  });
+  noteTextKeyDownTimes = newNoteTextKeyDownTimes;
+  noteTextKeyDownTimes.push({
+      keyCode:   kbdEvent.keyCode
+    , noteNum:   noteNum
+    , timestamp: (new Date()).getTime()
+  });
+
+  setTimeout( unstickNoteTextKeys, 1505 );
+
+  if( ! kbdEvent.repeat ) {
     engine.noteOn( noteNum );
   }
 });
@@ -78,8 +96,33 @@ ractive.on( 'noteOnForTextKey', function( rEvent ) {
 ractive.on( 'noteOffForTextKey', function( rEvent ) {
   var kbdEvent = rEvent.original
     , noteNum = textKeyNoteMap[ kbdEvent.keyCode ]
+    , newNoteTextKeyDownTimes
+    , entry
   ;
+
   if( noteNum ) {
     engine.noteOff( noteNum );
+    newNoteTextKeyDownTimes = [];
+    noteTextKeyDownTimes.forEach( function( entry ) {
+      if( entry.keyCode !== kbdEvent.keyCode ) {
+        newNoteTextKeyDownTimes.push( entry );
+      }
+    });
+    noteTextKeyDownTimes = newNoteTextKeyDownTimes;
   }
 });
+
+function unstickNoteTextKeys() {
+  var newNoteTextKeyDownTimes = []
+    , now = (new Date()).getTime()
+  ;
+
+  noteTextKeyDownTimes.forEach( function( entry ) {
+    if( now - entry.timestamp > 1500 ) {
+      engine.noteOff( entry.noteNum );
+    } else {
+      newNoteTextKeyDownTimes.push( entry );
+    }
+  });
+  noteTextKeyDownTimes = newNoteTextKeyDownTimes;
+}
