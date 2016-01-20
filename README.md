@@ -44,7 +44,7 @@ npm if those are not already installed on your system.
 See https://nodejs.org and
 https://docs.npmjs.com/getting-started/installing-node
 
-### Clone the repository fron github
+### Clone the repository from github
 
 Change to the directory in which you'll want to have the analosizer
 project directory installed, and then clone the analosizer repository
@@ -80,7 +80,7 @@ project's ./src directory, in its own terminal window or pane...
 
     npm run watch
 
-This project uses the Ractive.js fraework for tempating and UI data
+This project uses the Ractive.js framework for tempating and UI data
 binding.  See http://www.ractivejs.org/ for more info.
 
 This project uses Browserify to build a single runnable javascript file
