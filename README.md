@@ -5,7 +5,7 @@ A self-contained analog-style synthesizer that runs within a Web browser.
 ## Usage
 
 Open your compatible Web browser and navigate to
-http://stevecj.github.io/browser-based-apps/analosizer/analosizer.html .
+http://stevecj.github.io/browser-based-apps/analo-sizer/analosizer.html .
 Play notes by clicking the keys on the piano keyboard image or by
 pressing the corresponding keys on your computer keyboard.
 
@@ -46,28 +46,28 @@ https://docs.npmjs.com/getting-started/installing-node
 
 ### Clone the repository from github
 
-Change to the directory in which you'll want to have the analosizer
-project directory installed, and then clone the analosizer repository
+Change to the directory in which you'll want to have the analo-sizer
+project directory installed, and then clone the analo-sizer repository
 from GitHub.
 
-    git clone https://github.com/stevecj/analosizer.git
+    git clone https://github.com/stevecj/analo-sizer.git
 
 ### Install the build dependencies
 
-Change to the newly created ./analosizer directory, and then update the
+Change to the newly created ./analo-sizer directory, and then update the
 npm project.
 
     npm update
 
-### Build the Analosizer Run-Time Files
+### Build the Analo-sizer Run-Time Files
 
     npm run build
 
-### Open Analosizer In Your Browser
+### Open Anala-osizer In Your Browser
 
 Open a compatible Web browser (a modern browser with WebAudio support) and
 enter the file URL to the analosizer.html file in your build directory
-(e.g. file:///Users/boss/Projects/analosizer/build/analosizer.html).
+(e.g. file:///Users/boss/Projects/analo-sizer/build/analosizer.html).
 
 ## Development
 
