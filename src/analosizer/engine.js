@@ -1,7 +1,7 @@
 "use strict";
 
 var Voicing   = require('./voicing.js')
-  , GainModel = require('./gain-model.js')
+  , Gain = require('./gain.js')
 ;
 
 module.exports = Engine;
@@ -9,17 +9,17 @@ module.exports = Engine;
 function Engine() {
   var AudioContext = global.AudioContext || global.webkitAudioContext
     , audioContext = new AudioContext()
-    , outputGainModel = new GainModel( audioContext )
+    , outputGain = new Gain( audioContext )
     , voicing = new Voicing( audioContext )
     , onStateNoteVoices = []
   ;
 
-  outputGainModel.connect( audioContext.destination );
+  outputGain.connect( audioContext.destination );
 
   this.noteOn  = noteOn;
   this.noteOff = noteOff;
 
-  Object.defineProperty( this, 'outputGain', { get: getOutputGainModel } );
+  Object.defineProperty( this, 'outputGain', { get: getOutputGain } );
 
   function noteOn( noteNum ) {
     var voice = onStateNoteVoices[ noteNum ];
@@ -27,7 +27,7 @@ function Engine() {
     if( voice ) { return; }
 
     voice = onStateNoteVoices[ noteNum ] = voicing.createVoice();
-    voice.connect( outputGainModel.inputNode );
+    voice.connect( outputGain.inputNode );
     voice.startNote( noteNum );
   }
 
@@ -43,7 +43,7 @@ function Engine() {
     }
   }
 
-  function getOutputGainModel() {
-    return outputGainModel.exposedModel;
+  function getOutputGain() {
+    return outputGain.exposedObject;
   }
 };

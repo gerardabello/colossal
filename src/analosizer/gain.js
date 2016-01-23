@@ -1,16 +1,16 @@
 "use strict";
 
-module.exports = GainModel;
+module.exports = Gain;
 
 var Math = global.Math;
 
-function GainModel( audioContext ) {
+function Gain( audioContext ) {
   var gainNode = audioContext.createGain()
     , level_dB = 0
-    , exposedModel = {}
+    , exposedObject = {}
   ;
 
-  Object.defineProperty( exposedModel, 'level_dB', {
+  Object.defineProperty( exposedObject, 'level_dB', {
       get: getLevel_dB
     , set: setLevel_dB
   });
@@ -18,7 +18,7 @@ function GainModel( audioContext ) {
   Object.defineProperty( this, 'inputNode', { get: getInputNode } );
   this.connect = connect;
 
-  this.exposedModel = exposedModel;
+  this.exposedObject = exposedObject;
 
   function getInputNode() {
     return gainNode;
