@@ -2,7 +2,9 @@
 
 module.exports = Gain;
 
-var Math = global.Math;
+var Math = global.Math
+  , Object = global.Object
+;
 
 function Gain( audioContext ) {
   var gainNode = audioContext.createGain()

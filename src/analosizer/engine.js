@@ -1,7 +1,7 @@
 "use strict";
 
-var Voicing   = require('./voicing.js')
-  , Gain = require('./gain.js')
+var Voicing = require('./voicing.js')
+  , Gain    = require('./gain.js')
 ;
 
 module.exports = Engine;
@@ -20,6 +20,7 @@ function Engine() {
   this.noteOff = noteOff;
 
   Object.defineProperty( this, 'outputGain', { get: getOutputGain } );
+  Object.defineProperty( this, 'voicing',    { get: getVoicing    } );
 
   function noteOn( noteNum ) {
     var voice = onStateNoteVoices[ noteNum ];
@@ -45,5 +46,9 @@ function Engine() {
 
   function getOutputGain() {
     return outputGain.exposedObject;
+  }
+
+  function getVoicing() {
+    return voicing.exposedObject;
   }
 };

@@ -111,6 +111,28 @@
       <input type='number' step='any' value='{{outputGain.level_dB}}' />
       dB
     </fieldset>
+
+    {{#voicing}}
+      <fieldset class='panel-section'>
+        <legend>Voicing</legend>
+
+        <fieldset class='instrument'>
+          <legend>Waveform</legend>
+
+          <input id='voicing-waveform-sine' type='radio' name='{{waveformType}}' value='sine'>
+          <label for='voicing-waveform-sine'>Sine</label>
+
+          <input id='voicing-waveform-square' type='radio' name='{{waveformType}}' value='square'>
+          <label for='voicing-waveform-square'>Square</label>
+
+          <input id='voicing-waveform-sawtooth' type='radio' name='{{waveformType}}' value='sawtooth'>
+          <label for='voicing-waveform-sawtooth'>Sawtooth</label>
+
+          <input id='voicing-waveform-triangle' type='radio' name='{{waveformType}}' value='triangle'>
+          <label for='voicing-waveform-triangle'>Triangle</label>
+        </fieldset>
+      </fieldset>
+    {{/voicing}}
   {{/engine}}
 
   <div class='controller' id='controller-keyboard'>

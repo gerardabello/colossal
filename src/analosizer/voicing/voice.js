@@ -1,6 +1,7 @@
 "use strict";
 
-var attackTimeSecs = 0.005
+var Object = global.Object
+  , attackTimeSecs = 0.005
   , releaseTimeSecs = 0.5
 ;
 
@@ -11,9 +12,17 @@ module.exports = function Voice( audioContext ) {
 
   oscillator.connect( gain );
 
+  Object.defineProperty( this, 'waveformType', {
+    set: setWaveformType
+  });
+
   this.connect   = connect;
   this.startNote = startNote;
   this.endNote   = endNote;
+
+  function setWaveformType( newValue ) {
+    oscillator.type = newValue;
+  }
 
   function connect( toNode ) {
     gain.connect( toNode );
