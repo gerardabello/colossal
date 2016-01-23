@@ -4,20 +4,25 @@ var attackTimeSecs = 0.005
   , releaseTimeSecs = 0.5
 ;
 
-module.exports = function Voice( audioContext, destination ) {
+module.exports = function Voice( audioContext ) {
   var oscillator = audioContext.createOscillator()
     , gain = audioContext.createGain()
   ;
 
+  oscillator.connect( gain );
+
+  this.connect   = connect;
   this.startNote = startNote;
   this.endNote   = endNote;
+
+  function connect( toNode ) {
+    gain.connect( toNode );
+  }
 
   function startNote( noteNum ) {
     var attackStartAt;
 
     oscillator.frequency.value = noteNumToFrequency( noteNum );
-    oscillator.connect( gain );
-    gain.connect( destination );
     gain.gain.value = 0;
     oscillator.start()
     attackStartAt = audioContext.currentTime + 0.001;

@@ -97,6 +97,22 @@
   <legend>Analo-sizer (analog-style synthesizer)</legend>
   <a id='init-focus' href='javascript:void(0)' autofocus='autofocus'>-</a>
 
+  {{#engine}}
+    <fieldset class='panel-section'>
+      <legend>Global</legend>
+
+      <label for='global-volume'>Volume</label>
+      <input
+        id='global-volume'
+        type='range'
+        min='-36' max='0' step='1'
+        value='{{outputGain.level_dB}}'
+      />
+      <input type='number' step='any' value='{{outputGain.level_dB}}' />
+      dB
+    </fieldset>
+  {{/engine}}
+
   <div class='controller' id='controller-keyboard'>
     {{>controllerKey { keyType: 'white', label: 'C',  noteNum: 60 }
   }}{{>controllerKey { keyType: 'black', label: 'C♯', noteNum: 61 }
