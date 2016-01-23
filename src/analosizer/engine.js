@@ -1,6 +1,6 @@
 "use strict";
 
-var Voice     = require('./engine/voice.js')
+var Voicing   = require('./voicing.js')
   , GainModel = require('./gain-model.js')
 ;
 
@@ -10,7 +10,7 @@ function Engine() {
   var AudioContext = global.AudioContext || global.webkitAudioContext
     , audioContext = new AudioContext()
     , outputGainModel = new GainModel( audioContext )
-    , voice
+    , voicing = new Voicing( audioContext )
     , onStateNoteVoices = []
   ;
 
@@ -26,7 +26,7 @@ function Engine() {
 
     if( voice ) { return; }
 
-    voice = onStateNoteVoices[ noteNum ] = new Voice( audioContext );
+    voice = onStateNoteVoices[ noteNum ] = voicing.createVoice();
     voice.connect( outputGainModel.inputNode );
     voice.startNote( noteNum );
   }
