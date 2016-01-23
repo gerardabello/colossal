@@ -170,11 +170,15 @@
     <script src='./analosizer.js'></script>
 
     <script>
-      var analosizer = new Analosizer({
-          ui: {
-              containerSelector: '#app-container'
-            , templateSelector:  '#app-template'
-          }
+      var analosizer;
+
+      window.addEventListener( 'load', function() {
+        analosizer = new Analosizer({
+            ui: {
+                containerSelector: '#app-container'
+              , templateSelector:  '#app-template'
+            }
+        });
       });
     </script>
   </body>
