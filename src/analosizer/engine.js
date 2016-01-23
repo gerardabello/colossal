@@ -1,12 +1,10 @@
 "use strict";
 
-var AudioContextPool = require('./engine/audio-context-pool.js')
-  , Voice            = require('./engine/voice.js')
-;
+var Voice = require('./engine/voice.js');
 
 module.exports = function Engine() {
-  var engaged = false
-    , audioContextPool = new AudioContextPool()
+  var AudioContext = global.AudioContext || global.webkitAudioContext
+    , audioContext = new AudioContext()
     , voice
     , onStateNoteVoices = []
   ;
@@ -15,12 +13,9 @@ module.exports = function Engine() {
   this.noteOff = noteOff;
 
   function noteOn( noteNum ) {
-    var audioContext = audioContextPool.get()
-      , voice = onStateNoteVoices[ noteNum ]
-    ;
+    var voice = onStateNoteVoices[ noteNum ];
 
     if( voice ) { return; }
-
 
     voice = onStateNoteVoices[ noteNum ]
           = new Voice( audioContext, audioContext.destination )
@@ -32,6 +27,7 @@ module.exports = function Engine() {
     var voice = onStateNoteVoices[ noteNum ];
 
     if( ! voice ) { return; }
+
     try {
       voice.endNote();
     } finally {
