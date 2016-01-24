@@ -1,5 +1,11 @@
-Version 0.1.0
-- Initial release
+Version 0.1.3
+- Allows selecting sine, square, sawtooth, or triangle waveform
+  for voicing.
+- Improved user interface appearance.
+
+Version 0.1.2
+- Don't stop chord notes playing in attempt to stop playing
+  stuck-key notes.
 
 Version 0.1.1
 - Extend virual piano keyboard up to E-5
@@ -14,6 +20,5 @@ Version 0.1.1
   such as browser plugins for vim-like, keyboard-driven browser
   navigation.
 
-Version 0.1.2
-- Don't stop chord notes playing in attempt to stop playing
-  stuck-key notes.
+Version 0.1.0
+- Initial release

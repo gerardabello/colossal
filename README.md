@@ -15,19 +15,17 @@ of simultaneously held keys.
 
 ## Known issues and limitations
 
-1. Does not yet have any controls yet & only plays sinewave tones with a
-   pre-defined volume envelope at this time.
-2. There is sometimes a delay before the first triggered not starts playing
-   on some browsers.
-3. No visual feedback when notes are played.
-4. Only tested on one mobile browser (Mobile Safari on iOS).
-5. Presents a non-informative dialog to the user on every attempt to play
+1. Has very few controls so far.  Does not yet have filtering or provide
+   volume envelope control,etc.
+2. No visual feedback when notes are played.
+3. Only tested on one mobile browser (Mobile Safari on iOS).
+4. Presents a non-informative dialog to the user on every attempt to play
    a note on iOS.
-6. The note that plays on iOS sounds awful and nothing like a sinewave
-   sound.
-7. Does not yet attempt to respond to touch events, so does not play chords
+5. The note that plays on iOS sounds awful and nothing like the supposed
+   waveform.
+6. Does not yet attempt to respond to touch events, so does not play chords
    using multi-touch.
-8. Visual layout is crappy on iOS.
+7. Visual layout is poor on iOS.
 
 ## Making a Build
 
