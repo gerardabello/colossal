@@ -9,6 +9,31 @@
       .panel {
         display: block;
         position: relative;
+        float: left;
+        background-color: #def;
+        border: solid 1px #cde;
+        border-radius: 0.375em;
+        padding: 0.5em;
+      }
+      .panel-section {
+        border-radius: 0.375em;
+      }
+      .instrument {
+        background-color: #f0f7ff;
+        border: solid 1px #d7e0e7;
+        border-radius: 0.5em;
+      }
+      .control + .control {
+        margin-left: 1em;
+      }
+      input {
+        width: 4em;
+      }
+      input[type=radio] {
+        width: auto;
+      }
+      input[type=range] {
+        min-width: 30em;
       }
       #init-focus {
         display: block;
@@ -78,6 +103,7 @@
       .project-info {
         float: left;
         margin-top: 0.75em;
+        margin-right: 1em;
       }
       .version {
         display: block;
@@ -89,27 +115,41 @@
 
   </body>
 
+    <h1>Analo-sizer (analog-style synthesizer)</h1>
+
     <div id='app-container'>
     </div>
 
     <script id='app-template' type='text/html+ractive'>
-<fieldset class='panel' on-keydown='noteOnForTextKey' on-keyup='noteOffForTextKey'>
-  <legend>Analo-sizer (analog-style synthesizer)</legend>
+<div
+  class='panel'
+  on-keydown='noteOnForTextKey'
+  on-keyup='noteOffForTextKey'
+>
   <a id='init-focus' href='javascript:void(0)' autofocus='autofocus'>-</a>
 
   {{#engine}}
     <fieldset class='panel-section'>
       <legend>Global</legend>
 
-      <label for='global-volume'>Volume</label>
-      <input
-        id='global-volume'
-        type='range'
-        min='-36' max='0' step='1'
-        value='{{outputGain.level_dB}}'
-      />
-      <input type='number' step='any' value='{{outputGain.level_dB}}' />
-      dB
+      <fieldset class='instrument'>
+        <legend>Volume</legend>
+
+        <span class='control'>
+          <input
+            id='global-volume'
+            type='range'
+            min='-36' max='0' step='1'
+            value='{{outputGain.level_dB}}'
+          />
+          <input
+            type='number'
+            step='any'
+            value='{{outputGain.level_dB}}'
+          />
+        dB
+        <span>
+      </fieldset>
     </fieldset>
 
     {{#voicing}}
@@ -119,17 +159,33 @@
         <fieldset class='instrument'>
           <legend>Waveform</legend>
 
-          <input id='voicing-waveform-sine' type='radio' name='{{waveformType}}' value='sine'>
-          <label for='voicing-waveform-sine'>Sine</label>
-
-          <input id='voicing-waveform-square' type='radio' name='{{waveformType}}' value='square'>
-          <label for='voicing-waveform-square'>Square</label>
-
-          <input id='voicing-waveform-sawtooth' type='radio' name='{{waveformType}}' value='sawtooth'>
-          <label for='voicing-waveform-sawtooth'>Sawtooth</label>
-
-          <input id='voicing-waveform-triangle' type='radio' name='{{waveformType}}' value='triangle'>
-          <label for='voicing-waveform-triangle'>Triangle</label>
+          <span class='control'>
+            <input
+              id='voicing-waveform-sine'
+              type='radio'
+              name='{{waveformType}}'
+              value='sine'
+            >
+            <label for='voicing-waveform-sine'>Sine</label>
+          </span
+          ><span class='control'>
+            <input
+              id='voicing-waveform-square'
+              type='radio'
+              name='{{waveformType}}'
+              value='square'
+              accesskey='x'
+            >
+            <label for='voicing-waveform-square'>Square</label>
+          </span
+          ><span class='control'>
+            <input id='voicing-waveform-sawtooth' type='radio' name='{{waveformType}}' value='sawtooth'>
+            <label for='voicing-waveform-sawtooth'>Sawtooth</label>
+          </span
+            ><span class='control'>
+            <input id='voicing-waveform-triangle' type='radio' name='{{waveformType}}' value='triangle'>
+            <label for='voicing-waveform-triangle'>Triangle</label>
+          </span>
         </fieldset>
       </fieldset>
     {{/voicing}}
@@ -184,7 +240,7 @@
   <span class='version'>
     v{{version}}
   </span>
-</fieldset>
+</div>
 
 {{#partial controllerKey}}<a
   class='controller-key {{keyType}}-key'
