@@ -26,6 +26,8 @@ of simultaneously held keys.
 6. Does not yet attempt to respond to touch events, so does not play chords
    using multi-touch.
 7. Visual layout is poor on iOS.
+8. Text keys don't play notes on Safari after clicking a virtual keyboard
+   key or a waveform radio button.
 
 ## Making a Build
 
