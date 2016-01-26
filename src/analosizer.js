@@ -52,14 +52,11 @@ function Analosizer( opts ) {
     var msEvent = rEvent.original;
     if( ~msEvent.buttons & 1 ) { return; }
 
-    engine.noteOn( noteNum );
+    engine.noteOn( noteNum, 'mouse' );
   });
 
   ractive.on( 'noteOffForMouse', function( rEvent, noteNum ) {
-    var msEvent = rEvent.original;
-    if( msEvent.buttons & 1 ) { return; }
-
-    engine.noteOff( noteNum );
+    engine.noteOff( noteNum, 'mouse' );
   });
 
   ractive.on( 'noteOnForTextKey', function( rEvent ) {
@@ -88,7 +85,7 @@ function Analosizer( opts ) {
     setTimeout( unstickNoteTextKeys, 1505 );
 
     if( ! kbdEvent.repeat ) {
-      engine.noteOn( noteNum );
+      engine.noteOn( noteNum, 'textKey' );
     }
   });
 
@@ -98,7 +95,7 @@ function Analosizer( opts ) {
     ;
 
     if( noteNum ) {
-      engine.noteOff( noteNum );
+      engine.noteOff( noteNum, 'textKey' );
       lastNoteKeyActivityAt = (new Date()).getTime();
       noteTextKeysEngaged[ kbdEvent.keyCode ] = false;
     }

@@ -11,7 +11,7 @@ function Engine() {
     , audioContext = new AudioContext()
     , outputGain = new Gain( audioContext )
     , voicing = new Voicing( audioContext )
-    , onStateNoteVoices = []
+    , voicesBeingPlayed = {}
   ;
 
   outputGain.connect( audioContext.destination );
@@ -22,25 +22,29 @@ function Engine() {
   Object.defineProperty( this, 'outputGain', { get: getOutputGain } );
   Object.defineProperty( this, 'voicing',    { get: getVoicing    } );
 
-  function noteOn( noteNum ) {
-    var voice = onStateNoteVoices[ noteNum ];
+  function noteOn( noteNum, source ) {
+    var voiceKey = [ noteNum, source ]
+      , voice = voicesBeingPlayed[ voiceKey ]
+    ;
 
     if( voice ) { return; }
 
-    voice = onStateNoteVoices[ noteNum ] = voicing.createVoice();
+    voice = voicesBeingPlayed[ voiceKey ] = voicing.createVoice();
     voice.connect( outputGain.inputNode );
     voice.startNote( noteNum );
   }
 
-  function noteOff( noteNum ) {
-    var voice = onStateNoteVoices[ noteNum ];
+  function noteOff( noteNum, source ) {
+    var voiceKey = [ noteNum, source ]
+      , voice = voicesBeingPlayed[ voiceKey ]
+    ;
 
     if( ! voice ) { return; }
 
     try {
       voice.endNote();
     } finally {
-      onStateNoteVoices[ noteNum ] = null;
+      voicesBeingPlayed[ voiceKey ] = null;
     }
   }
 
