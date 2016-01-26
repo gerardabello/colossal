@@ -246,9 +246,9 @@
 {{#partial controllerKey2}}<button
   class='controller-key {{keyType}}-key'
   href='javascript:void(0)'
-  on-mousedown='noteOn:{{noteNum}}'
-  on-mouseup='noteOff:{{noteNum}}'
-  on-mouseout='noteOff:{{noteNum}}'
+  on-mousedown='noteOnForMouse:{{noteNum}}'
+  on-mouseup='noteOffForMouse:{{noteNum}}'
+  on-mouseout='noteOffForMouse:{{noteNum}}'
 >
   <span class='control-label note-label'>{{noteLabel}}</span
   ><span class='control-label hot-key-label'>{{hotKeyLabel}}</span>

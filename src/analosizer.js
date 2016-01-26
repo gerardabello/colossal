@@ -48,11 +48,17 @@ function Analosizer( opts ) {
     initFocusEl.focus();
   }
 
-  ractive.on( 'noteOn', function( rEvent, noteNum ) {
+  ractive.on( 'noteOnForMouse', function( rEvent, noteNum ) {
+    var msEvent = rEvent.original;
+    if( ~msEvent.buttons & 1 ) { return; }
+
     engine.noteOn( noteNum );
   });
 
-  ractive.on( 'noteOff', function( rEvent, noteNum ) {
+  ractive.on( 'noteOffForMouse', function( rEvent, noteNum ) {
+    var msEvent = rEvent.original;
+    if( msEvent.buttons & 1 ) { return; }
+
     engine.noteOff( noteNum );
   });
 
