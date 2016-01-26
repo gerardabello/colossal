@@ -16,7 +16,9 @@
         padding: 0.5em;
       }
       .panel-section {
+        border: solid 1px black;
         border-radius: 0.375em;
+        margin-bottom: 0.25em;
       }
       .instrument {
         background-color: #f0f7ff;
@@ -45,61 +47,80 @@
       }
       .controller {
         position: relative;
+        margin-top: 0.5em;
+        padding: 0.25em 0 0.25em 0.25em;
+        background: #9ab;
+        border: solid 1px #89a;
+        border-radius: 0.25em;
       }
       .controller-key {
-        position: relative;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
         display: inline-block;
-        vertical-align: top;
+        position: relative;
         border: solid 1px black;
-        text-align: center;
+        position: relative;
+        vertical-align: top;
+        font-size: inherit;
       }
-      .controller-key.white-key {
+      .controller-key.long-key {
         background-color: white;
-        color: black;
-        width: 2em;
-        height: 5em;
-        margin: 0.5em 0.075em;
+        width: 3.25em;
+        height: 10em;
+        margin-right: 0.25em;
       }
-      .controller-key.black-key {
+      .controller-key.short-key {
         background-color: black;
-        color: white;
-        width: 1.5em;
-        height: 2.5em;
-        margin: 0.5em -0.7875em;
+        width: 2.5em;
+        height: 5.5em;
+        margin-left: -1.375em;
+        margin-right: -1.125em;
         z-index: 1;
       }
-      .controller-key .control-label {
-        position: absolute;
-        width: 100%;
-        left: 0;
-        bottom: 0;
-        line-height: 2em;
+      .controller-key .note-label {
+        font-weight: bold;
       }
-      .text-key-control {
-        display: inline-block;
-        position: relative;
-        border: solid 1px black;
-        width: 2em;
-        height: 2em;
-        margin: 0 0.075em;
-        vertical-align: top;
-      }
-      .text-key-control.white-key {
-        background-color: white;
+      .long-key .note-label {
         color: black;
-        margin-top: 2.25em;
       }
-      .text-key-control.black-key {
-        background-color: black;
+      .short-key .note-label {
         color: white;
-        margin: 0 -1.0375em;
       }
-      .text-key-control .control-label {
+      .controller-key .control-label {
         display: block;
-        width: 100%;
-        line-height: 1.875em;
-        text-align: center
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
       }
+      .long-key .note-label {
+        top: auto;
+        margin: auto auto 0.5em;
+      }
+      .short-key .note-label {
+        bottom: auto;
+        margin: 0.75em auto auto;
+      }
+      .controller-key .hot-key-label {
+        background-color: #ddd;
+        width: 1.5em;
+        height: 1.5em;
+        text-align: center;
+        padding-top: 0.282em;
+        border-radius: 0.325em;
+        border: solid 1px #ccc;
+      }
+      .long-key .hot-key-label {
+        top: auto;
+        margin: auto auto 2.25em;
+      }
+      .short-key .hot-key-label {
+        top: auto;
+        margin: auto auto 0.25em;
+      }
+
       .project-info {
         float: left;
         margin-top: 0.75em;
@@ -192,43 +213,23 @@
   {{/engine}}
 
   <div class='controller' id='controller-keyboard'>
-    {{>controllerKey { keyType: 'white', label: 'C',  noteNum: 60 }
-  }}{{>controllerKey { keyType: 'black', label: 'C♯', noteNum: 61 }
-  }}{{>controllerKey { keyType: 'white', label: 'D',  noteNum: 62 }
-  }}{{>controllerKey { keyType: 'black', label: 'D♯', noteNum: 63 }
-  }}{{>controllerKey { keyType: 'white', label: 'E',  noteNum: 64 }
-  }}{{>controllerKey { keyType: 'white', label: 'F',  noteNum: 65 }
-  }}{{>controllerKey { keyType: 'black', label: 'F♯', noteNum: 66 }
-  }}{{>controllerKey { keyType: 'white', label: 'G',  noteNum: 67 }
-  }}{{>controllerKey { keyType: 'black', label: 'G♯', noteNum: 68 }
-  }}{{>controllerKey { keyType: 'white', label: 'A',  noteNum: 69 }
-  }}{{>controllerKey { keyType: 'black', label: 'A♯', noteNum: 70 }
-  }}{{>controllerKey { keyType: 'white', label: 'B',  noteNum: 71 }
-  }}{{>controllerKey { keyType: 'white', label: 'C',  noteNum: 72 }
-  }}{{>controllerKey { keyType: 'black', label: 'C♯', noteNum: 73 }
-  }}{{>controllerKey { keyType: 'white', label: 'D',  noteNum: 74 }
-  }}{{>controllerKey { keyType: 'black', label: 'D♯', noteNum: 75 }
-  }}{{>controllerKey { keyType: 'white', label: 'E',  noteNum: 76 }
-  }}
-  </div>
-  <div class='controller' id='text-key-controls'>
-    {{>textKeyControl { keyType: 'white', label: 'A',  noteNum: 60 }
-  }}{{>textKeyControl { keyType: 'black', label: 'W',  noteNum: 61 }
-  }}{{>textKeyControl { keyType: 'white', label: 'S',  noteNum: 62 }
-  }}{{>textKeyControl { keyType: 'black', label: 'E',  noteNum: 63 }
-  }}{{>textKeyControl { keyType: 'white', label: 'D',  noteNum: 64 }
-  }}{{>textKeyControl { keyType: 'white', label: 'F',  noteNum: 65 }
-  }}{{>textKeyControl { keyType: 'black', label: 'T',  noteNum: 66 }
-  }}{{>textKeyControl { keyType: 'white', label: 'G',  noteNum: 67 }
-  }}{{>textKeyControl { keyType: 'black', label: 'Y',  noteNum: 68 }
-  }}{{>textKeyControl { keyType: 'white', label: 'H',  noteNum: 69 }
-  }}{{>textKeyControl { keyType: 'black', label: 'U',  noteNum: 70 }
-  }}{{>textKeyControl { keyType: 'white', label: 'J',  noteNum: 71 }
-  }}{{>textKeyControl { keyType: 'white', label: 'K',  noteNum: 72 }
-  }}{{>textKeyControl { keyType: 'black', label: 'O',  noteNum: 73 }
-  }}{{>textKeyControl { keyType: 'white', label: 'L',  noteNum: 74 }
-  }}{{>textKeyControl { keyType: 'black', label: 'P',  noteNum: 75 }
-  }}{{>textKeyControl { keyType: 'white', label: ';',  noteNum: 76 }
+    {{>controllerKey2 { keyType: 'long',  noteLabel: 'C',  hotKeyLabel: 'A', noteNum: 60 }
+  }}{{>controllerKey2 { keyType: 'short', noteLabel: 'C♯', hotKeyLabel: 'W', noteNum: 61 }
+  }}{{>controllerKey2 { keyType: 'long',  noteLabel: 'D',  hotKeyLabel: 'S', noteNum: 62 }
+  }}{{>controllerKey2 { keyType: 'short', noteLabel: 'D♯', hotKeyLabel: 'E', noteNum: 63 }
+  }}{{>controllerKey2 { keyType: 'long',  noteLabel: 'E',  hotKeyLabel: 'D', noteNum: 64 }
+  }}{{>controllerKey2 { keyType: 'long',  noteLabel: 'F',  hotKeyLabel: 'F', noteNum: 65 }
+  }}{{>controllerKey2 { keyType: 'short', noteLabel: 'F♯', hotKeyLabel: 'T', noteNum: 66 }
+  }}{{>controllerKey2 { keyType: 'long',  noteLabel: 'G',  hotKeyLabel: 'G', noteNum: 67 }
+  }}{{>controllerKey2 { keyType: 'short', noteLabel: 'G♯', hotKeyLabel: 'Y', noteNum: 68 }
+  }}{{>controllerKey2 { keyType: 'long',  noteLabel: 'A',  hotKeyLabel: 'H', noteNum: 69 }
+  }}{{>controllerKey2 { keyType: 'short', noteLabel: 'A♯', hotKeyLabel: 'U', noteNum: 70 }
+  }}{{>controllerKey2 { keyType: 'long',  noteLabel: 'B',  hotKeyLabel: 'J', noteNum: 71 }
+  }}{{>controllerKey2 { keyType: 'long',  noteLabel: 'C',  hotKeyLabel: 'K', noteNum: 72 }
+  }}{{>controllerKey2 { keyType: 'short', noteLabel: 'C♯', hotKeyLabel: 'O', noteNum: 73 }
+  }}{{>controllerKey2 { keyType: 'long',  noteLabel: 'D',  hotKeyLabel: 'L', noteNum: 74 }
+  }}{{>controllerKey2 { keyType: 'short', noteLabel: 'D♯', hotKeyLabel: 'P', noteNum: 75 }
+  }}{{>controllerKey2 { keyType: 'long',  noteLabel: 'E',  hotKeyLabel: ';', noteNum: 76 }
   }}
   </div>
 
@@ -242,25 +243,16 @@
   </span>
 </div>
 
-{{#partial controllerKey}}<a
+{{#partial controllerKey2}}<button
   class='controller-key {{keyType}}-key'
   href='javascript:void(0)'
   on-mousedown='noteOn:{{noteNum}}'
   on-mouseup='noteOff:{{noteNum}}'
   on-mouseout='noteOff:{{noteNum}}'
 >
-  <span class='control-label'>{{label}}</span>
-</a>{{/partial}}
-
-{{#partial textKeyControl}}<a
-  class='text-key-control {{keyType}}-key'
-  href='javascript:void(0)'
-  on-mousedown='noteOn:{{noteNum}}'
-  on-mouseup='noteOff:{{noteNum}}'
-  on-mouseout='noteOff:{{noteNum}}'
->
-  <span class='control-label'>{{label}}</span>
-</a>{{/partial}}
+  <span class='control-label note-label'>{{noteLabel}}</span
+  ><span class='control-label hot-key-label'>{{hotKeyLabel}}</span>
+</button>{{/partial}}
     </script>
 
     <script src='./analosizer.js'></script>
