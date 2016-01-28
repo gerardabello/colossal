@@ -1,3 +1,8 @@
+Version 0.1.5
+- Added text to the page regarding currently supported Web
+  browsers and workaround for playing notes by typing not
+  working after clicking with the mouse.
+
 Version 0.1.4
 - Fix sticking notes when dragging mouse off of virtual piano
   key with mouse held down.

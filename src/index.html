@@ -14,11 +14,17 @@
         border: solid 1px #cde;
         border-radius: 0.375em;
         padding: 0.5em;
+        margin: 0.5em 0;
       }
       .panel-section {
         border: solid 1px black;
         border-radius: 0.375em;
         margin-bottom: 0.25em;
+      }
+      .note {
+        margin: 0.5em 0;
+        width: 35em;
+        font-style: italic;
       }
       .instrument {
         background-color: #f0f7ff;
@@ -146,6 +152,19 @@
 
     <div id='app-container'>
     </div>
+
+    <p class='note'>
+      This is only tested and known to be working properly in Mozilla
+      Firefox and Google Chrome browsers at this time. If it is working
+      incorrectly for you in another browser, please try it in Firefox or
+      Chrome.
+    </p>
+
+    <p class='note'>
+      If playing using the keyboard is not working after clicking on keys
+      or other controls using the mouse, then clicking on the volume
+      slider knob should get them working again.
+    </p>
 
     <script id='app-template' type='text/html+ractive'>
 <div
