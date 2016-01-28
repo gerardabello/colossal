@@ -39,6 +39,7 @@ function Analosizer( opts ) {
           el: opts.ui.containerSelector
         , template: opts.ui.templateSelector
         , data: data
+        , adapt: [ new NotesBeingPlayedAdaptor() ]
         , oncomplete: fireReady
       })
   ;
@@ -46,6 +47,46 @@ function Analosizer( opts ) {
   function fireReady() {
     var initFocusEl = global.document.getElementById('init-focus');
     initFocusEl.focus();
+  }
+
+  function NotesBeingPlayedAdaptor() {
+    this.filter = filter;
+    this.wrap = wrap;
+
+    function filter( object, keypath ) {
+      return (
+        typeof object                    === 'object' &&
+        typeof object.toNotesBeingPlayed === 'function'
+      );
+    }
+
+    function wrap( ractive, object, keypath, prefixer ) {
+      object.addChangeListener( onChange );
+
+      return {
+          get: get
+        , teardown: teardown
+        , reset: reset
+      };
+
+      function onChange() {
+        ractive.set( keypath, object );
+      }
+
+      function get() {
+        return object;
+      }
+
+      function teardown() {
+        object.removeChangeListener( onChange );
+      }
+
+      function reset( data ) {
+        // Allow and ignore attempts to reset which
+        // will happen when we tell ractive about a
+        // change so that bindings will refresh.
+      }
+    }
   }
 
   ractive.on( 'noteOnForMouse', function( rEvent, noteNum ) {

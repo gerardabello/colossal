@@ -70,6 +70,9 @@
         height: 10em;
         margin-right: 0.25em;
       }
+      .controller-key.long-key.on {
+        background-color: #bfb;
+      }
       .controller-key.short-key {
         background-color: black;
         width: 2.5em;
@@ -77,6 +80,9 @@
         margin-left: -1.375em;
         margin-right: -1.125em;
         z-index: 1;
+      }
+      .controller-key.short-key.on {
+        background-color: #050;
       }
       .controller-key .note-label {
         font-weight: bold;
@@ -244,7 +250,7 @@
 </div>
 
 {{#partial controllerKey2}}<button
-  class='controller-key {{keyType}}-key'
+  class='controller-key {{keyType}}-key{{engine.notesBeingPlayed.get(noteNum) ? " on" : ""}}'
   href='javascript:void(0)'
   on-mousedown='noteOnForMouse:{{noteNum}}'
   on-mouseover='noteOnForMouse:{{noteNum}}'

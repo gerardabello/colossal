@@ -1,7 +1,8 @@
 "use strict";
 
-var Voicing = require('./voicing.js')
-  , Gain    = require('./gain.js')
+var Voicing           = require('./voicing.js')
+  , VoicesBeingPlayed = require('./voices-being-played.js')
+  , Gain              = require('./gain.js')
 ;
 
 module.exports = Engine;
@@ -11,7 +12,7 @@ function Engine() {
     , audioContext = new AudioContext()
     , outputGain = new Gain( audioContext )
     , voicing = new Voicing( audioContext )
-    , voicesBeingPlayed = {}
+    , voicesBeingPlayed = new VoicesBeingPlayed()
   ;
 
   outputGain.connect( audioContext.destination );
@@ -19,32 +20,30 @@ function Engine() {
   this.noteOn  = noteOn;
   this.noteOff = noteOff;
 
-  Object.defineProperty( this, 'outputGain', { get: getOutputGain } );
-  Object.defineProperty( this, 'voicing',    { get: getVoicing    } );
+  Object.defineProperty( this, 'outputGain',       { get: getOutputGain } );
+  Object.defineProperty( this, 'voicing',          { get: getVoicing    } );
+  Object.defineProperty( this, 'notesBeingPlayed', { get: getNotesBeingPlayed } );
 
   function noteOn( noteNum, source ) {
-    var voiceKey = [ noteNum, source ]
-      , voice = voicesBeingPlayed[ voiceKey ]
-    ;
+    var voice = voicesBeingPlayed.get( noteNum, source );
 
     if( voice ) { return; }
 
-    voice = voicesBeingPlayed[ voiceKey ] = voicing.createVoice();
+    voice = voicing.createVoice();
     voice.connect( outputGain.inputNode );
     voice.startNote( noteNum );
+    voicesBeingPlayed.set( noteNum, source, voice );
   }
 
   function noteOff( noteNum, source ) {
-    var voiceKey = [ noteNum, source ]
-      , voice = voicesBeingPlayed[ voiceKey ]
-    ;
+    var voice = voicesBeingPlayed.get( noteNum, source );
 
     if( ! voice ) { return; }
 
     try {
       voice.endNote();
     } finally {
-      voicesBeingPlayed[ voiceKey ] = null;
+      voicesBeingPlayed.clear( noteNum, source );
     }
   }
 
@@ -54,5 +53,9 @@ function Engine() {
 
   function getVoicing() {
     return voicing.exposedObject;
+  }
+
+  function getNotesBeingPlayed() {
+    return voicesBeingPlayed.counts;
   }
 };
