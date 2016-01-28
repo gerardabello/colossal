@@ -1,3 +1,16 @@
+Version 0.1.4
+- Fix sticking notes when dragging mouse off of virtual piano
+  key with mouse held down.
+- New and improved virtual piano keyboard appearance.
+- Don't play notes for mouse click with other than left button
+  on virtual piano keyboard.
+- Distinguish between not sources (mouse vs text key) and allow
+  a note to be played in unison from multiple sources.
+- Allow glissando to be played by dragging mouse across virtual
+  piano keyboard with mouse button held down.
+- Provide visual feedback on virtual piano keyboard for notes
+  currently being played.
+
 Version 0.1.3
 - Allows selecting sine, square, sawtooth, or triangle waveform
   for voicing.

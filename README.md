@@ -17,17 +17,17 @@ of simultaneously held keys.
 
 1. Has very few controls so far.  Does not yet have filtering or provide
    volume envelope control,etc.
-2. No visual feedback when notes are played.
-3. Only tested on one mobile browser (Mobile Safari on iOS).
-4. Presents a non-informative dialog to the user on every attempt to play
+2. Only tested on one mobile browser (Mobile Safari on iOS).
+3. Presents a non-informative dialog to the user on every attempt to play
    a note on iOS.
-5. The note that plays on iOS sounds awful and nothing like the supposed
+4. The note that plays on iOS sounds awful and nothing like the supposed
    waveform.
-6. Does not yet attempt to respond to touch events, so does not play chords
+5. Does not yet attempt to respond to touch events, so does not play chords
    using multi-touch.
-7. Visual layout is poor on iOS.
-8. Text keys don't play notes on Safari after clicking a virtual keyboard
+6. Visual layout is poor on iOS.
+7. Text keys don't play notes on Safari after clicking a virtual keyboard
    key or a waveform radio button.
+8. Overloading and distortion when chords are played in Safari browser.
 
 ## Making a Build
 
