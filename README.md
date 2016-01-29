@@ -26,10 +26,8 @@ of simultaneously held keys.
    using multi-touch.
 6. Visual layout is poor on iOS.
 7. Text keys don't play notes on Safari after clicking a virtual keyboard
-   key or a waveform radio button (actually not working in Safari at all
-   at the moment).
-8. Overloading and distortion when chords are played in Safari browser
-   (actually not working in Safari at all at the moment).
+   key or a waveform radio button.
+8. Overloading and distortion when chords are played in Safari browser.
 
 ## Making a Build
 

@@ -3,7 +3,7 @@
 global.Analosizer = Analosizer;
 
 function Analosizer( opts ) {
-  var version = '0.1.5'
+  var version = '0.1.6'
     , Engine = require('./analosizer/engine.js')
     , engine = new Engine()
     , textKeyNoteMap = []
@@ -90,8 +90,11 @@ function Analosizer( opts ) {
   }
 
   ractive.on( 'noteOnForMouse', function( rEvent, noteNum ) {
-    var msEvent = rEvent.original;
-    if( ~msEvent.buttons & 1 ) { return; }
+    var msEvent = rEvent.original
+      , buttons = msEvent.buttons || msEvent.which
+    ;
+
+    if( ~buttons & 1 ) { return; }
 
     engine.noteOn( noteNum, 'mouse' );
   });
