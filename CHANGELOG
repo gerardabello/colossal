@@ -1,3 +1,14 @@
+Version 0.1.7
+- Reduce output gain relative to full-scale to mostly eliminate
+  audible clipping when playing chords in the Safari browser.
+  Other browsers should have had the same problem and presumably
+  did not because they employ limiters specificatlly to prevent
+  that kind of thing.  In any case, we don't want to rely on
+  the browser generously taking care of that for us.
+- Add a limiter stage to the output to eliminate clipping that
+  would still occur in spite of the output gain reduction that
+  is now in place.
+
 Version 0.1.6
 - Playing notes works on Safari again (with issues).
 
