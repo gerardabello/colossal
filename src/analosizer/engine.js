@@ -10,7 +10,8 @@ module.exports = Engine;
 function Engine() {
   var AudioContext = global.AudioContext || global.webkitAudioContext
     , audioContext = new AudioContext()
-    , outputGain = new Gain( audioContext )
+    // Offset of -10.5 dB moslty prevents audible overload clipping with chords.
+    , outputGain = new Gain( audioContext, -10.5 )
     , voicing = new Voicing( audioContext )
     , voicesBeingPlayed = new VoicesBeingPlayed()
   ;
