@@ -90,11 +90,13 @@ function Analosizer( opts ) {
   }
 
   ractive.on( 'noteOnForMouse', function( rEvent, noteNum ) {
-    var msEvent = rEvent.original
-      , buttons = msEvent.buttons || msEvent.which
-    ;
+    var msEvent = rEvent.original;
 
-    if( ~buttons & 1 ) { return; }
+    if( 'buttons' in msEvent ) {
+      if( ~msEvent.buttons & 1 ) { return; }
+    } else {
+      if( msEvent.which !== 1 ) { return; }
+    }
 
     engine.noteOn( noteNum, 'mouse' );
   });

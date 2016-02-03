@@ -33,7 +33,7 @@ module.exports = function Voice( audioContext ) {
 
     oscillator.frequency.value = noteNumToFrequency( noteNum );
     gain.gain.value = 0;
-    oscillator.start()
+    oscillator.start();
     attackStartAt = audioContext.currentTime + 0.001;
     gain.gain.setValueAtTime( 0, attackStartAt );
     gain.gain.linearRampToValueAtTime( 1, attackStartAt + attackTimeSecs );
