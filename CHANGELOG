@@ -1,3 +1,7 @@
+Version 0.1.8
+- Fix recently introduced bug in mouse button itentification that
+  caused Firefox mouse handling to stop working correctly.
+
 Version 0.1.7
 - Reduce output gain relative to full-scale to mostly eliminate
   audible clipping when playing chords in the Safari browser.
