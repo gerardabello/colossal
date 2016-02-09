@@ -60,7 +60,7 @@ npm project.
 
     npm run build
 
-### Open Anala-osizer In Your Browser
+### Open Analo-sizer In Your Browser
 
 Open a compatible Web browser (a modern browser with WebAudio support) and
 enter the file URL to the analosizer.html file in your build directory
