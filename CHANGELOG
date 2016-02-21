@@ -1,3 +1,10 @@
+Version 0.1.9
+- Playing notes using text keys now works in Firefox and Safari
+  immediately after clicking a note on the virtual piano
+  keyboard.
+- Playing notes using text keys now works in Safari immediately
+  after manipulating the volume range control using the mouse.
+
 Version 0.1.8
 - Fix recently introduced bug in mouse button itentification that
   caused Firefox mouse handling to stop working correctly.
