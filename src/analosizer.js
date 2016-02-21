@@ -99,6 +99,7 @@ function Analosizer( opts ) {
     }
 
     engine.noteOn( noteNum, 'mouse' );
+    msEvent.target.focus();
   });
 
   ractive.on( 'noteOffForMouse', function( rEvent, noteNum ) {

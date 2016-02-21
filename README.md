@@ -17,14 +17,15 @@ of simultaneously held keys.
 
 1. Has very few controls so far.  Does not yet have filtering or provide
    volume envelope control,etc.
-2. Only tested on one mobile browser (Mobile Safari on iOS).
-3. Presents a non-informative dialog to the user on every attempt to play
-   a note on iOS.
+2. Is not known to be working properly on any mobile Web browser and visual
+   layout is poor on mobile Web browsers.
 4. Does not yet attempt to respond to touch events, so does not play chords
    using multi-touch.
-5. Visual layout is poor on iOS.
-6. Text keys don't play notes on Safari after clicking a virtual keyboard
-   key or a waveform radio button.
+5. Text keys don't play notes in Safari or Firefox when the focus is on
+   a waveform radio button.
+6. There is sometimes a click at the beginning of the playing of a note in
+   Firefox as if maybe the attack fade-in starts before the note starts
+   playing.
 
 ## Making a Build
 

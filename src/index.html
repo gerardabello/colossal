@@ -6,6 +6,9 @@
     <meta charset="UTF-8" />
     <title>Analosizer</title>
     <style>
+      h1, h2 {
+        clear: both;
+      }
       .panel {
         display: block;
         position: relative;
@@ -26,7 +29,7 @@
         width: 35em;
         font-style: italic;
       }
-      .instrument {
+      .panel-instrument {
         background-color: #f0f7ff;
         border: solid 1px #d7e0e7;
         border-radius: 0.5em;
@@ -153,6 +156,8 @@
     <div id='app-container'>
     </div>
 
+    <h2>Usage Notes</h2>
+
     <p class='note'>
       This is only tested and known to be working properly in Mozilla
       Firefox, Google Chrome, and Apple Safari for OS X browsers at this
@@ -161,10 +166,25 @@
     </p>
 
     <p class='note'>
-      If playing using the keyboard is not working after clicking on keys
-      or other controls using the mouse, then clicking on the volume
-      slider knob (and then pressing [tab] if using Safari) should get them
-      to work again.
+      Playing notes using the computer keyboard may not work in some
+      browsers when the focus is on certain controls. If using the
+      computer keyboard to play notes is not working, you should be
+      able to make it work again by clicking a note on the piano
+      keyboard or by clicking on the volume control slider.
+    </p>
+
+    <p class='note'>
+      Chords can be played by holding down multiple keys on your computer
+      keyboard at the same time. For instance, hold down the A, D, and G
+      keys (for notes C, E, and G) all at the same time to play a C Major
+      chord.
+    </p>
+
+    <p class='note'>
+      Due to limitations of computer keyboards&apos; abilities to
+      distinguish some combinations of simultaneously-held keys, some
+      complex chords cannot be successfully played using a computer
+      keyboard.
     </p>
 
     <script id='app-template' type='text/html+ractive'>
@@ -179,15 +199,20 @@
     <fieldset class='panel-section'>
       <legend>Global</legend>
 
-      <fieldset class='instrument'>
+      <fieldset class='panel-instrument'>
         <legend>Volume</legend>
 
         <span class='control'>
+          <!-- In Safari 9.0.3 for OS X and possibly other browsers,
+               the focus moves to the <body> element after clicking
+               the range input unless we explicitly set the focus.
+          -->
           <input
             id='global-volume'
             type='range'
             min='-36' max='0' step='1'
             value='{{outputGain.level_dB}}'
+            onclick='this.focus();'
           />
           <input
             type='number'
@@ -203,7 +228,7 @@
       <fieldset class='panel-section'>
         <legend>Voicing</legend>
 
-        <fieldset class='instrument'>
+        <fieldset class='panel-instrument'>
           <legend>Waveform</legend>
 
           <span class='control'>
@@ -276,6 +301,7 @@
   on-mouseover='noteOnForMouse:{{noteNum}}'
   on-mouseup='noteOffForMouse:{{noteNum}}'
   on-mouseout='noteOffForMouse:{{noteNum}}'
+  onclick='this.focus();'
 >
   <span class='control-label note-label'>{{noteLabel}}</span
   ><span class='control-label hot-key-label'>{{hotKeyLabel}}</span>
