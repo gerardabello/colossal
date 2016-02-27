@@ -1,0 +1,14 @@
+image: node
+
+pages:
+  stage: deploy
+  script:
+  - npm update
+  - npm run build
+  - mv build public
+  - cp index.html public
+  artifacts:
+    paths:
+    - public
+  only:
+  - master
