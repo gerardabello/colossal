@@ -5,7 +5,8 @@ pages:
   script:
   - npm update
   - npm run build
-  - mv build public
+  - mkdir public/build
+  - mv build public/build
   - cp index.html public
   artifacts:
     paths:
