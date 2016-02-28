@@ -10,7 +10,7 @@ import Knob from './knob/knob.jsx';
 
 let styles = {
     root:{
-        background: "rgb(60, 37, 32)",
+        background: "rgb(208, 208, 208)",
     }
 }
 

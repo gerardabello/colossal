@@ -6,11 +6,6 @@ var Note = require('octavian').Note;
 
 import './keyboard.scss';
 
-let styles = {
-    root:{
-        background: "rgb(228, 189, 180)",
-    }
-}
 
 var Keyboard = React.createClass({
     getInitialState: function() {
@@ -43,8 +38,10 @@ var Keyboard = React.createClass({
         }
 
         return (
-            <div id="keyboard" style={ styles.root }>
-                {nkeys}
+            <div id="keyboard">
+                <div className="container">
+                    {nkeys}
+                </div>
             </div>
         )
     }
