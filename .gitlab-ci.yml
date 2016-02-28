@@ -9,7 +9,7 @@ pages:
   - mkdir .public/build
   - mv build .public/build
   - cp index.html .public
-  - cp .public public
+  - cp -r .public public
   artifacts:
     paths:
     - public

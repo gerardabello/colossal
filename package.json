@@ -23,5 +23,8 @@
     "start": "electron main.js",
     "build": "webpack",
     "watch": "webpack-dev-server --hot --inline"
+  },
+  "dependencies": {
+    "react-tap-event-plugin": "^0.2.2"
   }
 }
