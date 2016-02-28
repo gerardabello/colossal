@@ -6,19 +6,11 @@ pages:
   - npm update
   - npm install node-sass
   - npm run build
-  - ls
-  - ls build
   - mkdir .public
   - mkdir .public/build
-  - ls
-  - ls .public
   - cp index.html .public
   - cp build/bundle.js .public/build
-  - ls .public
-  - ls .public/build
   - mv .public public
-  - ls public
-  - ls public/build
   artifacts:
     paths:
     - public
