@@ -54,8 +54,10 @@ var PolySynth = React.createClass({
         this.setState({ notes: n});
     },
     stopVoice(signature){
-        this.state.notes[signature].finish();
-        delete this.state.notes[signature];
+        if(this.state.notes[signature]){
+            this.state.notes[signature].finish();
+            delete this.state.notes[signature];
+        }
     },
     handleEnv1R(e){
         let p = this.state.preset;
