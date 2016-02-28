@@ -4,6 +4,7 @@ pages:
   stage: deploy
   script:
   - npm update
+  - npm install node-sass
   - npm run build
   - mkdir .public
   - mkdir .public/build
