@@ -71,7 +71,7 @@ var PolySynth = React.createClass({
         return (
             <div style={ styles.root }>
                 <input type="range" min="1e-2" max="10" step="0.001" value={this.state.preset.envelopes.env1.r} onChange={this.handleEnv1R}/>
-                <Knob value={5} onChangeValue={this.handleChangeKnob} />
+                <Knob value={5} min={0} max={100} onChangeValue={this.handleChangeKnob} />
             </div>
         )
     }
