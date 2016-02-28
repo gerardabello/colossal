@@ -26,5 +26,6 @@
     "watch": "webpack-dev-server --hot --inline"
   },
   "dependencies": {
+    "react-addons-linked-state-mixin": "^0.14.7"
   }
 }

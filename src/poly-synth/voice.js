@@ -57,7 +57,7 @@ class Voice {
 
         //env1
         this.envGain.gain.cancelScheduledValues(now);
-        this.envGain.gain.setValueAtTime(0.001, now);
+        this.envGain.gain.setValueAtTime(1e-10, now);
         this.envGain.gain.exponentialRampToValueAtTime(p.envelopes.env1.al, now + p.envelopes.env1.a);
         this.envGain.gain.exponentialRampToValueAtTime(p.envelopes.env1.dl, now + p.envelopes.env1.a + p.envelopes.env1.d);
     }
@@ -79,7 +79,7 @@ class Voice {
         let now = this.context.currentTime;
         this.mainGain.gain.cancelScheduledValues(now);
         this.mainGain.gain.setValueAtTime(this.mainGain.gain.value, now);
-        this.mainGain.gain.exponentialRampToValueAtTime(0.001, now + this.preset.envelopes.env1.r);
+        this.mainGain.gain.exponentialRampToValueAtTime(1e-4, now + this.preset.envelopes.env1.r);
 
         setTimeout(
             function() {

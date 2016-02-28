@@ -1,10 +1,12 @@
 'use strict';
 
-import React from 'react';
 import Maps from '../maps.js';
 import Voice from './voice.js';
 
+import React from 'react';
 var Octavian = require('octavian');
+import Knob from './knob/knob.jsx';
+
 
 let styles = {
     root:{
@@ -20,11 +22,11 @@ let initialPreset = {
         },
         osc2: {
             shape: "square",
-            gain: 0
+            gain: 0.3
         },
         osc3: {
             shape: "sine",
-            gain: 1
+            gain: 0
         }
     },
     envelopes: {
@@ -55,18 +57,19 @@ var PolySynth = React.createClass({
         this.state.notes[signature].finish();
         delete this.state.notes[signature];
     },
+    handleEnv1R(e){
+        let p = this.state.preset;
+        p.envelopes.env1.r = e.target.valueAsNumber;
+        this.setState({preset: p});
+    },
+    handleChangeKnob(e){
+    },
     //RENDER
     render: function() {
         return (
             <div style={ styles.root }>
-                <button type="button" onMouseDown={this.startVoice.bind(this,"A0")} onMouseUp={this.stopVoice.bind(this,"A0")}>Click Me!</button>
-                <button type="button" onMouseDown={this.startVoice.bind(this,"A1")} onMouseUp={this.stopVoice.bind(this,"A1")}>Click Me!</button>
-                <button type="button" onMouseDown={this.startVoice.bind(this,"A2")} onMouseUp={this.stopVoice.bind(this,"A2")}>Click Me!</button>
-                <button type="button" onMouseDown={this.startVoice.bind(this,"A3")} onMouseUp={this.stopVoice.bind(this,"A3")}>Click Me!</button>
-                <button type="button" onMouseDown={this.startVoice.bind(this,"A4")} onMouseUp={this.stopVoice.bind(this,"A4")}>Click Me!</button>
-                <button type="button" onMouseDown={this.startVoice.bind(this,"A5")} onMouseUp={this.stopVoice.bind(this,"A5")}>Click Me!</button>
-                <button type="button" onMouseDown={this.startVoice.bind(this,"A6")} onMouseUp={this.stopVoice.bind(this,"A6")}>Click Me!</button>
-                <button type="button" onMouseDown={this.startVoice.bind(this,"A7")} onMouseUp={this.stopVoice.bind(this,"A7")}>Click Me!</button>
+                <input type="range" min="1e-2" max="10" step="0.001" value={this.state.preset.envelopes.env1.r} onChange={this.handleEnv1R}/>
+                <Knob value={5} onChangeValue={this.handleChangeKnob} />
             </div>
         )
     }
