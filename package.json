@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "file-loader": "^0.8.5",
-    "react-addons-linked-state-mixin": "^0.14.7"
+    "react-addons-linked-state-mixin": "^0.14.7",
+    "react-binding": "^0.7.5"
   }
 }

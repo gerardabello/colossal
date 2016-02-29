@@ -6,11 +6,22 @@ import './knob.scss';
 var Knob = React.createClass({
     getInitialState: function() {
         return {
-            value: this.props.value,
+            value: this.props.valueLink.value,
             dragging: false,
             dragPoint: [0.0,0.0],
-            dragStartValue: this.props.value,
+            dragStartValue: 0,
         };
+    },
+
+    getValueLink: function(props) {
+      // Create an object that works just like the one
+      // returned from `this.linkState` if we weren't passed
+      // one; that way, we can always behave as if we're using
+      // `valueLink`, even if we're using plain `value` and `onChange`.
+      return props.valueLink || {
+        value: props.value,
+        requestChange: props.onChange
+      };
     },
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -23,9 +34,7 @@ var Knob = React.createClass({
         this.setState({
             value: value
         }, () => {
-            if (this.props.onChangeValue) {
-                this.props.onChangeValue(this.state.value)
-            }
+            this.getValueLink(this.props).requestChange(value);
         })
     },
 

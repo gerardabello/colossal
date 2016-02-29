@@ -7,6 +7,9 @@ import React from 'react';
 var Octavian = require('octavian');
 import Knob from './knob/knob.jsx';
 
+import Binder from 'react-binding';
+
+
 
 let styles = {
     root:{
@@ -64,14 +67,13 @@ var PolySynth = React.createClass({
         p.envelopes.env1.r = e.target.valueAsNumber;
         this.setState({preset: p});
     },
-    handleChangeKnob(e){
-    },
     //RENDER
     render: function() {
         return (
             <div style={ styles.root }>
-                <input type="range" min="1e-2" max="10" step="0.001" value={this.state.preset.envelopes.env1.r} onChange={this.handleEnv1R}/>
-                <Knob value={5} min={0} max={100} onChangeValue={this.handleChangeKnob} />
+                <Knob min={1e-4} max={10} valueLink={Binder.bindToState(this,"preset", "envelopes.env1.r")}/>
+                <Knob min={1e-4} max={1} valueLink={Binder.bindToState(this,"preset", "osc.osc2.gain")}/>
+                <p> {this.state.preset.osc.osc2.gain} </p>
             </div>
         )
     }
