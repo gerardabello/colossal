@@ -9,13 +9,7 @@ import Knob from './knob/knob.jsx';
 
 import Binder from 'react-binding';
 
-
-
-let styles = {
-    root:{
-        background: "rgb(208, 208, 208)",
-    }
-}
+import './poly-synth.scss';
 
 let initialPreset = {
     osc: {
@@ -62,18 +56,37 @@ var PolySynth = React.createClass({
             delete this.state.notes[signature];
         }
     },
-    handleEnv1R(e){
-        let p = this.state.preset;
-        p.envelopes.env1.r = e.target.valueAsNumber;
-        this.setState({preset: p});
-    },
     //RENDER
     render: function() {
         return (
-            <div style={ styles.root }>
-                <Knob min={1e-4} max={10} valueLink={Binder.bindToState(this,"preset", "envelopes.env1.r")}/>
-                <Knob min={1e-4} max={1} valueLink={Binder.bindToState(this,"preset", "osc.osc2.gain")}/>
-                <p> {this.state.preset.osc.osc2.gain} </p>
+            <div id="poly-synth">
+                <div id="osc">
+                    <div id="osc1">
+                        <h2>OSC1</h2>
+                        <Knob min={1e-4} max={1} valueLink={Binder.bindToState(this,"preset", "osc.osc1.gain")}/>
+                    </div>
+                    <div id="osc2">
+                        <h2>OSC2</h2>
+                        <Knob min={1e-4} max={1} valueLink={Binder.bindToState(this,"preset", "osc.osc2.gain")}/>
+                    </div>
+                    <div id="osc3">
+                        <h2>OSC3</h2>
+                        <Knob min={1e-4} max={1} valueLink={Binder.bindToState(this,"preset", "osc.osc3.gain")}/>
+                    </div>
+                </div>
+                <div id="env">
+                    <p>Attack</p>
+                    <Knob min={1e-4} max={10} valueLink={Binder.bindToState(this,"preset", "envelopes.env1.a")}/>
+                    <p>Attack level</p>
+                    <Knob min={1e-4} max={1} valueLink={Binder.bindToState(this,"preset", "envelopes.env1.al")}/>
+                    <p>Decay</p>
+                    <Knob min={1e-4} max={10} valueLink={Binder.bindToState(this,"preset", "envelopes.env1.d")}/>
+                    <p>Decay level</p>
+                    <Knob min={1e-4} max={1} valueLink={Binder.bindToState(this,"preset", "envelopes.env1.dl")}/>
+                    <p>Release</p>
+                    <Knob min={1e-4} max={10} valueLink={Binder.bindToState(this,"preset", "envelopes.env1.r")}/>
+
+                </div>
             </div>
         )
     }

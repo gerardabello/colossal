@@ -1,0 +1,26 @@
+//BASE COLORS
+$back-color: rgb(208, 208, 208);
+
+
+
+
+
+
+//
+
+#poly-synth {
+    background: $back-color;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+
+    #osc{
+        flex: 1;
+    }
+
+    #env{
+        flex: 2;
+        display: flex;
+    }
+
+}

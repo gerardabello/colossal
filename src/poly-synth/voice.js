@@ -58,8 +58,8 @@ class Voice {
         //env1
         this.envGain.gain.cancelScheduledValues(now);
         this.envGain.gain.setValueAtTime(1e-10, now);
-        this.envGain.gain.exponentialRampToValueAtTime(p.envelopes.env1.al, now + p.envelopes.env1.a);
-        this.envGain.gain.exponentialRampToValueAtTime(p.envelopes.env1.dl, now + p.envelopes.env1.a + p.envelopes.env1.d);
+        this.envGain.gain.linearRampToValueAtTime(p.envelopes.env1.al, now + p.envelopes.env1.a);
+        this.envGain.gain.exponentialRampToValueAtTime(p.envelopes.env1.al * p.envelopes.env1.dl, now + p.envelopes.env1.a + p.envelopes.env1.d);
     }
 
     startOsc(note){
