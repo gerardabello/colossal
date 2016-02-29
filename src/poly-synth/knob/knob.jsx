@@ -6,7 +6,7 @@ import './knob.scss';
 var Knob = React.createClass({
     getInitialState: function() {
         return {
-            value: this.props.valueLink.value,
+            value: this.getValueLink(this.props).value,
             dragging: false,
             dragPoint: [0.0,0.0],
             dragStartValue: 0,
