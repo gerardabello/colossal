@@ -65,11 +65,12 @@ var Knob = React.createClass({
 
     render() {
         return (
-            <div className="knob" onMouseDown={this.onMouseDown} >
+
+            <div className="knob-surround" onMouseDown={this.onMouseDown} >
             <div
-            className="spinner"
+            className="knob"
             style={{
-                transform: `rotate(${-45 + this.valueToDeg(this.state.value)}deg)`
+                transform: `rotate(${45 + this.valueToDeg(this.state.value)}deg)`
             }}
             >
             </div>

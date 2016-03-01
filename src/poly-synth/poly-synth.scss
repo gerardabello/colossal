@@ -1,6 +1,6 @@
 //BASE COLORS
-$back-color: rgb(208, 208, 208);
-
+$back-color: #171717;
+$color: white;
 
 
 
@@ -10,17 +10,47 @@ $back-color: rgb(208, 208, 208);
 
 #poly-synth {
     background: $back-color;
+    color: $color;
     display: flex;
     flex-direction: row;
     align-items: stretch;
+    height: 300px;
+    font-family: sans-serif;
+    font-weight: bold;
+
 
     #osc{
         flex: 1;
+        display: flex;
+        flex-direction: column;
+
+        > div{
+            flex: 1;
+            display: flex;
+        }
     }
 
     #env{
         flex: 2;
         display: flex;
+    }
+
+    .section{
+        border: rgba(0, 0, 0, 0.12) 1px solid;
+
+         > h2{
+            margin: 0;
+            font-size: 5.5em;
+            position: absolute;
+            color: rgba(255, 255, 255, 0.04);
+        }
+    }
+
+    .knob-label-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
 
 }

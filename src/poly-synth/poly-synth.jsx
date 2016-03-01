@@ -61,20 +61,29 @@ var PolySynth = React.createClass({
         return (
             <div id="poly-synth">
                 <div id="osc">
-                    <div id="osc1">
+                    <div id="osc1" className="section">
                         <h2>OSC1</h2>
-                        <Knob min={1e-4} max={1} valueLink={Binder.bindToState(this,"preset", "osc.osc1.gain")}/>
+                        <div className="knob-label-container">
+                            <Knob min={1e-4} max={1} valueLink={Binder.bindToState(this,"preset", "osc.osc1.gain")}/>
+                            <span>Gain</span>
+                        </div>
                     </div>
-                    <div id="osc2">
+                    <div id="osc2" className="section">
                         <h2>OSC2</h2>
-                        <Knob min={1e-4} max={1} valueLink={Binder.bindToState(this,"preset", "osc.osc2.gain")}/>
+                        <div className="knob-label-container">
+                            <Knob min={1e-4} max={1} valueLink={Binder.bindToState(this,"preset", "osc.osc2.gain")}/>
+                            <span>Gain</span>
+                        </div>
                     </div>
-                    <div id="osc3">
+                    <div id="osc3" className="section">
                         <h2>OSC3</h2>
-                        <Knob min={1e-4} max={1} valueLink={Binder.bindToState(this,"preset", "osc.osc3.gain")}/>
+                        <div className="knob-label-container">
+                            <Knob min={1e-4} max={1} valueLink={Binder.bindToState(this,"preset", "osc.osc3.gain")}/>
+                            <span>Gain</span>
+                        </div>
                     </div>
                 </div>
-                <div id="env">
+                <div id="env" className="section">
                     <p>Attack</p>
                     <Knob min={1e-4} max={10} valueLink={Binder.bindToState(this,"preset", "envelopes.env1.a")}/>
                     <p>Attack level</p>
@@ -85,7 +94,6 @@ var PolySynth = React.createClass({
                     <Knob min={1e-4} max={1} valueLink={Binder.bindToState(this,"preset", "envelopes.env1.dl")}/>
                     <p>Release</p>
                     <Knob min={1e-4} max={10} valueLink={Binder.bindToState(this,"preset", "envelopes.env1.r")}/>
-
                 </div>
             </div>
         )
