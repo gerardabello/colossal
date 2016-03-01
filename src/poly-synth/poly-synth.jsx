@@ -78,7 +78,7 @@ var PolySynth = React.createClass({
                     <div id="osc3" className="section">
                         <h2>OSC3</h2>
                         <div className="knob-label-container">
-                            <Knob min={0} max={1} law="log" valueLink={Binder.bindToState(this,"preset", "osc.osc3.gain")}/>
+                            <Knob min={0} max={1} law="pow" valueLink={Binder.bindToState(this,"preset", "osc.osc3.gain")}/>
                             <span>Gain</span>
                         </div>
                     </div>
