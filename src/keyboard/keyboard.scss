@@ -1,3 +1,11 @@
+$white-width: 40px;
+$white-lenght: 100px;
+$white-height: 10px;
+
+$black-width: 20px;
+$black-lenght: 70px;
+$black-height: 5px;
+
 #keyboard {
 
     background: rgb(51, 37, 28);
@@ -5,13 +13,13 @@
     flex: 1;
     display: flex;
     justify-content: center;
-    height: 120px;
+    height: $white-lenght + 20px;
     overflow: hidden;
 
     border-top: black 4px solid;
 
     .container{
-        height: 112px;
+        height: $white-lenght + $white-height + 2px;
         display: flex;
         box-shadow: rgba(0, 0, 0, 0.54) 0 0 80px;
     }
@@ -37,34 +45,34 @@
 
     .white.key:active {
         background-color: #e0e0e0;
-        height: 110px;
+        height: $white-lenght + $white-height;
         box-shadow: #D6D6D6 0px 0px 0px;
     }
 
     .black.key:active {
         background-color: #1d1d1d;
-        height: 75px;
+        height: $black-lenght + $black-height;
         box-shadow: #464646 0px 0px 0px;
     }
 
     .white.key {
         background-color: #f6f6f6;
         border: #DEDEDE 1px solid;
-        width: 40px;
-        height: 100px;
-        box-shadow: #CCCCCC 0px 10px 0px;
+        width: $white-width;
+        height: $white-lenght;
+        box-shadow: #CCCCCC 0px $white-height 0px;
     }
 
     .black.key {
         display: inline-block;
         background-color: #212121;
         border: #464646 1px solid;
-        box-shadow: #1B1B1B 0px 5px 0px;
+        box-shadow: #1B1B1B 0px $black-height 0px;
         position: relative;
-        width: 20px;
-        margin-right: -23px;
-        left: -10px;
-        height: 70px;
+        width: $black-width;
+        margin-right: -($black-width + 3px);
+        left: -($black-width / 2);
+        height: $black-lenght;
         top: 0px;
     }
 }
