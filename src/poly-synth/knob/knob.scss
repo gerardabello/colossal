@@ -17,8 +17,9 @@
         right: 0;
         bottom: 0;
         left: 15%;
-        background: rgb(243, 243, 243);
-        box-shadow: black 0 0 30px, white 0 0 0 2px;
+
+        background: #DEDEDE;
+        box-shadow: #F5F5F5 0 0 10px 3px, darkgrey 0 0 0 2px inset, #F3F3F3 0 0 6px 4px inset, rgb(208, 208, 208) 0 0 0 6px, black 0 0 0 8px;
         border-radius: 50%;
         z-index: 1;
         align-items: center;
@@ -26,9 +27,9 @@
 
         &:before {
             content: "";
-            width: 8px;
-            height: 7px;
-            margin: 4px;
+            width: 6px;
+            height: 6px;
+            margin: 6px;
             border-radius: 50%;
             background: #000;
         }
