@@ -6,7 +6,7 @@ import './knob.scss';
 var Knob = React.createClass({
     getInitialState: function() {
         return {
-            value: this.getValueLink(this.props).value,
+            value: this.reverseLaw(this.getValueLink(this.props).value),
             dragging: false,
             dragPoint: [0.0,0.0],
             dragStartValue: 0,
@@ -25,54 +25,63 @@ var Knob = React.createClass({
     },
 
     shouldComponentUpdate(nextProps, nextState) {
-        return nextState.value !== this.state.value
+        return this.reverseLaw(nextState.value) !== this.state.value
     },
 
     handleChange(value) {
-        if(value > this.props.max) { value = this.props.max; }
-        if(value < this.props.min) { value = this.props.min; }
+        if(value > 1) { value = 1; }
+        if(value < 0) { value = 0; }
         this.setState({
             value: value
         }, () => {
-            this.getValueLink(this.props).requestChange(value);
+            this.getValueLink(this.props).requestChange(this.applyLaw(value));
         })
     },
 
     applyLaw(v){
         let law = this.props.law || "linear";
-        let n = this.props.min;
-        let a = this.props.max;
+        let min = this.props.min;
+        let max = this.props.max;
 
+        let result = 0;
         switch (law) {
             case "linear":
-                return value
+                result = v
                 break;
             case "log":
-                let exp = (v-n) / (a-n);
-                return n * Math.pow(a/n, exp);
+                result = min * Math.pow(max/min, v);
                 break;
             case "pow":
-                let p = (v-n) / (a-n);
-                return n + (p*p)*(a-n);
+                result = min + (v*v)*(max-min);
+                break;
             default:
+                result = v
+                break;
         }
+
+        return result;
     },
     reverseLaw(v){
         let law = this.props.law || "linear";
-        let n = this.props.min;
-        let a = this.props.max;
+        let min = this.props.min;
+        let max = this.props.max;
 
+        let result = 0;
         switch (law) {
             case "linear":
-                return value
+                result = v
                 break;
             case "log":
-                return (-n*Math.log(a/n)+v*Math.log(a/n)+n*Math.log(v/n))/(Math.log(v/n));
+                result = (Math.log(v/min))/(Math.log(max/min));
                 break;
             case "pow":
-                return n+Math.sqrt(-a*n+a*v+(n*n)-n*v);
+                result = Math.sqrt((v-min)/(max-min));
+                break;
             default:
+                result = v
+                break;
         }
+        return result;
     },
 
     valueToDeg(value) {
