@@ -1,6 +1,5 @@
 var React = require('react');
 
-import MonoSynth from './mono-synth/mono-synth.jsx';
 import PolySynth from './poly-synth/poly-synth.jsx';
 import Keyboard from './keyboard/keyboard.jsx';
 

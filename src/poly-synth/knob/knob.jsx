@@ -38,6 +38,43 @@ var Knob = React.createClass({
         })
     },
 
+    applyLaw(v){
+        let law = this.props.law || "linear";
+        let n = this.props.min;
+        let a = this.props.max;
+
+        switch (law) {
+            case "linear":
+                return value
+                break;
+            case "log":
+                let exp = (v-n) / (a-n);
+                return n * Math.pow(a/n, exp);
+                break;
+            case "pow":
+                let p = (v-n) / (a-n);
+                return n + (p*p)*(a-n);
+            default:
+        }
+    },
+    reverseLaw(v){
+        let law = this.props.law || "linear";
+        let n = this.props.min;
+        let a = this.props.max;
+
+        switch (law) {
+            case "linear":
+                return value
+                break;
+            case "log":
+                return (-n*Math.log(a/n)+v*Math.log(a/n)+n*Math.log(v/n))/(Math.log(v/n));
+                break;
+            case "pow":
+                return n+Math.sqrt(-a*n+a*v+(n*n)-n*v);
+            default:
+        }
+    },
+
     valueToDeg(value) {
         return Math.round(((value-this.props.min) / (this.props.max - this.props.min)) * 270)
     },

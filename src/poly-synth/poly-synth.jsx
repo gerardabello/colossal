@@ -64,21 +64,21 @@ var PolySynth = React.createClass({
                     <div id="osc1" className="section">
                         <h2>OSC1</h2>
                         <div className="knob-label-container">
-                            <Knob min={1e-4} max={1} valueLink={Binder.bindToState(this,"preset", "osc.osc1.gain")}/>
+                            <Knob min={0} max={1} law="pow" valueLink={Binder.bindToState(this,"preset", "osc.osc1.gain")}/>
                             <span>Gain</span>
                         </div>
                     </div>
                     <div id="osc2" className="section">
                         <h2>OSC2</h2>
                         <div className="knob-label-container">
-                            <Knob min={1e-4} max={1} valueLink={Binder.bindToState(this,"preset", "osc.osc2.gain")}/>
+                            <Knob min={0} max={1} law="pow" valueLink={Binder.bindToState(this,"preset", "osc.osc2.gain")}/>
                             <span>Gain</span>
                         </div>
                     </div>
                     <div id="osc3" className="section">
                         <h2>OSC3</h2>
                         <div className="knob-label-container">
-                            <Knob min={1e-4} max={1} valueLink={Binder.bindToState(this,"preset", "osc.osc3.gain")}/>
+                            <Knob min={0} max={1} law="pow" valueLink={Binder.bindToState(this,"preset", "osc.osc3.gain")}/>
                             <span>Gain</span>
                         </div>
                     </div>
