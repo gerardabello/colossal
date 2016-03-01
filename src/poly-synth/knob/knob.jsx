@@ -46,7 +46,7 @@ var Knob = React.createClass({
         let result = 0;
         switch (law) {
             case "linear":
-                result = v
+                result = v*(max-min) + min;
                 break;
             case "log":
                 result = min * Math.pow(max/min, v);
@@ -55,7 +55,7 @@ var Knob = React.createClass({
                 result = min + (v*v)*(max-min);
                 break;
             default:
-                result = v
+                result = v*(max-min) + min;
                 break;
         }
 
@@ -69,7 +69,7 @@ var Knob = React.createClass({
         let result = 0;
         switch (law) {
             case "linear":
-                result = v
+                result = (v - min) / (max-min);
                 break;
             case "log":
                 result = (Math.log(v/min))/(Math.log(max/min));
@@ -78,14 +78,14 @@ var Knob = React.createClass({
                 result = Math.sqrt((v-min)/(max-min));
                 break;
             default:
-                result = v
+                result = (v - min) / (max-min);
                 break;
         }
         return result;
     },
 
     valueToDeg(value) {
-        return Math.round(((value-this.props.min) / (this.props.max - this.props.min)) * 270)
+        return Math.round(value * 270);
     },
 
     onMouseDown(e){
@@ -95,7 +95,7 @@ var Knob = React.createClass({
     handleMoveAll: function(e) {
         if(this.state.dragging){
             let value = this.state.dragPoint[1] - e.screenY;
-            value *= (this.props.max - this.props.min)*0.003; //scale
+            value *= 0.003; //scale
             this.handleChange(this.state.dragStartValue + value);
         }
     },
