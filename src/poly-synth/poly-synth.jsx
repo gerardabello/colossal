@@ -29,9 +29,8 @@ let initialPreset = {
     envelopes: {
         env1: {
             a: 0.012,
-            al: 1.0,
             d: 0.4,
-            dl: 0.9,
+            s: 0.9,
             r: 1.0
         }
     }
@@ -84,16 +83,27 @@ var PolySynth = React.createClass({
                     </div>
                 </div>
                 <div id="env" className="section">
-                    <p>Attack</p>
+
+                    <div className="knob-label-container">
                     <Knob min={1e-4} max={10} law="pow" valueLink={Binder.bindToState(this,"preset", "envelopes.env1.a")}/>
-                    <p>Attack level</p>
-                    <Knob min={1e-4} max={1} law="pow" valueLink={Binder.bindToState(this,"preset", "envelopes.env1.al")}/>
-                    <p>Decay</p>
-                    <Knob min={1e-4} max={5} law="pow" valueLink={Binder.bindToState(this,"preset", "envelopes.env1.d")}/>
-                    <p>Decay level</p>
-                    <Knob min={1e-4} max={1} law="pow" valueLink={Binder.bindToState(this,"preset", "envelopes.env1.dl")}/>
-                    <p>Release</p>
-                    <Knob min={1e-4} max={5} law="pow" valueLink={Binder.bindToState(this,"preset", "envelopes.env1.r")}/>
+                        <span>ATTACK</span>
+                    </div>
+
+                    <div className="knob-label-container">
+                        <Knob min={1e-4} max={5} law="pow" valueLink={Binder.bindToState(this,"preset", "envelopes.env1.d")}/>
+                        <span>DECAY</span>
+                    </div>
+
+                    <div className="knob-label-container">
+                        <Knob min={1e-4} max={1} law="pow" valueLink={Binder.bindToState(this,"preset", "envelopes.env1.s")}/>
+                        <span>SUSTAIN</span>
+                    </div>
+
+                    <div className="knob-label-container">
+                        <Knob min={1e-4} max={5} law="pow" valueLink={Binder.bindToState(this,"preset", "envelopes.env1.r")}/>
+                        <span>RELEASE</span>
+                    </div>
+
                 </div>
             </div>
         )

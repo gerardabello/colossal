@@ -15,6 +15,7 @@ $color: #CACACA;
     flex-direction: row;
     align-items: stretch;
     height: 300px;
+    width: 1024px;
     font-family: 'Orbitron', sans-serif;
 
 
@@ -50,6 +51,10 @@ $color: #CACACA;
         flex-direction: column;
         align-items: center;
         justify-content: center;
+
+        span{
+            font-size: 12px;
+        }
     }
 
 }

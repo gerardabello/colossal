@@ -55,9 +55,9 @@ $size: 3em;
 
         &:before {
             content: "";
-            width: 3px;
-            height: 5px;
-            margin: -9px;
+            width: 0.2em;
+            height: 0.4em;
+            margin: -0.5em;
             border-radius: 50%;
             background: rgba(0, 0, 0, 0.23);
             transition: all 0.15s ease;
