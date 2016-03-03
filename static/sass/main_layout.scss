@@ -13,3 +13,11 @@ html, body {
 	flex-direction: column;
 	height: 100%;
 }
+
+
+#instrument-stack{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: black;
+}

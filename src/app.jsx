@@ -37,7 +37,9 @@ var App = React.createClass({
 	render: function() {
 		return (
 			<div id="stack">
-				<PolySynth style={styles.instrument} ctx={this.state.ctx} dstNode={this.state.dstNode} ref={(ref) => this.synth = ref}/>
+				<div id="instrument-stack">
+					<PolySynth style={styles.instrument} ctx={this.state.ctx} dstNode={this.state.dstNode} ref={(ref) => this.synth = ref}/>
+				</div>
 				<Keyboard style={styles.keyboard} noteOn={this.noteOn} noteOff={this.noteOff} />
 			</div>
 		)
