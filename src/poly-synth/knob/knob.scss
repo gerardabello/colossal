@@ -28,9 +28,9 @@ $size: 3em;
     left: 50%;
     width: 6%;
     height: 13%;
-    background-color: #a8d8f8;
+    background-color: #A8F8F2;
     border-radius: 50%;
-    box-shadow: 0 0 0.4em 0 #79c3f4;
+    box-shadow: 0 0 0.4em 0 #8ee7e0;
 }
 
 .indicator {
@@ -46,13 +46,21 @@ $size: 3em;
         align-items: center;
         justify-content: flex-start;
 
+        &.active{
+            &:before {
+                background: #A8F8F2;
+                box-shadow: rgba(168, 248, 242, 0.71) 0 0 5px;
+            }
+        }
+
         &:before {
             content: "";
             width: 3px;
-            height: 2px;
+            height: 5px;
             margin: -9px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.4);
+            background: rgba(0,0,0, 0.04);
         }
+
     }
 }

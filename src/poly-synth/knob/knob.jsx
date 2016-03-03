@@ -110,24 +110,35 @@ var Knob = React.createClass({
     },
 
     render() {
+        let rdeg = 45 + this.valueToDeg(this.state.value);
+
+        let indicators = [];
+
+        for(let i = -45; i <= 225; i+=15){
+            if(rdeg-90>=i){
+                indicators.push(
+                    <div key={i} className="indicator active" style={{transform: `rotate(${i}deg)`}}></div>
+                );
+            }else{
+                indicators.push(
+                    <div key={i} className="indicator" style={{transform: `rotate(${i}deg)`}}></div>
+                );
+            }
+        }
+
         return (
 
             <div className="knob-surround" onMouseDown={this.onMouseDown} >
             <div
             className="knob"
             style={{
-                transform: `rotate(${45 + this.valueToDeg(this.state.value)}deg)`
+                transform: `rotate(${rdeg}deg)`
             }}
             >
             </div>
 
-            <div className="indicator" style={{transform: `rotate(-45deg)`}}></div>
-            <div className="indicator" style={{transform: `rotate(0deg)`}}></div>
-            <div className="indicator" style={{transform: `rotate(45deg)`}}></div>
-            <div className="indicator" style={{transform: `rotate(90deg)`}}></div>
-            <div className="indicator" style={{transform: `rotate(135deg)`}}></div>
-            <div className="indicator" style={{transform: `rotate(180deg)`}}></div>
-            <div className="indicator" style={{transform: `rotate(225deg)`}}></div>
+            {indicators}
+
 
             </div>
         )
