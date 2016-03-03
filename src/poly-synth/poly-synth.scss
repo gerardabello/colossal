@@ -1,10 +1,10 @@
 //BASE COLORS
 $back-color: #171717;
-$color: white;
+$color: #CACACA;
 
 
 
-
+@import url(https://fonts.googleapis.com/css?family=Orbitron:400,500,700);
 
 //
 
@@ -15,8 +15,7 @@ $color: white;
     flex-direction: row;
     align-items: stretch;
     height: 300px;
-    font-family: sans-serif;
-    font-weight: bold;
+    font-family: 'Orbitron', sans-serif;
 
 
     #osc{
