@@ -21,8 +21,9 @@ class Envelope {
     finish(){
         let p = this.preset;
         let now = this.context.currentTime;
+        let v = this.target.value;
         this.target.cancelScheduledValues(now);
-        this.target.setValueAtTime(this.target.value, now);
+        this.target.setValueAtTime(v, now);
         this.target.exponentialRampToValueAtTime(1e-4, now + p.r);
 
         setTimeout(
