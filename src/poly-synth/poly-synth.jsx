@@ -1,15 +1,15 @@
 'use strict';
 
-import Maps from '../maps.js';
-import Voice from './voice.js';
-
 import React from 'react';
 var Octavian = require('octavian');
-import Knob from './knob/knob.jsx';
 
 import Binder from 'react-binding';
 
+import Knob from './knob/knob.jsx';
 import './poly-synth.scss';
+
+import Voice from './voice/voice.js';
+
 
 let initialPreset = {
     osc: {
@@ -63,7 +63,7 @@ var PolySynth = React.createClass({
     componentWillUpdate(nextProps, nextState){
         //remove finished voices
         for(let i = 0; i < this.voices.length; i++){
-            if(this.voices[i].finished == true){
+            if(this.voices[i].isFinished == true){
                 this.voices.splice(i, 1);
             }
         }
