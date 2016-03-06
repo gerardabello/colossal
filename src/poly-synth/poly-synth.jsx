@@ -44,8 +44,9 @@ var PolySynth = React.createClass({
     },
     //HANDLERS
     startVoice(signature){
-        let v = new Voice(this.props.ctx, this.props.dstNode,signature, this.state.preset);
         let n = this.state.notes;
+        if(n[signature]){return;}
+        let v = new Voice(this.props.ctx, this.props.dstNode,signature, this.state.preset);
         n[signature] = v;
         this.setState({ notes: n});
     },

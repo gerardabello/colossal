@@ -7,9 +7,28 @@ var Note = require('octavian').Note;
 import './keyboard.scss';
 
 
+let keynotemap = {
+    65 : "C2", //A
+    83 : "D2", //S
+    68 : "E2", //D
+    70 : "F2", //F
+    71 : "G2", //G
+    72 : "A2", //H
+    74 : "B2", //J
+}
+
+
 var Keyboard = React.createClass({
     getInitialState: function() {
         return {};
+    },
+    componentDidMount(){
+        window.addEventListener('keydown', function(event) {
+            this.noteOn(keynotemap[event.keyCode]);
+        }.bind(this), false);
+        window.addEventListener('keyup', function(event) {
+            this.noteOff(keynotemap[event.keyCode]);
+        }.bind(this), false);
     },
     //HANDLERS
     noteOff(signature){

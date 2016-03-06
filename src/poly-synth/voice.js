@@ -8,8 +8,11 @@ class Voice {
 
         this.createNodes(dst);
         this.setPreset(this.preset);
+        this.startEnv();
         this.startOsc(this.note);
+    }
 
+    updatePreset(){
 
     }
 
@@ -54,7 +57,11 @@ class Voice {
 
         this.osc3.type = p.osc.osc3.shape;
         this.osc3Gain.gain.setValueAtTime(p.osc.osc3.gain, now);
+    }
 
+    startEnv(){
+        let p = this.preset;
+        let now = this.context.currentTime;
         //env1
         this.envGain.gain.cancelScheduledValues(now);
         this.envGain.gain.setValueAtTime(1e-10, now);
