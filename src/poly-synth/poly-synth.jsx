@@ -63,7 +63,7 @@ var PolySynth = React.createClass({
     componentWillUpdate(nextProps, nextState){
         //remove finished voices
         for(let i = 0; i < this.voices.length; i++){
-            if(this.voices[i].isFinished == true){
+            if(this.voices[i].isFinished() == true){
                 this.voices.splice(i, 1);
             }
         }
