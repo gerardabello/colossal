@@ -12,8 +12,9 @@ class Voice {
         this.startOsc(this.note);
     }
 
-    updatePreset(){
-
+    updatePreset(p){
+        this.setPreset(p);
+        this.preset = p;
     }
 
     createNodes(dst){
@@ -92,6 +93,7 @@ class Voice {
             function() {
                 //avoid memory leak
                 this.mainGain.disconnect();
+                this.finished = true;
             }.bind(this), 10*1000); //Todo check all envelopes for min time
         }
     }
