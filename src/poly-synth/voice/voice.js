@@ -3,6 +3,7 @@ var Note = require('octavian').Note;
 
 import Oscilator from './oscilator.js';
 import Envelope from './envelope.js';
+import Filter from './filter.js';
 
 class Voice {
     constructor(ctx, dst, signature, preset) {
@@ -38,7 +39,9 @@ class Voice {
 
         this.mainGain = ctx.createGain();
 
-        this.envGain.connect(this.mainGain);
+        //this.envGain.connect(this.mainGain);
+        this.filt1 = new Filter(ctx, this.envGain, this.mainGain);
+
         this.env1 = new Envelope(ctx, this.envGain.gain, this.preset.envelopes.env1);
 
         this.mainGain.connect(dst);
@@ -51,6 +54,8 @@ class Voice {
         this.osc1.setPreset(p.osc.osc1);
         this.osc2.setPreset(p.osc.osc2);
         this.osc3.setPreset(p.osc.osc3);
+
+        this.filt1.setPreset(p.filters.filt1);
     }
 
     startEnv(){

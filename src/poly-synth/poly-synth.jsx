@@ -26,6 +26,13 @@ let initialPreset = {
             gain: 0
         }
     },
+    filters: {
+        filt1: {
+            type: "lowpass",
+            freq: 1000,
+            q: 1,
+        },
+    },
     envelopes: {
         env1: {
             a: 0.012,
@@ -98,6 +105,19 @@ var PolySynth = React.createClass({
                         </div>
                     </div>
                 </div>
+                <div id="filt1" className="section">
+
+                    <div className="knob-label-container">
+                    <Knob min={20} max={22050} law="log" valueLink={Binder.bindToState(this,"preset", "filters.filt1.freq")}/>
+                        <span>CUTOFF</span>
+                    </div>
+
+                    <div className="knob-label-container">
+                        <Knob min={1} max={20} law="pow" valueLink={Binder.bindToState(this,"preset", "filters.filt1.q")}/>
+                        <span>Q</span>
+                    </div>
+                </div>
+
                 <div id="env" className="section">
 
                     <div className="knob-label-container">
