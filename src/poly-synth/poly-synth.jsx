@@ -5,6 +5,7 @@ import React from 'react';
 import Binder from 'react-binding';
 
 import Knob from './knob/knob.jsx';
+import Selector from './selector/selector.jsx';
 import './poly-synth.scss';
 
 import Voice from './voice/voice.js';
@@ -15,14 +16,17 @@ let initialPreset = {
         osc1: {
             shape: 'sawtooth',
             gain: 0,
+            detune: 0,
         },
         osc2: {
             shape: 'square',
             gain: 0.3,
+            detune: 0,
         },
         osc3: {
             shape: 'sine',
             gain: 0,
+            detune: 0,
         },
     },
     filters: {
@@ -30,6 +34,7 @@ let initialPreset = {
             type: 'lowpass',
             freq: 1000,
             q: 1,
+            gain: 1,
         },
     },
     envelopes: {
@@ -83,37 +88,58 @@ var PolySynth = React.createClass({
             <div id="poly-synth">
                 <div id="osc">
                     <div id="osc1" className="section">
-                        <h2>OSC1</h2>
+                        <Selector values={['sine', 'square', 'sawtooth', 'triangle']} valueLink={Binder.bindToState(this,'preset', 'osc.osc1.shape')}/>
                         <div className="knob-label-container">
-                            <Knob min={0} max={1} law="pow" valueLink={Binder.bindToState(this,'preset', 'osc.osc1.gain')}/>
+                            <Knob min={-1} max={1} law="linear" valueLink={Binder.bindToState(this,'preset', 'osc.osc1.detune')}/>
+                            <span>DETUNE</span>
+                        </div>
+                        <div className="knob-label-container">
+                            <Knob min={0} max={0.6} law="pow" valueLink={Binder.bindToState(this,'preset', 'osc.osc1.gain')}/>
                             <span>GAIN</span>
                         </div>
                     </div>
                     <div id="osc2" className="section">
-                        <h2>OSC2</h2>
+                        <Selector values={['sine', 'square', 'sawtooth', 'triangle']} valueLink={Binder.bindToState(this,'preset', 'osc.osc2.shape')}/>
                         <div className="knob-label-container">
-                            <Knob min={0} max={1} law="pow" valueLink={Binder.bindToState(this,'preset', 'osc.osc2.gain')}/>
+                            <Knob min={-1} max={1} law="linear" valueLink={Binder.bindToState(this,'preset', 'osc.osc2.detune')}/>
+                            <span>DETUNE</span>
+                        </div>
+                        <div className="knob-label-container">
+                            <Knob min={0} max={0.6} law="pow" valueLink={Binder.bindToState(this,'preset', 'osc.osc2.gain')}/>
                             <span>GAIN</span>
                         </div>
                     </div>
                     <div id="osc3" className="section">
-                        <h2>OSC3</h2>
+                        <Selector values={['sine', 'square', 'sawtooth', 'triangle']} valueLink={Binder.bindToState(this,'preset', 'osc.osc3.shape')}/>
                         <div className="knob-label-container">
-                            <Knob min={0} max={1} law="pow" valueLink={Binder.bindToState(this,'preset', 'osc.osc3.gain')}/>
+                            <Knob min={-1} max={1} law="linear" valueLink={Binder.bindToState(this,'preset', 'osc.osc3.detune')}/>
+                            <span>DETUNE</span>
+                        </div>
+                        <div className="knob-label-container">
+                            <Knob min={0} max={0.6} law="pow" valueLink={Binder.bindToState(this,'preset', 'osc.osc3.gain')}/>
                             <span>GAIN</span>
                         </div>
                     </div>
                 </div>
                 <div id="filt1" className="section">
 
-                    <div className="knob-label-container">
-                    <Knob min={20} max={22050} law="log" valueLink={Binder.bindToState(this,'preset', 'filters.filt1.freq')}/>
-                        <span>CUTOFF</span>
-                    </div>
+                    <Selector values={['lowpass','highpass','bandpass','lowshelf','highshelf','peaking','notch','allpass']} valueLink={Binder.bindToState(this,'preset', 'filters.filt1.type')}/>
 
-                    <div className="knob-label-container">
-                        <Knob min={1} max={20} law="pow" valueLink={Binder.bindToState(this,'preset', 'filters.filt1.q')}/>
-                        <span>Q</span>
+                    <div className="subsection horitzontal">
+                        <div className="knob-label-container">
+                        <Knob min={20} max={22050} law="log" valueLink={Binder.bindToState(this,'preset', 'filters.filt1.freq')}/>
+                            <span>FREQ</span>
+                        </div>
+
+                        <div className="knob-label-container">
+                            <Knob min={1} max={20} law="pow" valueLink={Binder.bindToState(this,'preset', 'filters.filt1.q')}/>
+                            <span>Q</span>
+                        </div>
+
+                        <div className="knob-label-container">
+                            <Knob min={-20} max={20} law="pow" valueLink={Binder.bindToState(this,'preset', 'filters.filt1.gain')}/>
+                            <span>GAIN</span>
+                        </div>
                     </div>
                 </div>
 

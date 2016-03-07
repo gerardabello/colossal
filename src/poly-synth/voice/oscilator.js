@@ -32,6 +32,10 @@ class Oscilator {
         //osc
         this.osc.type = p.shape;
         this.oscGain.gain.setValueAtTime(p.gain, now);
+
+        if(this.note){
+            this.osc.frequency.setValueAtTime(this.getFreq(this.note, this.preset.detune), now);
+        }
     }
 
     start(signature){
@@ -39,9 +43,25 @@ class Oscilator {
         let ctx = this.context;
 
         let now = ctx.currentTime;
-        this.osc.frequency.setValueAtTime(this.note.frequency, now);
+        this.osc.frequency.setValueAtTime(this.getFreq(this.note, this.preset.detune), now);
 
         this.osc.start(0);
+    }
+
+
+    getFreq(note, detune){
+        let mod = note.modifier ? note.modifier : '';
+        let notedw = new Note(note.letter + mod + (note.octave-1));
+        let noteup = new Note(note.letter + mod + (note.octave+1));
+
+        let f = note.frequency;
+        if(detune > 0){
+            f += (noteup.frequency - f)*detune;
+        }else{
+            f += (f - notedw.frequency)*detune;
+        }
+
+        return f;
     }
 
 }

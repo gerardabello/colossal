@@ -4,8 +4,6 @@ $color: #CACACA;
 
 
 
-@import url(https://fonts.googleapis.com/css?family=Orbitron:400,500,700);
-
 //
 
 #poly-synth {
@@ -16,7 +14,7 @@ $color: #CACACA;
     align-items: stretch;
     height: 300px;
     width: 1024px;
-    font-family: 'Orbitron', sans-serif;
+    font-family: sans-serif;
 
 
     #osc{
@@ -38,22 +36,30 @@ $color: #CACACA;
     .section{
         border: rgba(0, 0, 0, 0.12) 1px solid;
 
-         > h2{
-            margin: 0;
-            font-size: 5.5em;
-            position: absolute;
-            color: rgba(255, 255, 255, 0.04);
+    }
+
+    .subsection{
+        display: flex;
+        justify-content: center;
+
+        &.horitzontal{
+
+        }
+
+        &.vertical{
+            flex-direction: column;
         }
     }
 
     .knob-label-container{
+        margin: 2px;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
 
         span{
-            font-size: 12px;
+            font-size: 10px;
         }
     }
 

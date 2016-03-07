@@ -24,6 +24,7 @@ class Filter {
         this.bqf.type = p.type;
         this.bqf.frequency.value = p.freq;
         this.bqf.Q.value = p.q;
+        this.bqf.gain.value = p.gain;
     }
 
 }
