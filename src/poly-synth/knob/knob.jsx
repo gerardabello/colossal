@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 import './knob.scss';
 
@@ -14,18 +14,18 @@ var Knob = React.createClass({
     },
 
     getValueLink: function(props) {
-      // Create an object that works just like the one
-      // returned from `this.linkState` if we weren't passed
-      // one; that way, we can always behave as if we're using
-      // `valueLink`, even if we're using plain `value` and `onChange`.
-      return props.valueLink || {
-        value: props.value,
-        requestChange: props.onChange
-      };
+        // Create an object that works just like the one
+        // returned from `this.linkState` if we weren't passed
+        // one; that way, we can always behave as if we're using
+        // `valueLink`, even if we're using plain `value` and `onChange`.
+        return props.valueLink || {
+            value: props.value,
+            requestChange: props.onChange
+        };
     },
 
     shouldComponentUpdate(nextProps, nextState) {
-        return this.reverseLaw(nextState.value) !== this.state.value
+        return this.reverseLaw(nextState.value) !== this.state.value;
     },
 
     handleChange(value) {
@@ -35,51 +35,51 @@ var Knob = React.createClass({
             value: value
         }, () => {
             this.getValueLink(this.props).requestChange(this.applyLaw(value));
-        })
+        });
     },
 
     applyLaw(v){
-        let law = this.props.law || "linear";
+        let law = this.props.law || 'linear';
         let min = this.props.min;
         let max = this.props.max;
 
         let result = 0;
         switch (law) {
-            case "linear":
-                result = v*(max-min) + min;
-                break;
-            case "log":
-                result = min * Math.pow(max/min, v);
-                break;
-            case "pow":
-                result = min + (v*v)*(max-min);
-                break;
+            case 'linear':
+            result = v*(max-min) + min;
+            break;
+            case 'log':
+            result = min * Math.pow(max/min, v);
+            break;
+            case 'pow':
+            result = min + (v*v)*(max-min);
+            break;
             default:
-                result = v*(max-min) + min;
-                break;
+            result = v*(max-min) + min;
+            break;
         }
 
         return result;
     },
     reverseLaw(v){
-        let law = this.props.law || "linear";
+        let law = this.props.law || 'linear';
         let min = this.props.min;
         let max = this.props.max;
 
         let result = 0;
         switch (law) {
-            case "linear":
-                result = (v - min) / (max-min);
-                break;
-            case "log":
-                result = (Math.log(v/min))/(Math.log(max/min));
-                break;
-            case "pow":
-                result = Math.sqrt((v-min)/(max-min));
-                break;
-            default:
-                result = (v - min) / (max-min);
-                break;
+        case 'linear':
+            result = (v - min) / (max-min);
+            break;
+        case 'log':
+            result = (Math.log(v/min))/(Math.log(max/min));
+            break;
+        case 'pow':
+            result = Math.sqrt((v-min)/(max-min));
+            break;
+        default:
+            result = (v - min) / (max-min);
+            break;
         }
         return result;
     },
@@ -100,7 +100,7 @@ var Knob = React.createClass({
         }
     },
 
-    handleMouseUp: function(e) {
+    handleMouseUp: function(){
         this.setState({dragging: false});
     },
 

@@ -1,7 +1,6 @@
 'use strict';
 
 import React from 'react';
-var Octavian = require('octavian');
 
 import Binder from 'react-binding';
 
@@ -14,21 +13,21 @@ import Voice from './voice/voice.js';
 let initialPreset = {
     osc: {
         osc1: {
-            shape: "sawtooth",
-            gain: 0
+            shape: 'sawtooth',
+            gain: 0,
         },
         osc2: {
-            shape: "square",
-            gain: 0.3
+            shape: 'square',
+            gain: 0.3,
         },
         osc3: {
-            shape: "sine",
-            gain: 0
-        }
+            shape: 'sine',
+            gain: 0,
+        },
     },
     filters: {
         filt1: {
-            type: "lowpass",
+            type: 'lowpass',
             freq: 1000,
             q: 1,
         },
@@ -38,10 +37,10 @@ let initialPreset = {
             a: 0.012,
             d: 0.4,
             s: 0.9,
-            r: 1.0
-        }
-    }
-}
+            r: 1.0,
+        },
+    },
+};
 
 var PolySynth = React.createClass({
     getInitialState: function() {
@@ -86,21 +85,21 @@ var PolySynth = React.createClass({
                     <div id="osc1" className="section">
                         <h2>OSC1</h2>
                         <div className="knob-label-container">
-                            <Knob min={0} max={1} law="pow" valueLink={Binder.bindToState(this,"preset", "osc.osc1.gain")}/>
+                            <Knob min={0} max={1} law="pow" valueLink={Binder.bindToState(this,'preset', 'osc.osc1.gain')}/>
                             <span>GAIN</span>
                         </div>
                     </div>
                     <div id="osc2" className="section">
                         <h2>OSC2</h2>
                         <div className="knob-label-container">
-                            <Knob min={0} max={1} law="pow" valueLink={Binder.bindToState(this,"preset", "osc.osc2.gain")}/>
+                            <Knob min={0} max={1} law="pow" valueLink={Binder.bindToState(this,'preset', 'osc.osc2.gain')}/>
                             <span>GAIN</span>
                         </div>
                     </div>
                     <div id="osc3" className="section">
                         <h2>OSC3</h2>
                         <div className="knob-label-container">
-                            <Knob min={0} max={1} law="pow" valueLink={Binder.bindToState(this,"preset", "osc.osc3.gain")}/>
+                            <Knob min={0} max={1} law="pow" valueLink={Binder.bindToState(this,'preset', 'osc.osc3.gain')}/>
                             <span>GAIN</span>
                         </div>
                     </div>
@@ -108,12 +107,12 @@ var PolySynth = React.createClass({
                 <div id="filt1" className="section">
 
                     <div className="knob-label-container">
-                    <Knob min={20} max={22050} law="log" valueLink={Binder.bindToState(this,"preset", "filters.filt1.freq")}/>
+                    <Knob min={20} max={22050} law="log" valueLink={Binder.bindToState(this,'preset', 'filters.filt1.freq')}/>
                         <span>CUTOFF</span>
                     </div>
 
                     <div className="knob-label-container">
-                        <Knob min={1} max={20} law="pow" valueLink={Binder.bindToState(this,"preset", "filters.filt1.q")}/>
+                        <Knob min={1} max={20} law="pow" valueLink={Binder.bindToState(this,'preset', 'filters.filt1.q')}/>
                         <span>Q</span>
                     </div>
                 </div>
@@ -121,28 +120,28 @@ var PolySynth = React.createClass({
                 <div id="env" className="section">
 
                     <div className="knob-label-container">
-                    <Knob min={1e-4} max={10} law="pow" valueLink={Binder.bindToState(this,"preset", "envelopes.env1.a")}/>
+                    <Knob min={1e-4} max={10} law="pow" valueLink={Binder.bindToState(this,'preset', 'envelopes.env1.a')}/>
                         <span>ATTACK</span>
                     </div>
 
                     <div className="knob-label-container">
-                        <Knob min={1e-4} max={5} law="pow" valueLink={Binder.bindToState(this,"preset", "envelopes.env1.d")}/>
+                        <Knob min={1e-4} max={5} law="pow" valueLink={Binder.bindToState(this,'preset', 'envelopes.env1.d')}/>
                         <span>DECAY</span>
                     </div>
 
                     <div className="knob-label-container">
-                        <Knob min={1e-4} max={1} law="pow" valueLink={Binder.bindToState(this,"preset", "envelopes.env1.s")}/>
+                        <Knob min={1e-4} max={1} law="pow" valueLink={Binder.bindToState(this,'preset', 'envelopes.env1.s')}/>
                         <span>SUSTAIN</span>
                     </div>
 
                     <div className="knob-label-container">
-                        <Knob min={1e-4} max={5} law="pow" valueLink={Binder.bindToState(this,"preset", "envelopes.env1.r")}/>
+                        <Knob min={1e-4} max={5} law="pow" valueLink={Binder.bindToState(this,'preset', 'envelopes.env1.r')}/>
                         <span>RELEASE</span>
                     </div>
 
                 </div>
             </div>
-        )
+        );
     }
 });
 

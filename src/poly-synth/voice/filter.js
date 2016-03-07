@@ -1,4 +1,3 @@
-var Note = require('octavian').Note;
 
 class Filter {
     constructor(ctx, src, dst) {
@@ -21,8 +20,6 @@ class Filter {
 
     setPreset(p){
         this.preset = p;
-        let ctx = this.context;
-        let now = ctx.currentTime;
 
         this.bqf.type = p.type;
         this.bqf.frequency.value = p.freq;

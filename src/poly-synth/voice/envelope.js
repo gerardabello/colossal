@@ -1,4 +1,3 @@
-var Note = require('octavian').Note;
 
 class Envelope {
     //As the envelopes cannot change during a voice execution, we set it at constructor time
@@ -29,9 +28,10 @@ class Envelope {
         setTimeout(
             function() {
                 this.finished = true;
-            }.bind(this), 10*1000); //Todo check all envelopes for min time
-        }
+            }.bind(this), 10*1000  //Todo check all envelopes for min time
+        );
     }
+}
 
 
-    export default Envelope;
+export default Envelope;

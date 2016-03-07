@@ -1,5 +1,3 @@
-var Note = require('octavian').Note;
-
 
 import Oscilator from './oscilator.js';
 import Envelope from './envelope.js';

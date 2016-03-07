@@ -11,10 +11,11 @@
     "babel-preset-react": "^6.5.0",
     "css-loader": "^0.21.0",
     "electron-prebuilt": "^0.36.0",
+    "eslint-plugin-react": "^4.2.0",
     "octavian": "^2.2.0",
     "react": "^0.14.0",
-    "react-tap-event-plugin": "^0.2.2",
     "react-dom": "^0.14.0",
+    "react-tap-event-plugin": "^0.2.2",
     "sass-loader": "^3.0.0",
     "style-loader": "^0.13.0",
     "webpack": "^1.12.2",
@@ -26,6 +27,7 @@
     "watch": "webpack-dev-server --hot --inline"
   },
   "dependencies": {
+    "eslint": "^2.3.0",
     "file-loader": "^0.8.5",
     "react-addons-linked-state-mixin": "^0.14.7",
     "react-binding": "^0.7.5"
