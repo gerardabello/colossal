@@ -22,7 +22,7 @@
         "start": "electron main.js",
         "build": "webpack",
         "watch": "webpack-dev-server --hot --inline",
-        "test": "jest"
+        "test": "jest --no-watchman"
     },
     "dependencies": {
         "electron-prebuilt": "^0.36.0",
@@ -35,7 +35,9 @@
         "octavian": "^2.2.0"
     },
     "jest": {
+        "watchman": false,
         "unmockedModulePathPatterns": [
+            "<rootDir>/node_modules/.*",
             "<rootDir>/node_modules/react",
             "<rootDir>/node_modules/react-dom",
             "<rootDir>/node_modules/react-addons-test-utils"
