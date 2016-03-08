@@ -31,7 +31,7 @@ class Oscilator {
 
         //osc
         this.osc.type = p.shape;
-        this.oscGain.gain.setValueAtTime(p.gain, now);
+        //this.oscGain.gain.setValueAtTime(p.gain, now);
 
         if(this.note){
             this.osc.frequency.setValueAtTime(this.getFreq(this.note, this.preset.detune), now);

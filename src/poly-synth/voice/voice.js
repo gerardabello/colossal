@@ -31,9 +31,13 @@ class Voice {
 
         this.envGain = ctx.createGain();
 
-        this.osc1 = new Oscilator(ctx,this.envGain);
-        this.osc2 = new Oscilator(ctx,this.envGain);
-        this.osc3 = new Oscilator(ctx,this.envGain);
+        this.osc1Mix = ctx.createGain();
+        this.osc1Mix.connect(this.envGain);
+        this.osc2Mix = ctx.createGain();
+        this.osc2Mix.connect(this.envGain);
+
+        this.osc1 = new Oscilator(ctx,this.osc1Mix);
+        this.osc2 = new Oscilator(ctx,this.osc2Mix);
 
         this.mainGain = ctx.createGain();
 
@@ -51,9 +55,14 @@ class Voice {
         //osc
         this.osc1.setPreset(p.osc.osc1);
         this.osc2.setPreset(p.osc.osc2);
-        this.osc3.setPreset(p.osc.osc3);
+
+        this.osc1Mix.gain.value = p.osc.mix;
+        this.osc2Mix.gain.value = 1-p.osc.mix;
 
         this.filt1.setPreset(p.filters.filt1);
+
+
+        this.mainGain.gain.value = p.gain;
     }
 
     startEnv(){
@@ -63,7 +72,6 @@ class Voice {
     startOsc(signature){
         this.osc1.start(signature);
         this.osc2.start(signature);
-        this.osc3.start(signature);
     }
 
     finish(){

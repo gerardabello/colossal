@@ -18,7 +18,7 @@ $color: #CACACA;
 
 
     #osc{
-        flex: 1;
+        flex: 0.6;
         display: flex;
         flex-direction: column;
 
@@ -28,17 +28,25 @@ $color: #CACACA;
         }
     }
 
+    #filt1{
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
     #env{
-        flex: 2;
+        flex: 1;
         display: flex;
     }
 
     .section{
+        flex: 1;
         border: rgba(0, 0, 0, 0.12) 1px solid;
-
+        margin: -0.5px; //this makes stacking borders 1px
     }
 
     .subsection{
+        flex: 1;
         display: flex;
         justify-content: center;
 
