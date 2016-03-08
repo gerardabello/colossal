@@ -3,6 +3,7 @@ let Maps = {
 
     applyLaw(v, min, max, law){
         let l = law || 'linear';
+        if(min>=max){throw('min should be smaller than max');}
 
         let result = 0;
         switch (l) {
@@ -10,6 +11,7 @@ let Maps = {
             result = v*(max-min) + min;
             break;
         case 'log':
+            if(min<0){throw('Called applyLaw with a log law and negative values');}
             result = min * Math.pow(max/min, v);
             break;
         case 'pow':
@@ -25,6 +27,7 @@ let Maps = {
 
     reverseLaw(v, min, max, law){
         let l = law || 'linear';
+        if(min>=max){throw('min should be smaller than max');}
 
         let result = 0;
         switch (l) {
@@ -32,6 +35,7 @@ let Maps = {
             result = (v - min) / (max-min);
             break;
         case 'log':
+            if(min<0){throw('Called applyLaw with a log law and negative values');}
             result = (Math.log(v/min))/(Math.log(max/min));
             break;
         case 'pow':
