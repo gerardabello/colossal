@@ -14,12 +14,12 @@
         "webpack": "^1.12.2",
         "webpack-dev-server": "^1.12.1",
         "eslint": "^2.3.0",
-        "eslint-plugin-react": "^4.2.0",
+        "eslint-plugin-react": "^4.2.0"
     },
     "scripts": {
         "start": "electron main.js",
         "build": "webpack",
-        "watch": "webpack-dev-server --hot --inline",
+        "watch": "webpack-dev-server --hot --inline"
     },
     "dependencies": {
         "electron-prebuilt": "^0.36.0",

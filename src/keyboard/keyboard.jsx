@@ -8,13 +8,13 @@ import './keyboard.scss';
 
 
 let keynotemap = {
-    65 : 'C2', //A
-    83 : 'D2', //S
-    68 : 'E2', //D
-    70 : 'F2', //F
-    71 : 'G2', //G
-    72 : 'A2', //H
-    74 : 'B2', //J
+    65 : 'C3', //A
+    83 : 'D3', //S
+    68 : 'E3', //D
+    70 : 'F3', //F
+    71 : 'G3', //G
+    72 : 'A3', //H
+    74 : 'B3', //J
 };
 
 
@@ -40,7 +40,7 @@ var Keyboard = React.createClass({
     //RENDER
     render: function() {
         let octaves = 4;
-        var note = new Note('C1');
+        var note = new Note('C2');
 
         let nkeys = [];
         for (var i=0; i < octaves*12; i++) {
