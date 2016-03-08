@@ -2,6 +2,8 @@ import React from 'react';
 
 import './knob.scss';
 
+import Maps from '../../maps.js';
+
 
 var Knob = React.createClass({
     getInitialState: function() {
@@ -39,49 +41,10 @@ var Knob = React.createClass({
     },
 
     applyLaw(v){
-        let law = this.props.law || 'linear';
-        let min = this.props.min;
-        let max = this.props.max;
-
-        let result = 0;
-        switch (law) {
-            case 'linear':
-            result = v*(max-min) + min;
-            break;
-            case 'log':
-            result = min * Math.pow(max/min, v);
-            break;
-            case 'pow':
-            result = min + (v*v)*(max-min);
-            break;
-            default:
-            result = v*(max-min) + min;
-            break;
-        }
-
-        return result;
+        return Maps.applyLaw(v,this.props.min,this.props.max,this.props.law);
     },
     reverseLaw(v){
-        let law = this.props.law || 'linear';
-        let min = this.props.min;
-        let max = this.props.max;
-
-        let result = 0;
-        switch (law) {
-        case 'linear':
-            result = (v - min) / (max-min);
-            break;
-        case 'log':
-            result = (Math.log(v/min))/(Math.log(max/min));
-            break;
-        case 'pow':
-            result = Math.sqrt((v-min)/(max-min));
-            break;
-        default:
-            result = (v - min) / (max-min);
-            break;
-        }
-        return result;
+        return Maps.reverseLaw(v,this.props.min,this.props.max,this.props.law);
     },
 
     valueToDeg(value) {
