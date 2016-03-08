@@ -32,7 +32,6 @@ module.exports = {
             },
 
             { test: /\.scss$/, loader: 'style-loader!css-loader!sass-loader' },
-            { test: /\.jpg$/, loader: 'file-loader?name=[path][name].[ext]' }
         ]
     },
     node: {
