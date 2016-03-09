@@ -4,22 +4,17 @@ import Envelope from './envelope.js';
 import Filter from './filter.js';
 
 class Voice {
-    constructor(ctx, dst, signature, preset) {
+    constructor(ctx, dst) {
         this.context = ctx;
-        this.preset = preset;
 
         this.createNodes(dst);
-        this.setPreset(preset);
-        this.startEnv();
-        this.startOsc(signature);
+        this.startOsc();
     }
 
-    isFinished(){
-        if(this.env1.finished == true){
-            this.mainGain.disconnect();
-            return true;
-        }
-        return false;
+    trigger(signature){
+        this.env1.trigger();
+        this.osc1.trigger(signature);
+        this.osc2.trigger(signature);
     }
 
     updatePreset(p){
@@ -30,6 +25,7 @@ class Voice {
         let ctx = this.context;
 
         this.envGain = ctx.createGain();
+        this.envGain.gain.value = 0;
 
         this.osc1Mix = ctx.createGain();
         this.osc1Mix.connect(this.envGain);
@@ -44,7 +40,7 @@ class Voice {
         //this.envGain.connect(this.mainGain);
         this.filt1 = new Filter(ctx, this.envGain, this.mainGain);
 
-        this.env1 = new Envelope(ctx, this.envGain.gain, this.preset.envelopes.env1);
+        this.env1 = new Envelope(ctx, this.envGain.gain);
 
         this.mainGain.connect(dst);
     }
@@ -60,22 +56,18 @@ class Voice {
         this.osc2Mix.gain.value = 1-p.osc.mix;
 
         this.filt1.setPreset(p.filters.filt1);
-
+        this.env1.setPreset(p.envelopes.env1);
 
         this.mainGain.gain.value = p.gain;
     }
 
-    startEnv(){
-        this.env1.start();
+    startOsc(){
+        this.osc1.start();
+        this.osc2.start();
     }
 
-    startOsc(signature){
-        this.osc1.start(signature);
-        this.osc2.start(signature);
-    }
-
-    finish(){
-        this.env1.finish();
+    end(){
+        this.env1.end();
     }
 }
 

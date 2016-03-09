@@ -1,5 +1,7 @@
 'use strict';
 
+var Note = require('octavian').Note;
+
 import React from 'react';
 
 import Binder from 'react-binding';
@@ -51,37 +53,36 @@ let initialPreset = {
 
 var PolySynth = React.createClass({
     getInitialState: function() {
-        return {notes:{}, preset: initialPreset};
+        return {preset: initialPreset};
     },
     componentDidMount: function() {
-        this.voices = [];
+        this.voices = {};
+
+        let octaves = 4;
+        var note = new Note('C2');
+
+        for (var i=0; i < octaves*12; i++) {
+            let v = new Voice(this.props.ctx, this.props.dstNode, this.state.preset);
+            v.updatePreset(this.state.preset);
+            this.voices[note.signature] = v;
+            note = note.minorSecond();
+        }
+
     },
     //HANDLERS
     startVoice(signature){
-        let n = this.state.notes;
-        //if we are already actively playing a note, ignore this
-        if(n[signature]){return;}
-        let v = new Voice(this.props.ctx, this.props.dstNode,signature, this.state.preset);
-        n[signature] = v;
-        this.voices.push(v);
-        this.setState({ notes: n});
+        if(this.voices[signature]){
+            this.voices[signature].trigger(signature);
+        }
     },
     stopVoice(signature){
-        if(this.state.notes[signature]){
-            //This makes the voice enter in the release state. We delete it from the notes state, meaning that this note is not actively playing. We keep a reference of it in the this.voices, where we will delete it when the voice itself tells us it has finished.
-            this.state.notes[signature].finish();
-            delete this.state.notes[signature];
+        if(this.voices[signature]){
+            this.voices[signature].end();
         }
     },
     componentWillUpdate(nextProps, nextState){
-        //remove finished voices
-        for(let i = 0; i < this.voices.length; i++){
-            if(this.voices[i].isFinished() == true){
-                this.voices.splice(i, 1);
-            }
-        }
-        for(let i = 0; i < this.voices.length; i++){
-            this.voices[i].updatePreset(nextState.preset);
+        for(var key in this.voices) {
+            this.voices[key].updatePreset(nextState.preset);
         }
     },
     //RENDER

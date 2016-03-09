@@ -7,6 +7,10 @@ class Oscilator {
         this.createNodes(dst);
     }
 
+    start(){
+        this.osc.start(0);
+    }
+
     updatePreset(p){
         this.setPreset(p);
     }
@@ -38,14 +42,12 @@ class Oscilator {
         }
     }
 
-    start(signature){
+    trigger(signature){
         this.note = new Note(signature);
         let ctx = this.context;
 
         let now = ctx.currentTime;
         this.osc.frequency.setValueAtTime(this.getFreq(this.note, this.preset.detune), now);
-
-        this.osc.start(0);
     }
 
 

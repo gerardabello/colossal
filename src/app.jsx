@@ -18,7 +18,7 @@ var App = React.createClass({
             dstGainNode: null,
         };
     },
-    componentDidMount: function(){
+    componentWillMount: function(){
         let audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         let dstGainNode = audioCtx.createGain();
         dstGainNode.connect(audioCtx.destination);
