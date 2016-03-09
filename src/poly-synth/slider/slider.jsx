@@ -78,7 +78,7 @@ var Slider = React.createClass({
         var dom = ReactDOM.findDOMNode(this);
 
         this.setState({ height: dom.clientHeight, knobheight: dom.children[0].clientHeight});
-
+        this.forceUpdate();
     },
 
     render() {
