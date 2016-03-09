@@ -87,18 +87,18 @@ var PolySynth = React.createClass({
     //RENDER
     render: function() {
         return (
-            <div id="poly-synth">
-                <div id="osc">
+            <div className="poly-synth">
+                <div className="osc">
                     <div className="subsection horitzontal">
                         <div className="subsection vertical">
-                            <div id="osc1" className="section">
+                            <div className="osc1" className="section">
                                 <Selector values={['sine', 'square', 'sawtooth', 'triangle']} valueLink={Binder.bindToState(this,'preset', 'osc.osc1.shape')}/>
                                 <div className="knob-label-container">
                                     <Knob min={-1} max={1} law="linear" valueLink={Binder.bindToState(this,'preset', 'osc.osc1.detune')}/>
                                     <span>DETUNE</span>
                                 </div>
                             </div>
-                            <div id="osc2" className="section">
+                            <div className="osc2" className="section">
                                 <Selector values={['sine', 'square', 'sawtooth', 'triangle']} valueLink={Binder.bindToState(this,'preset', 'osc.osc2.shape')}/>
                                 <div className="knob-label-container">
                                     <Knob min={-1} max={1} law="linear" valueLink={Binder.bindToState(this,'preset', 'osc.osc2.detune')}/>
@@ -108,11 +108,11 @@ var PolySynth = React.createClass({
                         </div>
                         <Slider min={0} max={1} law="linear" valueLink={Binder.bindToState(this,'preset', 'osc.mix')}/>
                     </div>
-                    <div id="lfo" className="section">
+                    <div className="lfo" className="section">
                         LFO
                     </div>
                 </div>
-                <div id="filt1" className="section">
+                <div className="filt1" className="section">
 
                     <Selector values={['lowpass','highpass','bandpass','lowshelf','highshelf','peaking','notch','allpass']} valueLink={Binder.bindToState(this,'preset', 'filters.filt1.type')}/>
 
@@ -134,7 +134,7 @@ var PolySynth = React.createClass({
                     </div>
                 </div>
 
-                <div id="env" className="section">
+                <div className="env" className="section">
 
                     <div className="knob-label-container">
                     <Knob min={1e-4} max={10} law="pow" valueLink={Binder.bindToState(this,'preset', 'envelopes.env1.a')}/>
