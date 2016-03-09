@@ -15,6 +15,8 @@ var Slider = React.createClass({
             dragging: false,
             dragPoint: [0.0,0.0],
             dragStartValue: 0,
+            height: 1,
+            knobheight: 1,
         };
     },
 
@@ -58,7 +60,7 @@ var Slider = React.createClass({
     handleMoveAll: function(e) {
         if(this.state.dragging){
             let value = this.state.dragPoint[1] - e.screenY;
-            value /= (this.height-this.knobheight); //scale
+            value /= (this.state.height-this.state.knobheight); //scale
             this.handleChange(this.state.dragStartValue + value);
         }
     },
@@ -75,10 +77,8 @@ var Slider = React.createClass({
 
         var dom = ReactDOM.findDOMNode(this);
 
-        this.height = dom.clientHeight;
-        this.knobheight = dom.children[0].clientHeight;
+        this.setState({ height: dom.clientHeight, knobheight: dom.children[0].clientHeight});
 
-        this.forceUpdate();
     },
 
     render() {
@@ -89,12 +89,10 @@ var Slider = React.createClass({
             className="knob"
             onMouseDown={this.onMouseDown}
             style={{
-                transform: 'translateY(' + (1-this.state.value)*(this.height-this.knobheight) + 'px)'
+                transform: 'translateY(' + (1-this.state.value)*(this.state.height-this.state.knobheight) + 'px)'
             }}
             >
             </div>
-
-
 
             </div>
         )
