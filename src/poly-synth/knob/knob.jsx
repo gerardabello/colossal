@@ -77,7 +77,7 @@ var Knob = React.createClass({
 
         let indicators = [];
 
-        for(let i = -45; i <= 225; i+=15){
+        for(let i = -45; i <= 225; i+=18){
             if(rdeg-90>=i){
                 indicators.push(
                     <div key={i} className="indicator active" style={{transform: `rotate(${i}deg)`}}></div>
