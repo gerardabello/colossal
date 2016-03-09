@@ -25,10 +25,6 @@ $color: #CACACA;
         display: flex;
         flex-direction: row;
 
-        > div{
-            flex: 1;
-            display: flex;
-        }
     }
 
     .filt1{
@@ -55,7 +51,7 @@ $color: #CACACA;
     }
 
     .section{
-        box-shadow: black 0 0 0 1px;
+        border: black 1px dotted;
     }
 
     .subsection{
