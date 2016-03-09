@@ -20,10 +20,10 @@ $color: #CACACA;
         //self positioning
         position: absolute;
         width: 200px;
-        height: 400px;
+        height: 200px;
 
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
 
         > div{
             flex: 1;
