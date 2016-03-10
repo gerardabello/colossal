@@ -7,107 +7,112 @@ import Binder from 'react-binding';
 
 import './oscilloscope.scss';
 
+let backcolor = 'rgb(34, 56, 50)';
+let lightcolor = 'rgb(132, 223, 196)';
+
 
 var Oscilloscope = React.createClass({
     getInitialState: function() {
         return {};
     },
-    componentDidMount: function() {
-        var analyser = this.props.ctx.createAnalyser();
-        this.props.node.connect(analyser);
+    drawTime: function(){
+        var drawVisual = requestAnimationFrame(this.drawTime);
 
-        let canvas = ReactDOM.findDOMNode(this).getElementsByClassName('canvas')[0];
-        let canvasCtx = canvas.getContext('2d');
+        let canvasCtx = this.canvasCtx;
+        let HEIGHT = this.HEIGHT;
+        let WIDTH = this.WIDTH;
+        let dataArray = this.dataArray;
+        let bufferLength = this.bufferLength;
 
-        let WIDTH = canvas.width;
-        let HEIGHT = canvas.height;
-
-        let domain = 'time';
-
-        let backcolor = 'rgb(34, 56, 50)';
-        let lightcolor = 'rgb(132, 223, 196)';
-
-        if(domain=='time'){
-            analyser.fftSize = 2048;
-            let bufferLength = analyser.fftSize;
-            let dataArray = new Uint8Array(bufferLength);
-
-            canvasCtx.clearRect(0, 0, WIDTH, HEIGHT);
+        this.analyser.getByteTimeDomainData(dataArray);
 
 
-            function draw() {
+        canvasCtx.fillStyle = backcolor;
+        canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
+        canvasCtx.shadowBlur = 10;
+        canvasCtx.shadowColor = lightcolor;
 
-                var drawVisual = requestAnimationFrame(draw);
+        canvasCtx.lineWidth = 2;
+        canvasCtx.strokeStyle = lightcolor;
 
-                analyser.getByteTimeDomainData(dataArray);
+        canvasCtx.beginPath();
 
-                canvasCtx.fillStyle = backcolor;
-                canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
-                canvasCtx.shadowBlur = 10;
-                canvasCtx.shadowColor = lightcolor;
+        var sliceWidth = WIDTH * 2.0 / bufferLength;
+        var x = 0;
 
-                canvasCtx.lineWidth = 2;
-                canvasCtx.strokeStyle = lightcolor;
+        let startdraw = false;
 
-                canvasCtx.beginPath();
+        let margin = 1;
+        let middle = 128;
 
-                var sliceWidth = WIDTH * 1.0 / bufferLength;
-                var x = 0;
+        for(var i = margin; i < bufferLength-margin; i++) {
+            if(!startdraw){
+            //If we find a sample that has a positive derivative and crosses zero, we set it as a 'trigger' point and start drawing. If we find that we have already searched half the buffer just start drawing already cause we lost all hopes.
+                if((dataArray[i-1] < middle && dataArray[i]>= middle) || i > bufferLength/2){
+                    startdraw = true;
+                }
+            }
 
-                for(var i = 0; i < bufferLength; i++) {
+            if(startdraw){
+                var v = dataArray[i] / 128.0;
+                var y = v * HEIGHT/2;
 
-                    var v = dataArray[i] / 128.0;
-                    var y = v * HEIGHT/2;
-
-                    if(i === 0) {
-                        canvasCtx.moveTo(x, y);
-                    } else {
-                        canvasCtx.lineTo(x, y);
-                    }
-
-                    x += sliceWidth;
+                if(i === 0) {
+                    canvasCtx.moveTo(x, y);
+                } else {
+                    canvasCtx.lineTo(x, y);
                 }
 
-                canvasCtx.lineTo(canvas.width, canvas.height/2);
-                canvasCtx.stroke();
-            };
-
-            draw();
-        }else if (domain=='freq'){
-            analyser.fftSize = 2048;
-            let bufferLength = analyser.frequencyBinCount;
-            let dataArray = new Uint8Array(bufferLength);
-
-            canvasCtx.clearRect(0, 0, WIDTH, HEIGHT);
-
-            function draw() {
-                let drawVisual = requestAnimationFrame(draw);
-
-                analyser.getByteFrequencyData(dataArray);
-
-                canvasCtx.fillStyle = backcolor;
-                canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
-
-                canvasCtx.shadowBlur = 10;
-                canvasCtx.shadowColor = lightcolor;
-
-                var barWidth = 1;
-                var barHeight;
-                var x = 0;
-
-                for(var i = 0; i < bufferLength; i++) {
-                    barHeight = dataArray[i];
-
-                    canvasCtx.fillStyle = lightcolor;
-                    canvasCtx.fillRect(x,HEIGHT-barHeight/2,barWidth,barHeight/2);
-
-                    x += barWidth;
-                }
-            };
-
-            draw();
-
+                x += sliceWidth;
+            }
         }
+
+        canvasCtx.stroke();
+    },
+    drawFreq: function(){
+        let drawVisual = requestAnimationFrame(this.drawFreq);
+
+        let canvasCtx = this.canvasCtx;
+        let HEIGHT = this.HEIGTH;
+        let WIDTH = this.WIDTH;
+
+        this.analyser.getByteFrequencyData(this.dataArray);
+
+        canvasCtx.fillStyle = backcolor;
+        canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
+
+        canvasCtx.shadowBlur = 10;
+        canvasCtx.shadowColor = lightcolor;
+
+        var barWidth = 1;
+        var barHeight;
+        var x = 0;
+
+        for(var i = 0; i < this.bufferLength; i++) {
+            barHeight = this.dataArray[i];
+
+            canvasCtx.fillStyle = lightcolor;
+            canvasCtx.fillRect(x,HEIGHT-barHeight/2,barWidth,barHeight/2);
+
+            x += barWidth;
+        }
+    },
+    componentDidMount: function() {
+        this.analyser = this.props.ctx.createAnalyser();
+        this.props.node.connect(this.analyser);
+
+        this.canvas = ReactDOM.findDOMNode(this).getElementsByClassName('canvas')[0];
+        this.canvasCtx = this.canvas.getContext('2d');
+
+        this.WIDTH = this.canvas.width;
+        this.HEIGHT = this.canvas.height;
+
+        this.analyser.fftSize = 2048;
+        this.bufferLength = this.analyser.fftSize;
+        this.dataArray = new Uint8Array(this.bufferLength);
+
+
+        this.drawTime();
 
 
     },
