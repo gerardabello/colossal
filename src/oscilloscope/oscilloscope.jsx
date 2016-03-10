@@ -34,11 +34,13 @@ var Oscilloscope = React.createClass({
 
             analyser.getByteTimeDomainData(dataArray);
 
-            canvasCtx.fillStyle = 'rgb(200, 200, 200)';
+            canvasCtx.fillStyle = 'rgb(34, 56, 50)';
             canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
+            canvasCtx.shadowBlur = 10;
+            canvasCtx.shadowColor = 'rgb(132, 223, 196)';
 
             canvasCtx.lineWidth = 2;
-            canvasCtx.strokeStyle = 'rgb(0, 0, 0)';
+            canvasCtx.strokeStyle = 'rgb(132, 223, 196)';
 
             canvasCtx.beginPath();
 

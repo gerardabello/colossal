@@ -1,5 +1,5 @@
 //BASE COLORS
-$back-color: #dadada;
+$back-color: #C7C7BF;;
 $color: #161616;
 
 
@@ -14,13 +14,13 @@ $color: #161616;
     position: relative;
 
     .canvas {
-        background: rgb(34, 56, 50);
         position: absolute;
         top: 10px;
         left: 10px;
         height: 180px;
         width: 700px;
         border-radius: 10px;
+        box-shadow: rgba(0, 0, 0, 0.5) 0 -2px 0px 2px, white 0 2px 0px 2px;
     }
 
 }
