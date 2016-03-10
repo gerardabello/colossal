@@ -17,57 +17,97 @@ var Oscilloscope = React.createClass({
         this.props.node.connect(analyser);
 
         let canvas = ReactDOM.findDOMNode(this).getElementsByClassName('canvas')[0];
-        let canvasCtx = canvas.getContext("2d");
+        let canvasCtx = canvas.getContext('2d');
 
         let WIDTH = canvas.width;
         let HEIGHT = canvas.height;
 
-        analyser.fftSize = 2048;
-        var bufferLength = analyser.fftSize;
-        var dataArray = new Uint8Array(bufferLength);
+        let domain = 'time';
 
-        canvasCtx.clearRect(0, 0, WIDTH, HEIGHT);
+        let backcolor = 'rgb(34, 56, 50)';
+        let lightcolor = 'rgb(132, 223, 196)';
 
-        function draw() {
+        if(domain=='time'){
+            analyser.fftSize = 2048;
+            let bufferLength = analyser.fftSize;
+            let dataArray = new Uint8Array(bufferLength);
 
-            var drawVisual = requestAnimationFrame(draw);
+            canvasCtx.clearRect(0, 0, WIDTH, HEIGHT);
 
-            analyser.getByteTimeDomainData(dataArray);
 
-            canvasCtx.fillStyle = 'rgb(34, 56, 50)';
-            canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
-            canvasCtx.shadowBlur = 10;
-            canvasCtx.shadowColor = 'rgb(132, 223, 196)';
+            function draw() {
 
-            canvasCtx.lineWidth = 2;
-            canvasCtx.strokeStyle = 'rgb(132, 223, 196)';
+                var drawVisual = requestAnimationFrame(draw);
 
-            canvasCtx.beginPath();
+                analyser.getByteTimeDomainData(dataArray);
 
-            var sliceWidth = WIDTH * 1.0 / bufferLength;
-            var x = 0;
+                canvasCtx.fillStyle = backcolor;
+                canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
+                canvasCtx.shadowBlur = 10;
+                canvasCtx.shadowColor = lightcolor;
 
-            for(var i = 0; i < bufferLength; i++) {
+                canvasCtx.lineWidth = 2;
+                canvasCtx.strokeStyle = lightcolor;
 
-                var v = dataArray[i] / 128.0;
-                var y = v * HEIGHT/2;
+                canvasCtx.beginPath();
 
-                if(i === 0) {
-                    canvasCtx.moveTo(x, y);
-                } else {
-                    canvasCtx.lineTo(x, y);
+                var sliceWidth = WIDTH * 1.0 / bufferLength;
+                var x = 0;
+
+                for(var i = 0; i < bufferLength; i++) {
+
+                    var v = dataArray[i] / 128.0;
+                    var y = v * HEIGHT/2;
+
+                    if(i === 0) {
+                        canvasCtx.moveTo(x, y);
+                    } else {
+                        canvasCtx.lineTo(x, y);
+                    }
+
+                    x += sliceWidth;
                 }
 
-                x += sliceWidth;
-            }
+                canvasCtx.lineTo(canvas.width, canvas.height/2);
+                canvasCtx.stroke();
+            };
 
-            canvasCtx.lineTo(canvas.width, canvas.height/2);
-            canvasCtx.stroke();
-        };
+            draw();
+        }else if (domain=='freq'){
+            analyser.fftSize = 2048;
+            let bufferLength = analyser.frequencyBinCount;
+            let dataArray = new Uint8Array(bufferLength);
 
-        draw();
+            canvasCtx.clearRect(0, 0, WIDTH, HEIGHT);
 
+            function draw() {
+                let drawVisual = requestAnimationFrame(draw);
 
+                analyser.getByteFrequencyData(dataArray);
+
+                canvasCtx.fillStyle = backcolor;
+                canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
+
+                canvasCtx.shadowBlur = 10;
+                canvasCtx.shadowColor = lightcolor;
+
+                var barWidth = 1;
+                var barHeight;
+                var x = 0;
+
+                for(var i = 0; i < bufferLength; i++) {
+                    barHeight = dataArray[i];
+
+                    canvasCtx.fillStyle = lightcolor;
+                    canvasCtx.fillRect(x,HEIGHT-barHeight/2,barWidth,barHeight/2);
+
+                    x += barWidth;
+                }
+            };
+
+            draw();
+
+        }
 
 
     },
