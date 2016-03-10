@@ -1,0 +1,26 @@
+//BASE COLORS
+$back-color: #dadada;
+$color: #161616;
+
+
+
+//
+
+.oscilloscope {
+    background: $back-color;
+    color: $color;
+    height: 200px;
+    width: 1024px;
+    position: relative;
+
+    .canvas {
+        background: rgb(34, 56, 50);
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        height: 180px;
+        width: 700px;
+        border-radius: 10px;
+    }
+
+}

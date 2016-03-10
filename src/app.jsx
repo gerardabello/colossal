@@ -2,6 +2,7 @@ var React = require('react');
 
 import PolySynth from './poly-synth/poly-synth.jsx';
 import Keyboard from './keyboard/keyboard.jsx';
+import Oscilloscope from './oscilloscope/oscilloscope.jsx';
 
 let styles = {
     stack: {
@@ -38,7 +39,8 @@ var App = React.createClass({
         return (
 			<div id="stack">
 			<div id="instrument-stack">
-			<PolySynth style={styles.instrument} ctx={this.state.ctx} dstNode={this.state.dstNode} ref={(ref) => this.synth = ref}/>
+			<PolySynth ctx={this.state.ctx} dstNode={this.state.dstNode} ref={(ref) => this.synth = ref}/>
+			<Oscilloscope ctx={this.state.ctx} node={this.state.dstNode}/>
 			</div>
 			<Keyboard style={styles.keyboard} noteOn={this.noteOn} noteOff={this.noteOff} />
 			</div>

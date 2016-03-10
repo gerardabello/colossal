@@ -13,8 +13,8 @@ injectTapEventPlugin();
 import '../static/sass/main.scss';
 
 var React = require('react');
-var ReactDom = require('react-dom');
+var ReactDOM = require('react-dom');
 
 import App from './app.jsx';
 
-ReactDom.render(<App/>, document.getElementById('react-root'));
+ReactDOM.render(<App/>, document.getElementById('react-root'));
