@@ -96,14 +96,16 @@ var PolySynth = React.createClass({
                     <div className="subsection vertical">
                         <div className="osc1 section">
                             <Selector values={['parametric','sine', 'square', 'sawtooth', 'triangle']} valueLink={Binder.bindToState(this,'preset', 'osc.osc1.shape')}/>
-                            <div className="knob-label-container">
-                                <Knob min={-1} max={1} law="linear" valueLink={Binder.bindToState(this,'preset', 'osc.osc1.detune')}/>
-                                <span>DETUNE</span>
-                            </div>
                             <div className="subsection horitzontal">
-                                <Knob small={true} min={-1} max={1} law="linear" valueLink={Binder.bindToState(this,'preset', 'osc.osc1.parameters.shape')}/>
-                                <Knob small={true} min={0} max={1} law="linear" valueLink={Binder.bindToState(this,'preset', 'osc.osc1.parameters.io')}/>
-                                <Knob small={true} min={0} max={1} law="linear" valueLink={Binder.bindToState(this,'preset', 'osc.osc1.parameters.ie')}/>
+                                <div className="knob-label-container">
+                                    <Knob small={true} min={-1} max={1} law="linear" valueLink={Binder.bindToState(this,'preset', 'osc.osc1.parameters.shape')}/>
+                                    <span>SHAPE</span>
+                                </div>
+                                <div className="knob-label-container">
+                                    <Knob small={true} min={-1} max={1} law="linear" valueLink={Binder.bindToState(this,'preset', 'osc.osc1.detune')}/>
+                                    <span>DETUNE</span>
+                                </div>
+
                             </div>
                         </div>
                         <div className="osc2 section">

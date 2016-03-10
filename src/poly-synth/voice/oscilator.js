@@ -48,7 +48,7 @@ class Oscilator {
                 ie = 1;
             }
 
-            let n = 64;
+            let n = 128;
             let real = new Float32Array(n);
             let imag = new Float32Array(n);
 
