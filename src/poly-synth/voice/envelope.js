@@ -28,6 +28,7 @@ class Envelope {
         this.target.cancelScheduledValues(now);
         this.target.setValueAtTime(v, now);
         this.target.exponentialRampToValueAtTime(1e-4, now + p.r);
+        this.target.linearRampToValueAtTime(0, now + p.r + 0.0012); //this is to set the value to 0
     }
 }
 
