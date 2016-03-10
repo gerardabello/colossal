@@ -19,7 +19,10 @@ let initialPreset = {
     osc: {
         mix: 0.5,
         osc1: {
-            shape: 'sawtooth',
+            shape: 'parametric',
+            parameters: {
+                shape: 0,
+            },
             detune: 0,
             octave: 0,
         },
@@ -96,6 +99,11 @@ var PolySynth = React.createClass({
                             <div className="knob-label-container">
                                 <Knob min={-1} max={1} law="linear" valueLink={Binder.bindToState(this,'preset', 'osc.osc1.detune')}/>
                                 <span>DETUNE</span>
+                            </div>
+                            <div className="subsection horitzontal">
+                                <Knob small={true} min={-1} max={1} law="linear" valueLink={Binder.bindToState(this,'preset', 'osc.osc1.parameters.shape')}/>
+                                <Knob small={true} min={0} max={1} law="linear" valueLink={Binder.bindToState(this,'preset', 'osc.osc1.parameters.io')}/>
+                                <Knob small={true} min={0} max={1} law="linear" valueLink={Binder.bindToState(this,'preset', 'osc.osc1.parameters.ie')}/>
                             </div>
                         </div>
                         <div className="osc2 section">

@@ -1,6 +1,12 @@
 $size: 35px;
+$smallSize: 20px;
 
 .knob-surround {
+
+    &.small{
+        width: $smallSize;
+        height: $smallSize;
+    }
 
     position: relative;
     background-color: grey;
@@ -8,7 +14,7 @@ $size: 35px;
     height: $size;
     border-radius: 50%;
     border: solid 2px #000000;
-    margin: 0.6em 0.6em 0.1em 0.6em;
+    margin: 6px;
     background: hsla(0,0%,15%,1);
     background: -webkit-gradient(linear, left bottom, left top, color-stop(0, hsla(0,0%,17%,1)), color-stop(1, hsla(0,0%,13%,1)));
     box-shadow: 0 0.2em 0 0.1px rgba(255, 255, 255, 0.25) inset, 0 -0.2em 0px 0.1px rgba(0, 0, 0, 0.19) inset, 0 0.6em 1.2em 0 rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 0.07) 0 0 2px 1px, rgba(255, 255, 255, 0.13) 0 0 20px -2px;
@@ -57,7 +63,7 @@ $size: 35px;
             content: "";
             width: 2px;
             height: 6px;
-            margin: -0.5em;
+            margin: -20%;
             border-radius: 50%;
             background: rgba(0, 0, 0, 0.23);
             transition: all 0.15s ease;

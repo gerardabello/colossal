@@ -35,23 +35,34 @@ class Oscilator {
 
         //osc
         if(p.shape == 'parametric'){
-            let r0 = 0;
-            let i0 = 0;
+
             let ie = 0;
             let io = 0;
-            let re = 0;
-            let ro = 0;
+
+            let shape = p.parameters.shape;
+            if(shape<0){
+                io = 1;
+                ie = 1+shape;
+            }else{
+                io = 1-shape;
+                ie = 1;
+            }
 
             let n = 64;
             let real = new Float32Array(n);
             let imag = new Float32Array(n);
 
-            for(var x = 1; x < n; x+=2) {
-                imag[x] = 4.0 / (Math.PI*x);
+            //real[0] = 0.5;
+            for(let x = 1; x < n; x+=2) {
+                imag[x] = (4.0*io) / (Math.PI*x);
+            }
+            for(let x = 2; x < n; x+=2) {
+                imag[x] = (4.0*ie) / (Math.PI*x);
             }
             /*
-            real[0] = 0.5;
+
             for (var i = 1; i < n; i++) {
+                imag[i] = 1 / (i * Math.PI);
                 imag[i] = 1 / (i * Math.PI);
             }
             */
