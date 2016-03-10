@@ -92,7 +92,7 @@ var PolySynth = React.createClass({
                 <div className="osc">
                     <div className="subsection vertical">
                         <div className="osc1 section">
-                            <Selector values={['sine', 'square', 'sawtooth', 'triangle']} valueLink={Binder.bindToState(this,'preset', 'osc.osc1.shape')}/>
+                            <Selector values={['parametric','sine', 'square', 'sawtooth', 'triangle']} valueLink={Binder.bindToState(this,'preset', 'osc.osc1.shape')}/>
                             <div className="knob-label-container">
                                 <Knob min={-1} max={1} law="linear" valueLink={Binder.bindToState(this,'preset', 'osc.osc1.detune')}/>
                                 <span>DETUNE</span>
