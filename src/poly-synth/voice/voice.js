@@ -9,12 +9,21 @@ class Voice {
 
         this.createNodes(dst);
         this.startOsc();
+
+        this.gate = false;
     }
 
     trigger(signature){
+        if(this.gate){return;}
         this.env1.trigger();
         this.osc1.trigger(signature);
         this.osc2.trigger(signature);
+        this.gate = true;
+    }
+
+    end(){
+        this.env1.end();
+        this.gate=false;
     }
 
     updatePreset(p){
@@ -66,9 +75,6 @@ class Voice {
         this.osc2.start();
     }
 
-    end(){
-        this.env1.end();
-    }
 }
 
 
