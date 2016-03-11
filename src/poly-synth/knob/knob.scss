@@ -18,8 +18,8 @@ $smallSize: 22px;
     border: solid 2px #000000;
     margin: 6px;
     margin-bottom: 20px;
-    background: hsla(0,0%,15%,1);
-    background: -webkit-gradient(linear, left bottom, left top, color-stop(0, hsla(0,0%,17%,1)), color-stop(1, hsla(0,0%,13%,1)));
+    background: #353535;
+    background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #2F2F2F), color-stop(1, #383838));
     box-shadow: 0 0.2em 0 0.1px rgba(255, 255, 255, 0.25) inset, 0 -0.2em 0px 0.1px rgba(0, 0, 0, 0.19) inset, 0 0.6em 1.2em 0 rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 0.07) 0 0 2px 1px, rgba(255, 255, 255, 0.13) 0 0 20px -2px;
 
   .knob {
