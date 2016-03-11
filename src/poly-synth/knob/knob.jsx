@@ -102,6 +102,7 @@ var Knob = React.createClass({
 
             {indicators}
 
+            <span>{this.props.label}</span>
 
             </div>
         )
