@@ -41,12 +41,11 @@ let initialPreset = {
             gain: 1,
             key: 0,
             env: {
-                a: 0.012,
+                a: 0,
                 d: 0,
                 s: 1,
                 r: 0,
             },
-
         },
     },
     envelopes: {
@@ -128,20 +127,20 @@ var PolySynth = React.createClass({
                     </div>
 
                     <div className="subsection horitzontal">
-                        <Knob label="A" small={true} min={20} max={22050} law="log" valueLink={Binder.bindToState(this,'preset', 'filters.filt1.env.a')}/>
-                        <Knob label="D" small={true} min={1} max={20} law="pow" valueLink={Binder.bindToState(this,'preset', 'filters.filt1.env.d')}/>
-                        <Knob label="S" small={true} min={-20} max={20} law="pow" valueLink={Binder.bindToState(this,'preset', 'filters.filt1.env.s')}/>
-                        <Knob label="R" small={true} min={0} max={1} law="linear" valueLink={Binder.bindToState(this,'preset', 'filters.filt1.env.r')}/>
+                        <Knob label="A" small={true} min={0} max={10} law="pow" valueLink={Binder.bindToState(this,'preset', 'filters.filt1.env.a')}/>
+                        <Knob label="D" small={true} min={0} max={5} law="pow" valueLink={Binder.bindToState(this,'preset', 'filters.filt1.env.d')}/>
+                        <Knob label="S" small={true} min={0} max={1} law="pow" valueLink={Binder.bindToState(this,'preset', 'filters.filt1.env.s')}/>
+                        <Knob label="R" small={true} min={0} max={10} law="pow" valueLink={Binder.bindToState(this,'preset', 'filters.filt1.env.r')}/>
                     </div>
                 </div>
 
                 <div className="env section">
                     <h2>AMP ENVELOPE</h2>
                     <div className="subsection horitzontal">
-                        <Knob label="ATTACK" min={1e-4} max={10} law="pow" valueLink={Binder.bindToState(this,'preset', 'envelopes.env1.a')}/>
-                        <Knob label="DECAY" min={1e-4} max={5} law="pow" valueLink={Binder.bindToState(this,'preset', 'envelopes.env1.d')}/>
-                        <Knob label="SUSTAIN" min={1e-4} max={1} law="pow" valueLink={Binder.bindToState(this,'preset', 'envelopes.env1.s')}/>
-                        <Knob label="RELEASE" min={1e-4} max={5} law="pow" valueLink={Binder.bindToState(this,'preset', 'envelopes.env1.r')}/>
+                        <Knob label="ATTACK" min={0} max={10} law="pow" valueLink={Binder.bindToState(this,'preset', 'envelopes.env1.a')}/>
+                        <Knob label="DECAY" min={0} max={5} law="pow" valueLink={Binder.bindToState(this,'preset', 'envelopes.env1.d')}/>
+                        <Knob label="SUSTAIN" min={0} max={1} law="pow" valueLink={Binder.bindToState(this,'preset', 'envelopes.env1.s')}/>
+                        <Knob label="RELEASE" min={0} max={10} law="pow" valueLink={Binder.bindToState(this,'preset', 'envelopes.env1.r')}/>
                     </div>
                 </div>
             </div>
