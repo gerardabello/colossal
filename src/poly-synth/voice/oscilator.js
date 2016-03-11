@@ -26,15 +26,33 @@ class Oscilator {
     setPreset(p){
         this.preset = p;
 
-        let ctx = this.context;
+        this.calculatePeriodicWave(p.wave);
 
+        let ctx = this.context;
         let now = ctx.currentTime;
 
-        //osc
+        if(this.note){
+            this.osc.frequency.setValueAtTime(this.getFreq(this.note, this.preset.detune), now);
+        }
+    }
+
+    calculatePeriodicWave(wp){
+
+        if(this.lastwavepreset != null){
+            //This is to prevent updating the wave every frame
+            if(Math.abs(this.lastwavepreset.shape-wp.shape) < 0.1){
+                return;
+            }
+        }
+
+        this.lastwavepreset = {};
+        this.lastwavepreset.shape = wp.shape;
+
+
         let ie = 0;
         let io = 0;
 
-        let shape = p.shape;
+        let shape = wp.shape;
         if(shape<0){
             io = 1;
             ie = 1+shape;
@@ -62,14 +80,8 @@ class Oscilator {
         }
         */
 
-        let wave = ctx.createPeriodicWave(real, imag);
+        let wave = this.context.createPeriodicWave(real, imag);
         this.osc.setPeriodicWave(wave);
-
-        //this.oscGain.gain.setValueAtTime(p.gain, now);
-
-        if(this.note){
-            this.osc.frequency.setValueAtTime(this.getFreq(this.note, this.preset.detune), now);
-        }
     }
 
     trigger(signature){
