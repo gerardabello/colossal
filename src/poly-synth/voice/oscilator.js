@@ -1,5 +1,5 @@
 var Note = require('octavian').Note;
-var deepEqual = require('deep-equal')
+var deepEqual = require('deep-equal');
 
 class Oscilator {
     constructor(ctx, dst) {
