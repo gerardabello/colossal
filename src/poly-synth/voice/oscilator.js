@@ -40,7 +40,7 @@ class Oscilator {
 
         if(this.lastwavepreset != null){
             //This is to prevent updating the wave every frame
-            if(Math.abs(this.lastwavepreset.shape-wp.shape) < 0.1){
+            if(Math.abs(this.lastwavepreset.shape-wp.shape) < 0.05){
                 return;
             }
         }
