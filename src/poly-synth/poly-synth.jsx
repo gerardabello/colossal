@@ -39,7 +39,14 @@ let initialPreset = {
             freq: 1000,
             q: 1,
             gain: 1,
-            tracking: true,
+            key: 0,
+            env: {
+                a: 0.012,
+                d: 0,
+                s: 1,
+                r: 0,
+            },
+
         },
     },
     envelopes: {
@@ -115,10 +122,16 @@ var PolySynth = React.createClass({
 
                     <div className="subsection horitzontal">
                         <Knob label="FREQ" min={20} max={22050} law="log" valueLink={Binder.bindToState(this,'preset', 'filters.filt1.freq')}/>
-
                         <Knob label="Q" min={1} max={20} law="pow" valueLink={Binder.bindToState(this,'preset', 'filters.filt1.q')}/>
-
                         <Knob label="GAIN" min={-20} max={20} law="pow" valueLink={Binder.bindToState(this,'preset', 'filters.filt1.gain')}/>
+                        <Knob label="KEY" min={0} max={1} law="linear" valueLink={Binder.bindToState(this,'preset', 'filters.filt1.key')}/>
+                    </div>
+
+                    <div className="subsection horitzontal">
+                        <Knob label="A" small={true} min={20} max={22050} law="log" valueLink={Binder.bindToState(this,'preset', 'filters.filt1.env.a')}/>
+                        <Knob label="D" small={true} min={1} max={20} law="pow" valueLink={Binder.bindToState(this,'preset', 'filters.filt1.env.d')}/>
+                        <Knob label="S" small={true} min={-20} max={20} law="pow" valueLink={Binder.bindToState(this,'preset', 'filters.filt1.env.s')}/>
+                        <Knob label="R" small={true} min={0} max={1} law="linear" valueLink={Binder.bindToState(this,'preset', 'filters.filt1.env.r')}/>
                     </div>
                 </div>
 

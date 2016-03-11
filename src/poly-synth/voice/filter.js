@@ -30,7 +30,7 @@ class Filter {
         this.preset = p;
 
         this.bqf.type = p.type;
-        this.bqf.frequency.value = p.freq + (p.tracking ? this.freqOffset : 0);
+        this.bqf.frequency.value = p.freq + (this.freqOffset * p.key);
         this.bqf.Q.value = p.q;
         this.bqf.gain.value = p.gain;
     }
