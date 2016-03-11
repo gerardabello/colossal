@@ -65,12 +65,12 @@ class Oscilator {
         let real = new Float32Array(n);
         let imag = new Float32Array(n);
 
-        //real[0] = 0.5;
         for(let x = 1; x < n; x+=2) {
-            imag[x] = (4.0*io) / (Math.PI*x);
+            imag[x] += (1.0*io) / (Math.PI*x);
         }
+
         for(let x = 2; x < n; x+=2) {
-            imag[x] = (4.0*ie) / (Math.PI*x);
+            imag[x] += (1.0*ie) / (Math.PI*x);
         }
 
 
