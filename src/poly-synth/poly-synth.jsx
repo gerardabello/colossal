@@ -42,6 +42,7 @@ let initialPreset = {
             freq: 1000,
             q: 1,
             gain: 1,
+            tracking: true,
         },
     },
     envelopes: {

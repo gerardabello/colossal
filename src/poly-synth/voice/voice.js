@@ -16,8 +16,11 @@ class Voice {
     trigger(signature){
         if(this.gate){return;}
         this.env1.trigger();
+        
         this.osc1.trigger(signature);
         this.osc2.trigger(signature);
+
+        this.filt1.trigger(signature);
         this.gate = true;
     }
 
