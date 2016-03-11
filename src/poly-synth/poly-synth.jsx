@@ -90,15 +90,17 @@ var PolySynth = React.createClass({
     render: function() {
         return (
             <div className="poly-synth">
-                <div className="osc">
+                <div className="oscillators">
                     <div className="subsection vertical">
-                        <div className="osc1 section">
+                        <div className="osc section">
+                            <h2>OSC1</h2>
                             <div className="subsection horitzontal">
                                 <Knob label="SHAPE" small={true} min={-1} max={1} law="linear" valueLink={Binder.bindToState(this,'preset', 'osc.osc1.wave.shape')}/>
                                 <Knob label="DETUNE" small={true} min={-1} max={1} law="linear" valueLink={Binder.bindToState(this,'preset', 'osc.osc1.detune')}/>
                             </div>
                         </div>
-                        <div className="osc2 section">
+                        <div className="osc section">
+                            <h2>OSC2</h2>
                             <div className="subsection horitzontal">
                                 <Knob label="SHAPE" small={true} min={-1} max={1} law="linear" valueLink={Binder.bindToState(this,'preset', 'osc.osc2.wave.shape')}/>
                                 <Knob label="DETUNE" small={true} min={-1} max={1} law="linear" valueLink={Binder.bindToState(this,'preset', 'osc.osc2.detune')}/>
@@ -121,10 +123,13 @@ var PolySynth = React.createClass({
                 </div>
 
                 <div className="env section">
-                    <Knob label="ATTACK" min={1e-4} max={10} law="pow" valueLink={Binder.bindToState(this,'preset', 'envelopes.env1.a')}/>
-                    <Knob label="DECAY" min={1e-4} max={5} law="pow" valueLink={Binder.bindToState(this,'preset', 'envelopes.env1.d')}/>
-                    <Knob label="SUSTAIN" min={1e-4} max={1} law="pow" valueLink={Binder.bindToState(this,'preset', 'envelopes.env1.s')}/>
-                    <Knob label="RELEASE" min={1e-4} max={5} law="pow" valueLink={Binder.bindToState(this,'preset', 'envelopes.env1.r')}/>
+                    <h2>AMP ENVELOPE</h2>
+                    <div className="subsection horitzontal">
+                        <Knob label="ATTACK" min={1e-4} max={10} law="pow" valueLink={Binder.bindToState(this,'preset', 'envelopes.env1.a')}/>
+                        <Knob label="DECAY" min={1e-4} max={5} law="pow" valueLink={Binder.bindToState(this,'preset', 'envelopes.env1.d')}/>
+                        <Knob label="SUSTAIN" min={1e-4} max={1} law="pow" valueLink={Binder.bindToState(this,'preset', 'envelopes.env1.s')}/>
+                        <Knob label="RELEASE" min={1e-4} max={5} law="pow" valueLink={Binder.bindToState(this,'preset', 'envelopes.env1.r')}/>
+                    </div>
                 </div>
             </div>
         );

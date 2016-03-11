@@ -9,14 +9,14 @@ $color: #CACACA;
 .poly-synth {
     background: $back-color;
     color: $color;
-    height: 300px;
+    height: 200px;
     width: 1024px;
     font-family: sans-serif;
     position: relative;
 
 
 
-    .osc{
+    .oscillators{
         //self positioning
         position: absolute;
         width: 200px;
@@ -25,17 +25,21 @@ $color: #CACACA;
         display: flex;
         flex-direction: row;
 
+        .osc{
+            flex: 1;
+
+        }
+
     }
+
 
     .filt1{
         //self positioning
         left: 200px;
         position: absolute;
-        width: 300px;
+        width: 200px;
         height: 100px;
 
-        display: flex;
-        flex-direction: column;
     }
 
     .env{
@@ -43,21 +47,27 @@ $color: #CACACA;
         position: absolute;
         left: 500px;
         width: 300px;
-        height: 80px;
+        height: 100px;
 
 
-        display: flex;
-        justify-content: space-around;
     }
 
     .section{
         border: black 1px dotted;
+        display: flex;
+        flex-direction: column;
+
+        h2 {
+            font-size: 26px;
+            margin: 2px;
+            color: rgba(255, 255, 255, 0.11);
+        }
     }
 
     .subsection{
         flex: 1;
         display: flex;
-        justify-content: center;
+        justify-content: space-around;
 
         &.horitzontal{
 
