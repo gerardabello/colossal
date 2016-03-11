@@ -1,5 +1,4 @@
 var Note = require('octavian').Note;
-var deepEqual = require('deep-equal');
 
 class Oscilator {
     constructor(ctx, dst) {
@@ -10,10 +9,6 @@ class Oscilator {
 
     start(){
         this.osc.start(0);
-    }
-
-    updatePreset(p){
-        this.setPreset(p);
     }
 
     createNodes(dst){
@@ -29,12 +24,6 @@ class Oscilator {
     }
 
     setPreset(p){
-
-        if(this.lastpreset != null){
-            if(deepEqual(this.lastpreset, p)){ return; }
-        }
-
-        this.lastpreset = this.preset;
         this.preset = p;
 
         let ctx = this.context;
@@ -42,45 +31,40 @@ class Oscilator {
         let now = ctx.currentTime;
 
         //osc
-        if(p.shape == 'parametric'){
+        let ie = 0;
+        let io = 0;
 
-            let ie = 0;
-            let io = 0;
-
-            let shape = p.parameters.shape;
-            if(shape<0){
-                io = 1;
-                ie = 1+shape;
-            }else{
-                io = 1-shape;
-                ie = 1;
-            }
-
-            let n = 128;
-            let real = new Float32Array(n);
-            let imag = new Float32Array(n);
-
-            //real[0] = 0.5;
-            for(let x = 1; x < n; x+=2) {
-                imag[x] = (4.0*io) / (Math.PI*x);
-            }
-            for(let x = 2; x < n; x+=2) {
-                imag[x] = (4.0*ie) / (Math.PI*x);
-            }
-            /*
-
-            for (var i = 1; i < n; i++) {
-                imag[i] = 1 / (i * Math.PI);
-                imag[i] = 1 / (i * Math.PI);
-            }
-            */
-
-            let wave = ctx.createPeriodicWave(real, imag);
-            this.osc.setPeriodicWave(wave);
-
+        let shape = p.shape;
+        if(shape<0){
+            io = 1;
+            ie = 1+shape;
         }else{
-            this.osc.type = p.shape;
+            io = 1-shape;
+            ie = 1;
         }
+
+        let n = 128;
+        let real = new Float32Array(n);
+        let imag = new Float32Array(n);
+
+        //real[0] = 0.5;
+        for(let x = 1; x < n; x+=2) {
+            imag[x] = (4.0*io) / (Math.PI*x);
+        }
+        for(let x = 2; x < n; x+=2) {
+            imag[x] = (4.0*ie) / (Math.PI*x);
+        }
+        /*
+
+        for (var i = 1; i < n; i++) {
+            imag[i] = 1 / (i * Math.PI);
+            imag[i] = 1 / (i * Math.PI);
+        }
+        */
+
+        let wave = ctx.createPeriodicWave(real, imag);
+        this.osc.setPeriodicWave(wave);
+
         //this.oscGain.gain.setValueAtTime(p.gain, now);
 
         if(this.note){

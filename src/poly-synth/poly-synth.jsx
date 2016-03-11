@@ -19,22 +19,15 @@ let initialPreset = {
     osc: {
         mix: 0.5,
         osc1: {
-            shape: 'parametric',
-            parameters: {
-                shape: 0,
-            },
+            shape: 0,
             detune: 0,
             octave: 0,
         },
         osc2: {
-            shape: 'square',
+            shape: 0,
             detune: 0,
             octave: 0,
-        },
-        lfo: {
-            shape: 'sine',
-            gain: 0,
-        },
+        }
     },
     filters: {
         filt1: {
@@ -96,15 +89,16 @@ var PolySynth = React.createClass({
                 <div className="osc">
                     <div className="subsection vertical">
                         <div className="osc1 section">
-                            <Selector values={['parametric','sine', 'square', 'sawtooth', 'triangle']} valueLink={Binder.bindToState(this,'preset', 'osc.osc1.shape')}/>
                             <div className="subsection horitzontal">
-                                <Knob label="SHAPE" small={true} min={-1} max={1} law="linear" valueLink={Binder.bindToState(this,'preset', 'osc.osc1.parameters.shape')}/>
+                                <Knob label="SHAPE" small={true} min={-1} max={1} law="linear" valueLink={Binder.bindToState(this,'preset', 'osc.osc1.shape')}/>
                                 <Knob label="DETUNE" small={true} min={-1} max={1} law="linear" valueLink={Binder.bindToState(this,'preset', 'osc.osc1.detune')}/>
                             </div>
                         </div>
                         <div className="osc2 section">
-                            <Selector values={['sine', 'square', 'sawtooth', 'triangle']} valueLink={Binder.bindToState(this,'preset', 'osc.osc2.shape')}/>
-                            <Knob label="DETUNE" min={-1} max={1} law="linear" valueLink={Binder.bindToState(this,'preset', 'osc.osc2.detune')}/>
+                            <div className="subsection horitzontal">
+                                <Knob label="SHAPE" small={true} min={-1} max={1} law="linear" valueLink={Binder.bindToState(this,'preset', 'osc.osc2.shape')}/>
+                                <Knob label="DETUNE" small={true} min={-1} max={1} law="linear" valueLink={Binder.bindToState(this,'preset', 'osc.osc2.detune')}/>
+                            </div>
                         </div>
                     </div>
                     <Slider min={0} max={1} law="linear" valueLink={Binder.bindToState(this,'preset', 'osc.mix')}/>
