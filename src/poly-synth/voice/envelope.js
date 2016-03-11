@@ -8,7 +8,7 @@ class Envelope {
 
 
     setPreset(preset){
-        this.preset = preset
+        this.preset = preset;
     }
 
     trigger(){
