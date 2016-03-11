@@ -23,13 +23,14 @@
     "watch": "webpack-dev-server --hot --inline"
   },
   "dependencies": {
+    "deep-equal": "^1.0.1",
     "electron-prebuilt": "^0.36.0",
+    "octavian": "^2.2.0",
     "react": "^0.14.0",
-    "react-dom": "^0.14.0",
-    "react-tap-event-plugin": "^0.2.2",
     "react-addons-linked-state-mixin": "^0.14.7",
     "react-addons-test-utils": "^0.14.7",
     "react-binding": "^0.7.5",
-    "octavian": "^2.2.0"
+    "react-dom": "^0.14.0",
+    "react-tap-event-plugin": "^0.2.2"
   }
 }

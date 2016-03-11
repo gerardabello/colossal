@@ -1,4 +1,5 @@
 var Note = require('octavian').Note;
+var deepEqual = require('deep-equal')
 
 class Oscilator {
     constructor(ctx, dst) {
@@ -28,7 +29,14 @@ class Oscilator {
     }
 
     setPreset(p){
+
+        if(this.lastpreset != null){
+            if(deepEqual(this.lastpreset, p)){ return; }
+        }
+
+        this.lastpreset = this.preset;
         this.preset = p;
+
         let ctx = this.context;
 
         let now = ctx.currentTime;
