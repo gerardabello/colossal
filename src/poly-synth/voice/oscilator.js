@@ -72,13 +72,7 @@ class Oscilator {
         for(let x = 2; x < n; x+=2) {
             imag[x] = (4.0*ie) / (Math.PI*x);
         }
-        /*
 
-        for (var i = 1; i < n; i++) {
-            imag[i] = 1 / (i * Math.PI);
-            imag[i] = 1 / (i * Math.PI);
-        }
-        */
 
         let wave = this.context.createPeriodicWave(real, imag);
         this.osc.setPeriodicWave(wave);
