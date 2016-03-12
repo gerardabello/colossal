@@ -53,7 +53,7 @@ class Envelope {
         target.cancelScheduledValues(now);
         target.setValueAtTime(1e-10, now);
         target.linearRampToValueAtTime(1, now + p.a);
-        target.exponentialRampToValueAtTime(p.s, now + p.a + p.d);
+        target.exponentialRampToValueAtTime(p.s + 1e-4, now + p.a + p.d);
     }
 
     end(){

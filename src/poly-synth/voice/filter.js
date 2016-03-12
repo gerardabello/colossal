@@ -1,5 +1,8 @@
 var Note = require('octavian').Note;
 
+
+import Envelope from './envelope.js';
+
 class Filter {
     constructor(ctx, src, dst) {
         this.context = ctx;
@@ -9,6 +12,7 @@ class Filter {
     }
 
     trigger(signature){
+        this.env.trigger();
         //Key tracking with base 440Hz
         this.freqOffset = (new Note(signature)).frequency - 440;
         this.setPreset(this.preset);
@@ -24,10 +28,19 @@ class Filter {
         this.bqf = ctx.createBiquadFilter();
         src.connect(this.bqf);
         this.bqf.connect(dst);
+
+        this.envGain = ctx.createGain();
+
+        this.envGain.connect(this.bqf.frequency);
+
+        this.env = new Envelope(ctx, this.envGain);
     }
 
     setPreset(p){
         this.preset = p;
+
+        this.env.setPreset(p.env);
+        this.envGain.gain.value = p.envgain;
 
         this.bqf.type = p.type;
         this.bqf.frequency.value = p.freq + (this.freqOffset * p.key);

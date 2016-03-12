@@ -17,10 +17,10 @@ import Voice from './voice/voice.js';
 let initialPreset = {
     gain: 0.4,
     osc: {
-        mix: 0.5,
+        mix: 0.5205479452054795,
         osc1: {
             wave : {
-                shape: 0,
+                shape: 0.19799999999999995,
             },
             detune: 0,
             octave: 0,
@@ -29,21 +29,22 @@ let initialPreset = {
             wave : {
                 shape: -1,
             },
-            detune: 0,
+            detune: 0.006,
             octave: 0,
-        }
+        },
     },
     filters: {
         filt1: {
             type: 'lowpass',
-            freq: 1000,
-            q: 1,
+            freq: 629.8005165823422,
+            q: 9.733996000000001,
             gain: 1,
-            key: 0,
+            key: 1,
+            envgain: 10000,
             env: {
                 a: 0,
-                d: 0,
-                s: 1,
+                d: 1.1956050000000003,
+                s: 0.00001,
                 r: 0,
             },
         },
@@ -51,9 +52,9 @@ let initialPreset = {
     envelopes: {
         env1: {
             a: 0.012,
-            d: 0.4,
-            s: 0.9,
-            r: 1.0,
+            d: 2.1,
+            s: 0.000001,
+            r: 2.1,
         },
     },
 };
@@ -127,9 +128,9 @@ var PolySynth = React.createClass({
                     </div>
 
                     <div className="subsection horitzontal">
-                        <Knob label="ENV" small={true} min={-5} max={5} law="liner" valueLink={Binder.bindToState(this,'preset', 'filters.filt1.env.env')}/>
+                        <Knob label="ENV" small={true} min={-10000} max={10000} law="liner" valueLink={Binder.bindToState(this,'preset', 'filters.filt1.envgain')}/>
                         <Knob label="A" small={true} min={0} max={10} law="pow" valueLink={Binder.bindToState(this,'preset', 'filters.filt1.env.a')}/>
-                        <Knob label="D" small={true} min={0} max={5} law="pow" valueLink={Binder.bindToState(this,'preset', 'filters.filt1.env.d')}/>
+                        <Knob label="D" small={true} min={0} max={10} law="pow" valueLink={Binder.bindToState(this,'preset', 'filters.filt1.env.d')}/>
                         <Knob label="S" small={true} min={0} max={1} law="pow" valueLink={Binder.bindToState(this,'preset', 'filters.filt1.env.s')}/>
                         <Knob label="R" small={true} min={0} max={10} law="pow" valueLink={Binder.bindToState(this,'preset', 'filters.filt1.env.r')}/>
                     </div>
@@ -139,7 +140,7 @@ var PolySynth = React.createClass({
                     <h2>AMP ENVELOPE</h2>
                     <div className="subsection horitzontal">
                         <Knob label="ATTACK" min={0} max={10} law="pow" valueLink={Binder.bindToState(this,'preset', 'envelopes.env1.a')}/>
-                        <Knob label="DECAY" min={0} max={5} law="pow" valueLink={Binder.bindToState(this,'preset', 'envelopes.env1.d')}/>
+                        <Knob label="DECAY" min={0} max={10} law="pow" valueLink={Binder.bindToState(this,'preset', 'envelopes.env1.d')}/>
                         <Knob label="SUSTAIN" min={0} max={1} law="pow" valueLink={Binder.bindToState(this,'preset', 'envelopes.env1.s')}/>
                         <Knob label="RELEASE" min={0} max={10} law="pow" valueLink={Binder.bindToState(this,'preset', 'envelopes.env1.r')}/>
                     </div>
