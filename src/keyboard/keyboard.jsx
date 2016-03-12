@@ -20,7 +20,7 @@ let keynotemap = {
 
 var Keyboard = React.createClass({
     getInitialState: function() {
-        return {};
+        return {pressedKeys: []};
     },
     componentDidMount(){
         window.addEventListener('keydown', function(event) {
@@ -32,10 +32,18 @@ var Keyboard = React.createClass({
     },
     //HANDLERS
     noteOff(signature){
-        this.props.noteOff(signature);
+        let index = this.state.pressedKeys.indexOf(signature);
+        if (index > -1) {
+            this.props.noteOff(signature);
+            this.state.pressedKeys.splice(index, 1);
+        }
     },
     noteOn(signature){
-        this.props.noteOn(signature);
+        let index = this.state.pressedKeys.indexOf(signature);
+        if (index == -1) {
+            this.props.noteOn(signature);
+            this.state.pressedKeys.push(signature);
+        }
     },
     //RENDER
     render: function() {
