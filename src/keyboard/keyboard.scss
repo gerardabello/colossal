@@ -9,13 +9,24 @@ $black-height: 5px;
 
     background: rgb(51, 37, 28);
 
+    color: white;
+
     flex: 1;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+
     height: $white-lenght + 20px;
     overflow: hidden;
 
     border-top: black 4px solid;
+
+    > span{
+        text-align: center;
+        margin: 20px;
+    }
 
     .container{
         height: $white-lenght + $white-height + 2px;

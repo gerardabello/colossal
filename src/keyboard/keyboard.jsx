@@ -67,6 +67,7 @@ var Keyboard = React.createClass({
                 <div className="container">
                     {nkeys}
                 </div>
+                <span>Press keys A to J or use virtual keyboard</span>
             </div>
         );
     }
