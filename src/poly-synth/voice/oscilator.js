@@ -78,12 +78,15 @@ class Oscilator {
         this.osc.setPeriodicWave(wave);
     }
 
-    trigger(signature){
+    trigger(signature, glide){
         this.note = new Note(signature);
         let ctx = this.context;
-
         let now = ctx.currentTime;
-        this.osc.frequency.setValueAtTime(this.getFreq(this.note, this.preset.detune), now);
+        if(glide == null){
+            glide = now;
+        }
+        this.osc.frequency.setValueAtTime(this.osc.frequency.value, now);
+        this.osc.frequency.linearRampToValueAtTime(this.getFreq(this.note, this.preset.detune), now+glide);
     }
 
 

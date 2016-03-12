@@ -14,19 +14,36 @@ class Voice {
     }
 
     trigger(signature){
-        if(this.gate){return;}
-        this.env1.trigger();
-        
-        this.osc1.trigger(signature);
-        this.osc2.trigger(signature);
+        if(!this.gate){
+            this.baseSignature = signature; // We store the signature that opened the gate. In polyphony it's always the same but not in mono.
+            this.filt1.trigger(signature);
+            this.env1.trigger();
+            this.gate = true;
+        }
 
-        this.filt1.trigger(signature);
-        this.gate = true;
+        {
+            //GLIDE MODE
+            let glide = 0;
+            if(this.preset.mode == 'MONO'){
+                glide = this.preset.glide;
+            }
+            if(this.preset.glideMode=='legato'){
+                if(this.baseSignature == signature){
+                    glide = 0;
+                }
+            }
+            this.osc1.trigger(signature, glide);
+            this.osc2.trigger(signature, glide);
+        }
+
     }
 
-    end(){
-        this.env1.end();
-        this.gate=false;
+    end(signature){
+        //We only stop the gate if the signature that tries to stop is the one that started the gate. Only used for MONO
+        if(signature == this.baseSignature){
+            this.gate = false;
+            this.env1.end();
+        }
     }
 
     updatePreset(p){

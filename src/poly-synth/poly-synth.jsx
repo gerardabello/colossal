@@ -16,10 +16,12 @@ import Voice from './voice/voice.js';
 
 let initialPreset = {
     gain: 0.4,
+    mode: 'POLY',
+    glide: 0.5,
+    glideMode: 'legato',
     osc: {
         mix: 0.5205479452054795,
         osc1: {
-            mode: 'POLY',
             wave : {
                 shape: 0.19799999999999995,
             },
@@ -80,13 +82,21 @@ var PolySynth = React.createClass({
     },
     //HANDLERS
     startVoice(signature){
+        let voice = signature;
+        if(this.state.preset.mode == 'MONO'){
+            voice = 'C2';
+        }
         if(this.voices[signature]){
-            this.voices[signature].trigger(signature);
+            this.voices[voice].trigger(signature);
         }
     },
     stopVoice(signature){
+        let voice = signature;
+        if(this.state.preset.mode == 'MONO'){
+            voice = 'C2';
+        }
         if(this.voices[signature]){
-            this.voices[signature].end();
+            this.voices[voice].end(signature);
         }
     },
     componentWillUpdate(nextProps, nextState){
@@ -102,7 +112,7 @@ var PolySynth = React.createClass({
                     <div className="subsection vertical">
                         <div className="osc section">
                             <h2>OSC1</h2>
-                            <Selector values={['MONO','POLY']} valueLink={Binder.bindToState(this,'preset', 'osc.osc1.mode')}/>
+
                             <div className="subsection horitzontal">
                                 <Knob label="SHAPE" small={true} min={-1} max={1} law="linear" valueLink={Binder.bindToState(this,'preset', 'osc.osc1.wave.shape')}/>
                                 <Knob label="DETUNE" small={true} min={-1} max={1} law="linear" valueLink={Binder.bindToState(this,'preset', 'osc.osc1.detune')}/>
@@ -147,6 +157,13 @@ var PolySynth = React.createClass({
                         <Knob label="RELEASE" min={0} max={10} law="pow" valueLink={Binder.bindToState(this,'preset', 'envelopes.env1.r')}/>
                     </div>
                 </div>
+
+                <div className="glide section">
+                    <Selector values={['MONO','POLY']} valueLink={Binder.bindToState(this,'preset', 'mode')}/>
+                    <Selector values={['always','legato']} valueLink={Binder.bindToState(this,'preset', 'glideMode')}/>
+                    <Knob label="GLIDE" small={true} min={0} max={2} law="linear" valueLink={Binder.bindToState(this,'preset', 'glide')}/>
+                </div>
+
             </div>
         );
     }
