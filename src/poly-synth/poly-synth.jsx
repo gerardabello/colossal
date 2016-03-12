@@ -17,6 +17,7 @@ import Voice from './voice/voice.js';
 let initialPreset = {
     gain: 0.4,
     mode: 'POLY',
+    triggerMode: 'multiple',
     glide: 0.5,
     glideMode: 'legato',
     osc: {
@@ -160,6 +161,7 @@ var PolySynth = React.createClass({
 
                 <div className="glide section">
                     <Selector values={['MONO','POLY']} valueLink={Binder.bindToState(this,'preset', 'mode')}/>
+                    <Selector values={['multiple','single']} valueLink={Binder.bindToState(this,'preset', 'triggerMode')}/>
                     <Selector values={['always','legato']} valueLink={Binder.bindToState(this,'preset', 'glideMode')}/>
                     <Knob label="GLIDE" small={true} min={0} max={2} law="linear" valueLink={Binder.bindToState(this,'preset', 'glide')}/>
                 </div>

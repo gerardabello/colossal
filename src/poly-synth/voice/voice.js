@@ -16,6 +16,8 @@ class Voice {
     trigger(signature){
         if(!this.gate){
             this.baseSignature = signature; // We store the signature that opened the gate. In polyphony it's always the same but not in mono.
+        }
+        if(!this.gate || this.preset.triggerMode == 'multiple'){
             this.filt1.trigger(signature);
             this.env1.trigger();
             this.gate = true;
