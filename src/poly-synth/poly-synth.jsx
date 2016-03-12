@@ -127,6 +127,7 @@ var PolySynth = React.createClass({
                     </div>
 
                     <div className="subsection horitzontal">
+                        <Knob label="ENV" small={true} min={-5} max={5} law="liner" valueLink={Binder.bindToState(this,'preset', 'filters.filt1.env.env')}/>
                         <Knob label="A" small={true} min={0} max={10} law="pow" valueLink={Binder.bindToState(this,'preset', 'filters.filt1.env.a')}/>
                         <Knob label="D" small={true} min={0} max={5} law="pow" valueLink={Binder.bindToState(this,'preset', 'filters.filt1.env.d')}/>
                         <Knob label="S" small={true} min={0} max={1} law="pow" valueLink={Binder.bindToState(this,'preset', 'filters.filt1.env.s')}/>
