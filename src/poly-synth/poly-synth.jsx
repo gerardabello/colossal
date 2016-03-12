@@ -126,7 +126,7 @@ var PolySynth = React.createClass({
                             </div>
                         </div>
                     </div>
-                    <Slider min={0} max={1} law="linear" valueLink={Binder.bindToState(this,'preset', 'osc.mix')}/>
+                    <Slider label="½" min={0} max={1} law="linear" valueLink={Binder.bindToState(this,'preset', 'osc.mix')}/>
                 </div>
                 <div className=" filt1 section">
 
@@ -151,10 +151,10 @@ var PolySynth = React.createClass({
                 <div className="env section">
                     <h2>AMP ENVELOPE</h2>
                     <div className="subsection horitzontal">
-                        <Knob label="ATTACK" min={0} max={10} law="pow" valueLink={Binder.bindToState(this,'preset', 'envelopes.env1.a')}/>
-                        <Knob label="DECAY" min={0} max={10} law="pow" valueLink={Binder.bindToState(this,'preset', 'envelopes.env1.d')}/>
-                        <Knob label="SUSTAIN" min={0} max={1} law="pow" valueLink={Binder.bindToState(this,'preset', 'envelopes.env1.s')}/>
-                        <Knob label="RELEASE" min={0} max={10} law="pow" valueLink={Binder.bindToState(this,'preset', 'envelopes.env1.r')}/>
+                        <Slider label="A" min={0} max={10} law="pow" valueLink={Binder.bindToState(this,'preset', 'envelopes.env1.a')}/>
+                        <Slider label="D" min={0} max={10} law="pow" valueLink={Binder.bindToState(this,'preset', 'envelopes.env1.d')}/>
+                        <Slider label="S" min={0} max={1} law="pow" valueLink={Binder.bindToState(this,'preset', 'envelopes.env1.s')}/>
+                        <Slider label="R" min={0} max={10} law="pow" valueLink={Binder.bindToState(this,'preset', 'envelopes.env1.r')}/>
                     </div>
                 </div>
 

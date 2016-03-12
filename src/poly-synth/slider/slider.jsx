@@ -92,6 +92,7 @@ var Slider = React.createClass({
                 transform: 'translateY(' + (1-this.state.value)*(this.state.height-this.state.knobheight) + 'px)'
             }}
             >
+            {this.props.label}
             </div>
 
             </div>
