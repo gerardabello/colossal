@@ -114,15 +114,15 @@ var PolySynth = React.createClass({
                             <h2>OSC1</h2>
 
                             <div className="subsection horitzontal">
-                                <Knob label="SHAPE" small={true} min={-1} max={1} law="linear" valueLink={Binder.bindToState(this,'preset', 'osc.osc1.wave.shape')}/>
-                                <Knob label="DETUNE" small={true} min={-1} max={1} law="linear" valueLink={Binder.bindToState(this,'preset', 'osc.osc1.detune')}/>
+                                <Knob label="SHAPE" min={-1} max={1} law="linear" valueLink={Binder.bindToState(this,'preset', 'osc.osc1.wave.shape')}/>
+                                <Knob label="DETUNE" min={-1} max={1} law="linear" valueLink={Binder.bindToState(this,'preset', 'osc.osc1.detune')}/>
                             </div>
                         </div>
                         <div className="osc section">
                             <h2>OSC2</h2>
                             <div className="subsection horitzontal">
-                                <Knob label="SHAPE" small={true} min={-1} max={1} law="linear" valueLink={Binder.bindToState(this,'preset', 'osc.osc2.wave.shape')}/>
-                                <Knob label="DETUNE" small={true} min={-1} max={1} law="linear" valueLink={Binder.bindToState(this,'preset', 'osc.osc2.detune')}/>
+                                <Knob label="SHAPE" min={-1} max={1} law="linear" valueLink={Binder.bindToState(this,'preset', 'osc.osc2.wave.shape')}/>
+                                <Knob label="DETUNE" min={-1} max={1} law="linear" valueLink={Binder.bindToState(this,'preset', 'osc.osc2.detune')}/>
                             </div>
                         </div>
                     </div>
