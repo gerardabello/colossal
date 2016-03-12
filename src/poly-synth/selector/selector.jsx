@@ -29,6 +29,15 @@ var Selector = React.createClass({
         });
     },
 
+
+    onToggle(){
+        //This only works if we have 2 values
+        if(this.props.values.length > 2){
+            return;
+        }
+        this.onNext();
+    },
+
     onNext(){
         let ci = this.props.values.indexOf(this.state.value);
         let i = ci + 1;
@@ -52,19 +61,24 @@ var Selector = React.createClass({
     },
 
     render() {
+
+        let arrowl = [];
+        let arrowr = [];
+
+        if(this.props.values.length > 2){
+            arrowl = (<div className="left arrow" onClick={this.onPrevious}>{'<'}</div>);
+            arrowr = (<div className="right arrow" onClick={this.onNext}>{'>'}</div>);
+        }
+
         return (
-            <div className="selector" >
-                <div className="left arrow" onClick={this.onPrevious}>
-                {'<'}
-                </div>
+            <div className="selector" onClick={this.onToggle}>
+                {arrowl}
 
                 <div className="text">
                 {this.state.value}
                 </div>
 
-                <div className="right arrow" onClick={this.onNext}>
-                {'>'}
-                </div>
+                {arrowr}
 
             </div>
         );

@@ -19,6 +19,7 @@ let initialPreset = {
     osc: {
         mix: 0.5205479452054795,
         osc1: {
+            mode: 'POLY',
             wave : {
                 shape: 0.19799999999999995,
             },
@@ -101,6 +102,7 @@ var PolySynth = React.createClass({
                     <div className="subsection vertical">
                         <div className="osc section">
                             <h2>OSC1</h2>
+                            <Selector values={['MONO','POLY']} valueLink={Binder.bindToState(this,'preset', 'osc.osc1.mode')}/>
                             <div className="subsection horitzontal">
                                 <Knob label="SHAPE" small={true} min={-1} max={1} law="linear" valueLink={Binder.bindToState(this,'preset', 'osc.osc1.wave.shape')}/>
                                 <Knob label="DETUNE" small={true} min={-1} max={1} law="linear" valueLink={Binder.bindToState(this,'preset', 'osc.osc1.detune')}/>
