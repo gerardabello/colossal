@@ -15,9 +15,25 @@ html, body {
 }
 
 
-#instrument-stack{
+#instrument-panel{
+    background: #20394b;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: #20394b;
+    #instrument-stack{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 1024px;
+
+        border-left: 7px solid #5F4D42;
+        border-right: 7px solid #5F4D42;
+        box-shadow: black 0 0 30px;
+
+        > div {
+            $m: 2px;
+            margin: $m;
+            box-shadow: #131313 0 $m,#424242 0 (-$m);
+        }
+    }
 }

@@ -38,10 +38,12 @@ var App = React.createClass({
     render: function() {
         return (
 			<div id="stack">
-			<div id="instrument-stack">
-			<PolySynth ctx={this.state.ctx} dstNode={this.state.dstNode} ref={(ref) => this.synth = ref}/>
-			<Oscilloscope ctx={this.state.ctx} node={this.state.dstNode}/>
-			</div>
+            <div id="instrument-panel">
+                <div id="instrument-stack">
+                    <PolySynth ctx={this.state.ctx} dstNode={this.state.dstNode} ref={(ref) => this.synth = ref}/>
+                    <Oscilloscope ctx={this.state.ctx} node={this.state.dstNode}/>
+                </div>
+            </div>
 			<Keyboard style={styles.keyboard} noteOn={this.noteOn} noteOff={this.noteOff} />
 			</div>
 		);
