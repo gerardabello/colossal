@@ -32,47 +32,52 @@ $black-height: 5px;
         font-size: 9px;
         font-family: sans-serif;
         color: rgba(0, 0, 0, 0);
-    }
-
-    .key.white:hover{
-        color: rgba(0, 0, 0, 0.5);
-    }
-
-    .key.black:hover{
-        color: rgba(255, 255, 255, 0.5);
-    }
 
 
-    .white.key:active {
-        background-color: #e0e0e0;
-        height: $white-lenght + $white-height;
-        box-shadow: #D6D6D6 0px 0px 0px;
+
+        &.white:hover{
+            color: rgba(0, 0, 0, 0.5);
+        }
+
+        &.black:hover{
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+
+        &.white.pressed {
+            background-color: #e0e0e0;
+            height: $white-lenght + $white-height;
+            box-shadow: #D6D6D6 0px 0px 0px;
+        }
+
+        &.black.pressed {
+            background-color: #1d1d1d;
+            height: $black-lenght + $black-height;
+            box-shadow: #464646 0px 0px 0px;
+        }
+
+        &.white {
+            background-color: #f6f6f6;
+            border: #DEDEDE 1px solid;
+            height: $white-lenght;
+            box-shadow: #CCCCCC 0px $white-height 0px;
+            flex: 1;
+        }
+
+        &.black {
+            display: inline-block;
+            background-color: #212121;
+            border: #464646 1px solid;
+            box-shadow: #1B1B1B 0px $black-height 0px, rgba(0, 0, 0, 0.7) 0 4px 20px -2px;
+            position: relative;
+            width: $black-width;
+            margin-right: -($black-width + 3px);
+            left: -($black-width / 2);
+            height: $black-lenght;
+            top: 0px;
+        }
+
     }
 
-    .black.key:active {
-        background-color: #1d1d1d;
-        height: $black-lenght + $black-height;
-        box-shadow: #464646 0px 0px 0px;
-    }
 
-    .white.key {
-        background-color: #f6f6f6;
-        border: #DEDEDE 1px solid;
-        height: $white-lenght;
-        box-shadow: #CCCCCC 0px $white-height 0px;
-        flex: 1;
-    }
-
-    .black.key {
-        display: inline-block;
-        background-color: #212121;
-        border: #464646 1px solid;
-        box-shadow: #1B1B1B 0px $black-height 0px, rgba(0, 0, 0, 0.7) 0 4px 20px -2px;
-        position: relative;
-        width: $black-width;
-        margin-right: -($black-width + 3px);
-        left: -($black-width / 2);
-        height: $black-lenght;
-        top: 0px;
-    }
 }
