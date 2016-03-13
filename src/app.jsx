@@ -1,6 +1,6 @@
 var React = require('react');
 
-import PolySynth from './poly-synth/poly-synth.jsx';
+import Colossal from './colossal/colossal.jsx';
 import Keyboard from './keyboard/keyboard.jsx';
 import Oscilloscope from './oscilloscope/oscilloscope.jsx';
 
@@ -40,7 +40,7 @@ var App = React.createClass({
 			<div id="stack">
             <div id="instrument-panel">
                 <div id="instrument-stack">
-                    <PolySynth ctx={this.state.ctx} dstNode={this.state.dstNode} ref={(ref) => this.synth = ref}/>
+                    <Colossal ctx={this.state.ctx} dstNode={this.state.dstNode} ref={(ref) => this.synth = ref}/>
                     <Oscilloscope ctx={this.state.ctx} node={this.state.dstNode}/>
                 </div>
             </div>

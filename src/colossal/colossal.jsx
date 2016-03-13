@@ -9,7 +9,8 @@ import Binder from 'react-binding';
 import Knob from './knob/knob.jsx';
 import Selector from './selector/selector.jsx';
 import Slider from './slider/slider.jsx';
-import './poly-synth.scss';
+
+import './colossal.scss';
 
 import Voice from './voice/voice.js';
 
@@ -63,7 +64,7 @@ let initialPreset = {
     },
 };
 
-var PolySynth = React.createClass({
+var Colossal = React.createClass({
     getInitialState: function() {
         return {preset: initialPreset};
     },
@@ -111,7 +112,7 @@ var PolySynth = React.createClass({
     //RENDER
     render: function() {
         return (
-            <div className="poly-synth">
+            <div className="colossal">
                 <div className="oscillators">
                     <div className="subsection vertical">
                         <div className="osc section">
@@ -183,4 +184,4 @@ var PolySynth = React.createClass({
     }
 });
 
-export default PolySynth;
+export default Colossal;
