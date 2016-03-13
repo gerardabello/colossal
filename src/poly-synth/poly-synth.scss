@@ -53,9 +53,18 @@ $color: #CACACA;
     .glide{
         //self positioning
         position: absolute;
-        left: 800px;
-        width: 222px;
-        height: 150px;
+        left: 751px;
+        width: 150px;
+        top: 42px;
+        height: 160px;
+    }
+
+    .mode{
+        //self positioning
+        position: absolute;
+        left: 751px;
+        width: 150px;
+        height: 40px;
     }
 
     .section{
@@ -68,6 +77,11 @@ $color: #CACACA;
             font-size: 26px;
             margin: 0;
             color: rgba(255, 255, 255, 0.11);
+        }
+
+        &.disabled{
+            pointer-events:none;
+            opacity: 0.3;
         }
     }
 

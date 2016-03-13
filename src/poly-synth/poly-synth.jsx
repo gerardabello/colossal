@@ -159,8 +159,10 @@ var PolySynth = React.createClass({
                     </div>
                 </div>
 
-                <div className="glide section">
+                <div className="mode section">
                     <Selector values={['MONO','POLY']} valueLink={Binder.bindToState(this,'preset', 'mode')}/>
+                </div>
+                <div className={'glide section ' + (this.state.preset.mode == 'MONO' ? '' : 'disabled')}>
                     <Selector values={['multiple','single']} valueLink={Binder.bindToState(this,'preset', 'triggerMode')}/>
                     <Selector values={['always','legato']} valueLink={Binder.bindToState(this,'preset', 'glideMode')}/>
                     <Knob label="GLIDE" small={true} min={0} max={2} law="linear" valueLink={Binder.bindToState(this,'preset', 'glide')}/>
