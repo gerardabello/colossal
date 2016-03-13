@@ -68,13 +68,16 @@ var PolySynth = React.createClass({
         return {preset: initialPreset};
     },
     componentDidMount: function() {
-        this.voices = {};
 
+        this.outGain = this.props.ctx.createGain();
+        this.outGain.connect(this.props.dstNode);
+
+        this.voices = {};
         let octaves = 4;
         var note = new Note('C2');
 
         for (var i=0; i < octaves*12; i++) {
-            let v = new Voice(this.props.ctx, this.props.dstNode, this.state.preset);
+            let v = new Voice(this.props.ctx, this.outGain, this.state.preset);
             v.updatePreset(this.state.preset);
             this.voices[note.signature] = v;
             note = note.minorSecond();
