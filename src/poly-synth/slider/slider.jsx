@@ -54,6 +54,10 @@ var Slider = React.createClass({
 
 
     onMouseDown(e){
+        if(e.button==2){
+            this.setState({value: this.props.min});
+            return;
+        }
         this.setState({dragPoint: [e.screenX, e.screenY], dragging: true, dragStartValue: this.state.value});
     },
 

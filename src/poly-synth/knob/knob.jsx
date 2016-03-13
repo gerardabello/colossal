@@ -52,6 +52,17 @@ var Knob = React.createClass({
     },
 
     onMouseDown(e){
+        if(e.button==2){
+            let def = 0;
+            if(def < this.props.min || def > this.props.max){
+                def = this.props.min;
+            }
+            if(this.props.defaultValue != null){
+                def = this.props.defaultValue;
+            }
+            this.setState({value: this.reverseLaw(def)});
+            return;
+        }
         this.setState({dragPoint: [e.screenX, e.screenY], dragging: true, dragStartValue: this.state.value});
     },
 
