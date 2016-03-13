@@ -54,7 +54,7 @@ $color: #CACACA;
         //self positioning
         position: absolute;
         left: 751px;
-        width: 150px;
+        width: 100px;
         top: 42px;
         height: 160px;
     }
@@ -63,12 +63,31 @@ $color: #CACACA;
         //self positioning
         position: absolute;
         left: 751px;
-        width: 150px;
+        width: 100px;
         height: 40px;
     }
 
+    .out{
+        position: absolute;
+        left: 852px;
+        top: 80px;
+        width: 120px;
+        height: 120px;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+
+    .level{
+        position: absolute;
+        left: 972px;
+        top: 80px;
+        width: 30px;
+        height: 120px;
+    }
+
     .section{
-        border: black 1px dotted;
+        border: rgba(0, 0, 0, 0) 1px solid;
         display: flex;
         flex-direction: column;
 
@@ -89,6 +108,10 @@ $color: #CACACA;
         flex: 1;
         display: flex;
         justify-content: space-around;
+
+        &.center{
+            align-items: center;
+        }
 
         &.horitzontal{
 

@@ -9,6 +9,12 @@ $smallSize: 22px;
         height: $smallSize;
     }
 
+    &.big{
+        width: 65px;
+        height: 65px;
+        margin: 20px;
+    }
+
     font-size: 10px;
     position: relative;
     background-color: grey;

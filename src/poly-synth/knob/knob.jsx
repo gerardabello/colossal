@@ -91,7 +91,7 @@ var Knob = React.createClass({
 
         return (
 
-            <div className={'knob-surround ' + (this.props.small ? 'small' : '')} onMouseDown={this.onMouseDown} >
+            <div className={'knob-surround ' + this.props.size} onMouseDown={this.onMouseDown} >
             <div
             className="knob"
             style={{

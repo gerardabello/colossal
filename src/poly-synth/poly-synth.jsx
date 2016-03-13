@@ -133,19 +133,19 @@ var PolySynth = React.createClass({
 
                     <Selector values={['lowpass','highpass','bandpass','lowshelf','highshelf','peaking','notch','allpass']} valueLink={Binder.bindToState(this,'preset', 'filters.filt1.type')}/>
 
-                    <div className="subsection horitzontal">
+                    <div className="subsection horitzontal center">
                         <Knob label="FREQ" min={20} max={22050} law="log" valueLink={Binder.bindToState(this,'preset', 'filters.filt1.freq')}/>
                         <Knob label="Q" min={1} max={20} law="pow" valueLink={Binder.bindToState(this,'preset', 'filters.filt1.q')}/>
                         <Knob label="GAIN" min={-20} max={20} law="pow" valueLink={Binder.bindToState(this,'preset', 'filters.filt1.gain')}/>
                         <Knob label="KEY" min={0} max={1} law="linear" valueLink={Binder.bindToState(this,'preset', 'filters.filt1.key')}/>
                     </div>
 
-                    <div className="subsection horitzontal">
-                        <Knob label="ENV" small={true} min={-10000} max={10000} law="liner" valueLink={Binder.bindToState(this,'preset', 'filters.filt1.envgain')}/>
-                        <Knob label="A" small={true} min={0} max={10} law="pow" valueLink={Binder.bindToState(this,'preset', 'filters.filt1.env.a')}/>
-                        <Knob label="D" small={true} min={0} max={10} law="pow" valueLink={Binder.bindToState(this,'preset', 'filters.filt1.env.d')}/>
-                        <Knob label="S" small={true} min={0} max={1} law="pow" valueLink={Binder.bindToState(this,'preset', 'filters.filt1.env.s')}/>
-                        <Knob label="R" small={true} min={0} max={10} law="pow" valueLink={Binder.bindToState(this,'preset', 'filters.filt1.env.r')}/>
+                    <div className="subsection horitzontal center">
+                        <Knob label="ENV" size="small" min={-10000} max={10000} law="liner" valueLink={Binder.bindToState(this,'preset', 'filters.filt1.envgain')}/>
+                        <Knob label="A" size="small" min={0} max={10} law="pow" valueLink={Binder.bindToState(this,'preset', 'filters.filt1.env.a')}/>
+                        <Knob label="D" size="small" min={0} max={10} law="pow" valueLink={Binder.bindToState(this,'preset', 'filters.filt1.env.d')}/>
+                        <Knob label="S" size="small" min={0} max={1} law="pow" valueLink={Binder.bindToState(this,'preset', 'filters.filt1.env.s')}/>
+                        <Knob label="R" size="small" min={0} max={10} law="pow" valueLink={Binder.bindToState(this,'preset', 'filters.filt1.env.r')}/>
                     </div>
                 </div>
 
@@ -165,7 +165,14 @@ var PolySynth = React.createClass({
                 <div className={'glide section ' + (this.state.preset.mode == 'MONO' ? '' : 'disabled')}>
                     <Selector values={['multiple','single']} valueLink={Binder.bindToState(this,'preset', 'triggerMode')}/>
                     <Selector values={['always','legato']} valueLink={Binder.bindToState(this,'preset', 'glideMode')}/>
-                    <Knob label="GLIDE" small={true} min={0} max={2} law="linear" valueLink={Binder.bindToState(this,'preset', 'glide')}/>
+                    <Knob label="GLIDE" min={0} max={2} law="linear" valueLink={Binder.bindToState(this,'preset', 'glide')}/>
+                </div>
+
+                <div className="out section">
+                    <Knob label="GAIN" size="big" min={0} max={2} law="pow" valueLink={Binder.bindToState(this,'preset', 'gain')}/>
+                </div>
+
+                <div className="level section">
                 </div>
 
             </div>
