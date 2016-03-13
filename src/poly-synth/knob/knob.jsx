@@ -60,7 +60,7 @@ var Knob = React.createClass({
             if(this.props.defaultValue != null){
                 def = this.props.defaultValue;
             }
-            this.setState({value: this.reverseLaw(def)});
+            this.handleChange(this.reverseLaw(def));
             return;
         }
         this.setState({dragPoint: [e.screenX, e.screenY], dragging: true, dragStartValue: this.state.value});

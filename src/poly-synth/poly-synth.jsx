@@ -137,7 +137,7 @@ var PolySynth = React.createClass({
                     <Selector values={['lowpass','highpass','bandpass','lowshelf','highshelf','peaking','notch','allpass']} valueLink={Binder.bindToState(this,'preset', 'filters.filt1.type')}/>
 
                     <div className="subsection horitzontal center">
-                        <Knob label="FREQ" min={20} max={22050} law="log" valueLink={Binder.bindToState(this,'preset', 'filters.filt1.freq')}/>
+                        <Knob label="FREQ" min={20} max={22050} defaultValue={22050} law="log" valueLink={Binder.bindToState(this,'preset', 'filters.filt1.freq')}/>
                         <Knob label="Q" min={1} max={20} law="pow" valueLink={Binder.bindToState(this,'preset', 'filters.filt1.q')}/>
                         <Knob label="GAIN" min={-20} max={20} law="pow" valueLink={Binder.bindToState(this,'preset', 'filters.filt1.gain')}/>
                         <Knob label="KEY" min={0} max={1} law="linear" valueLink={Binder.bindToState(this,'preset', 'filters.filt1.key')}/>
@@ -157,7 +157,7 @@ var PolySynth = React.createClass({
                     <div className="subsection horitzontal">
                         <Slider label="A" min={0} max={10} law="pow" valueLink={Binder.bindToState(this,'preset', 'envelopes.env1.a')}/>
                         <Slider label="D" min={0} max={10} law="pow" valueLink={Binder.bindToState(this,'preset', 'envelopes.env1.d')}/>
-                        <Slider label="S" min={0} max={1} law="pow" valueLink={Binder.bindToState(this,'preset', 'envelopes.env1.s')}/>
+                        <Slider label="S" min={0} max={1} law="pow" defaultValue={1} valueLink={Binder.bindToState(this,'preset', 'envelopes.env1.s')}/>
                         <Slider label="R" min={0} max={10} law="pow" valueLink={Binder.bindToState(this,'preset', 'envelopes.env1.r')}/>
                     </div>
                 </div>
@@ -172,7 +172,7 @@ var PolySynth = React.createClass({
                 </div>
 
                 <div className="out section">
-                    <Knob label="GAIN" size="big" min={0} max={2} law="pow" valueLink={Binder.bindToState(this,'preset', 'gain')}/>
+                    <Knob label="GAIN" defaultValue={0.4} size="big" min={0} max={2} law="pow" valueLink={Binder.bindToState(this,'preset', 'gain')}/>
                 </div>
 
                 <div className="level section">
