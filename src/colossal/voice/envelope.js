@@ -5,29 +5,32 @@ class Envelope {
         this.context = ctx;
         this.target = target;
 
-        var channels = 2;
-        // Create an empty two second stereo buffer at the
-        // sample rate of the AudioContext
-        var frameCount = ctx.sampleRate*2;
 
-        var myArrayBuffer = ctx.createBuffer(channels, frameCount, ctx.sampleRate);
+        //Create a costant source of value 1.0
+        {
+            var channels = 2;
+            // Create an empty two second stereo buffer at the
+            // sample rate of the AudioContext
+            var frameCount = ctx.sampleRate*2;
 
-        for (var channel = 0; channel < channels; channel++) {
-            // This gives us the actual ArrayBuffer that contains the data
-            var nowBuffering = myArrayBuffer.getChannelData(channel);
-            for (var i = 0; i < frameCount; i++) {
-                // Math.random() is in [0; 1.0]
-                // audio needs to be in [-1.0; 1.0]
-                nowBuffering[i] = 1.0;
+            var myArrayBuffer = ctx.createBuffer(channels, frameCount, ctx.sampleRate);
+
+            for (var channel = 0; channel < channels; channel++) {
+                // This gives us the actual ArrayBuffer that contains the data
+                var nowBuffering = myArrayBuffer.getChannelData(channel);
+                for (var i = 0; i < frameCount; i++) {
+                    // audio needs to be in [-1.0; 1.0]
+                    nowBuffering[i] = 1.0;
+                }
             }
+
+            this.source = ctx.createBufferSource();
+            // set the buffer in the AudioBufferSourceNode
+            this.source.buffer = myArrayBuffer;
+
+            this.source.loop = true;
+            this.source.start();
         }
-
-        this.source = ctx.createBufferSource();
-        // set the buffer in the AudioBufferSourceNode
-        this.source.buffer = myArrayBuffer;
-
-        this.source.loop = true;
-        this.source.start();
 
 
         this.gain = ctx.createGain();

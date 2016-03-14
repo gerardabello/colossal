@@ -2,6 +2,7 @@
 import Oscilator from './oscilator.js';
 import Envelope from './envelope.js';
 import Filter from './filter.js';
+import DualMixer from '../dual-mixer/dual-mixer.js';
 
 class Voice {
     constructor(ctx, dst) {
@@ -59,9 +60,9 @@ class Voice {
         this.envGain.gain.value = 0;
 
         this.osc1Mix = ctx.createGain();
-        this.osc1Mix.connect(this.envGain);
         this.osc2Mix = ctx.createGain();
-        this.osc2Mix.connect(this.envGain);
+
+        this.mixer = new DualMixer(ctx, this.osc1Mix,this.osc2Mix,this.envGain);
 
         this.osc1 = new Oscilator(ctx,this.osc1Mix);
         this.osc2 = new Oscilator(ctx,this.osc2Mix);
@@ -78,13 +79,14 @@ class Voice {
 
     setPreset(p){
         this.preset = p;
+        let ctx = this.context;
+        let now = ctx.currentTime;
 
         //osc
         this.osc1.setPreset(p.osc.osc1);
         this.osc2.setPreset(p.osc.osc2);
 
-        this.osc1Mix.gain.value = p.osc.mix;
-        this.osc2Mix.gain.value = 1-p.osc.mix;
+        this.mixer.exponentialRampToValueAtTime(p.osc.mix, now + 0.0012);
 
         this.filt1.setPreset(p.filters.filt1);
         this.env1.setPreset(p.envelopes.env1);
