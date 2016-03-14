@@ -14,59 +14,13 @@ import './colossal.scss';
 
 import Voice from './voice/voice.js';
 
+import Presets from './presets/presets.js';
 
-let initialPreset = {
-    gain: 0.4,
-    mode: 'POLY',
-    triggerMode: 'multiple',
-    glide: 0.5,
-    glideMode: 'legato',
-    osc: {
-        mix: 0.5205479452054795,
-        osc1: {
-            wave : {
-                shape: 0.19799999999999995,
-            },
-            detune: 0,
-            octave: 0,
-        },
-        osc2: {
-            wave : {
-                shape: -1,
-            },
-            detune: 0.006,
-            octave: 0,
-        },
-    },
-    filters: {
-        filt1: {
-            type: 'lowpass',
-            freq: 629.8005165823422,
-            q: 9.733996000000001,
-            gain: 1,
-            key: 1,
-            envgain: 10000,
-            env: {
-                a: 0,
-                d: 1.1956050000000003,
-                s: 0.00001,
-                r: 0,
-            },
-        },
-    },
-    envelopes: {
-        env1: {
-            a: 0.012,
-            d: 2.1,
-            s: 0.000001,
-            r: 2.1,
-        },
-    },
-};
+
 
 var Colossal = React.createClass({
     getInitialState: function() {
-        return {preset: initialPreset};
+        return {preset: Presets[0]};
     },
     componentDidMount: function() {
 
