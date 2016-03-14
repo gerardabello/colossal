@@ -20,7 +20,7 @@ import Presets from './presets/presets.js';
 
 var Colossal = React.createClass({
     getInitialState: function() {
-        return {preset: Presets[0]};
+        return {presetname: 'default', preset: Presets['default']};
     },
     componentDidMount: function() {
 
@@ -37,9 +37,12 @@ var Colossal = React.createClass({
             this.voices[note.signature] = v;
             note = note.minorSecond();
         }
-
     },
     //HANDLERS
+    onChangePreset(name){
+        let p = Object.assign(Presets[name], p); //We make a copy
+        this.setState({presetname: name, preset: p});
+    },
     startVoice(signature){
         let voice = signature;
         if(this.state.preset.mode == 'MONO'){
@@ -85,7 +88,7 @@ var Colossal = React.createClass({
                             </div>
                         </div>
                     </div>
-                    <Slider label="½" min={0} max={1} law="linear" valueLink={Binder.bindToState(this,'preset', 'osc.mix')}/>
+                    <Slider label="½" min={1e-14} max={1} law="linear" valueLink={Binder.bindToState(this,'preset', 'osc.mix')}/>
                 </div>
                 <div className=" filt1 section">
 
@@ -126,9 +129,15 @@ var Colossal = React.createClass({
                     <Knob label="GLIDE" min={0} max={2} law="linear" valueLink={Binder.bindToState(this,'preset', 'glide')}/>
                 </div>
 
+                <div className="preset section">
+                    <h2>PRESETS</h2>
+                    <Selector values={Object.keys(Presets)} value={this.state.presetname} onChange={this.onChangePreset}/>
+                </div>
+
                 <div className="out section">
                     <Knob label="GAIN" defaultValue={0.4} size="big" min={0} max={2} law="pow" valueLink={Binder.bindToState(this,'preset', 'gain')}/>
                 </div>
+
 
                 <div className="level section">
                 </div>

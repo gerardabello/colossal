@@ -14,8 +14,6 @@ $color: #CACACA;
     font-family: sans-serif;
     position: relative;
 
-
-
     .oscillators{
         //self positioning
         position: absolute;
@@ -67,6 +65,14 @@ $color: #CACACA;
         height: 40px;
     }
 
+    .preset{
+        //self positioning
+        position: absolute;
+        left: 851px;
+        width: 171px;
+        height: 80px;
+    }
+
     .out{
         position: absolute;
         left: 852px;
@@ -82,7 +88,7 @@ $color: #CACACA;
         position: absolute;
         left: 972px;
         top: 80px;
-        width: 30px;
+        width: 50px;
         height: 120px;
     }
 

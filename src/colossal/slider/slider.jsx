@@ -31,8 +31,8 @@ var Slider = React.createClass({
         };
     },
 
-    shouldComponentUpdate(nextProps, nextState) {
-        return this.reverseLaw(nextState.value) !== this.state.value;
+    componentWillReceiveProps(nextProps){
+        this.setState({value: this.reverseLaw(this.getValueLink(nextProps).value)});
     },
 
     handleChange(value) {
