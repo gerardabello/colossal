@@ -88,7 +88,7 @@ var Colossal = React.createClass({
                             </div>
                         </div>
                     </div>
-                    <Slider label="½" min={1e-14} max={1} law="linear" valueLink={Binder.bindToState(this,'preset', 'osc.mix')}/>
+                    <Slider label="½" min={0} max={1} law="linear" valueLink={Binder.bindToState(this,'preset', 'osc.mix')}/>
                 </div>
                 <div className=" filt1 section">
 

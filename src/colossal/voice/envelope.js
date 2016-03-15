@@ -1,3 +1,4 @@
+import globals from '../globals.js'
 
 class Envelope {
     //As the envelopes cannot change during a voice execution, we set it at constructor time
@@ -54,9 +55,9 @@ class Envelope {
         let target = this.gain.gain;
         //env1
         target.cancelScheduledValues(now);
-        target.setValueAtTime(1e-10, now);
+        target.setValueAtTime(0, now);
         target.linearRampToValueAtTime(1, now + p.a);
-        target.exponentialRampToValueAtTime(p.s + 1e-4, now + p.a + p.d);
+        target.exponentialRampToValueAtTime(p.s + globals.EXPZERO, now + p.a + p.d);
     }
 
     end(){
@@ -65,8 +66,8 @@ class Envelope {
         let target = this.gain.gain;
         target.cancelScheduledValues(now);
         target.setValueAtTime(target.value, now);
-        target.exponentialRampToValueAtTime(1e-4, now + p.r);
-        target.linearRampToValueAtTime(0, now + p.r + 0.0012); //this is to set the value to 0
+        target.exponentialRampToValueAtTime(globals.EXPZERO, now + p.r);
+        target.linearRampToValueAtTime(0, now + p.r + globals.TIMEZERO); //this is to set the value to 0
     }
 }
 

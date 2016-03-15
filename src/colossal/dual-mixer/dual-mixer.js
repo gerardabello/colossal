@@ -1,3 +1,4 @@
+import globals from '../globals.js'
 
 class DualMixer {
     constructor(ctx, src1, src2, dst) {
@@ -42,7 +43,7 @@ class DualMixer {
     }
 
     exponentialRampToValueAtTime(value, time){
-        this.gain.gain.exponentialRampToValueAtTime(value, time);
+        this.gain.gain.exponentialRampToValueAtTime(value + globals.EXPZERO, time);
     }
 
 
