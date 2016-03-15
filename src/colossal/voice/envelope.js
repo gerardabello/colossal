@@ -41,7 +41,25 @@ class Envelope {
 
         this.gain.connect(target);
 
+        createAnalizerToGetValue(this.gain);
+    }
 
+
+    createAnalizerToGetValue(src){
+        var analyser = this.context.createAnalyser();
+        analyser.fftSize = 32;
+
+
+        src.connect(analyser);
+        this.analyser = analyser;
+    }
+
+
+    getCurrentValue(){
+        var bufferLength = this.analyser.frequencyBinCount;
+        var dataArray = new Uint8Array(bufferLength);
+        this.analyser.getByteTimeDomainData(dataArray);
+        return dataArray[bufferLength-1];
     }
 
 
@@ -65,8 +83,14 @@ class Envelope {
         let now = this.context.currentTime;
         let target = this.gain.gain;
         target.cancelScheduledValues(now);
-        target.setValueAtTime(target.value, now);
-        target.exponentialRampToValueAtTime(globals.EXPZERO, now + p.r);
+        //Here we need the current value, as of now I have no way to obtain it, so we aprox:
+        //TODO make this better
+        let v = target.value;
+        if(v <= 0.01){
+            v = 1.0;
+        }
+        target.setValueAtTime(v, now);
+        target.linearRampToValueAtTime(globals.EXPZERO, now + p.r);
         target.linearRampToValueAtTime(0, now + p.r + globals.TIMEZERO); //this is to set the value to 0
     }
 }
