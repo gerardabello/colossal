@@ -50,7 +50,7 @@ var Presets = {
     },
     analogy: {
         name: 'Analogy',
-        gain: 0.4,
+        gain: 0.3,
         mode: 'POLY',
         triggerMode: 'multiple',
         glide: 0.5,
@@ -94,6 +94,55 @@ var Presets = {
                 d: 2.1,
                 s: 0.000001,
                 r: 2.1,
+            },
+        },
+    },
+    scape: {
+        name: 'Scape',
+        gain: 0.3,
+        mode: 'MONO',
+        triggerMode: 'multiple',
+        glide: 0.136,
+        glideMode: 'legato',
+        osc: {
+            mix: 0.69863,
+            osc1: {
+                wave : {
+                    shape: 0.19799999999999995,
+                },
+                detune: 0,
+                octave: 0,
+            },
+            osc2: {
+                wave : {
+                    shape: -1,
+                },
+                detune: -0.4,
+                octave: 0,
+            },
+        },
+        filters: {
+            filt1: {
+                type: 'lowpass',
+                freq: 3018,
+                q: 1.88,
+                gain: 1,
+                key: 1,
+                envgain: -2100,
+                env: {
+                    a: 0.262,
+                    d: 7.46,
+                    s: 0,
+                    r: 0,
+                },
+            },
+        },
+        envelopes: {
+            env1: {
+                a: 0.027,
+                d: 3.394,
+                s: 0.06,
+                r: 0.59,
             },
         },
     },
@@ -142,54 +191,6 @@ var Presets = {
                 d: 0.012,
                 s: 1,
                 r: 4,
-            },
-        },
-    },
-    glider: {
-        gain: 0.3,
-        mode: 'MONO',
-        triggerMode: 'single',
-        glide: 0.8,
-        glideMode: 'always',
-        osc: {
-            mix: 1,
-            osc1: {
-                wave : {
-                    shape: 0,
-                },
-                detune: 0,
-                octave: 0,
-            },
-            osc2: {
-                wave : {
-                    shape: -1,
-                },
-                detune: 0,
-                octave: 0,
-            },
-        },
-        filters: {
-            filt1: {
-                type: 'lowpass',
-                freq: 10000,
-                q: 1,
-                gain: 0,
-                key: 1,
-                envgain: 0,
-                env: {
-                    a: 0,
-                    d: 0,
-                    s: 0,
-                    r: 0,
-                },
-            },
-        },
-        envelopes: {
-            env1: {
-                a: 0.012,
-                d: 0.012,
-                s: 1,
-                r: 0.5,
             },
         },
     },
