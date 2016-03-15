@@ -41,14 +41,13 @@ class Envelope {
 
         this.gain.connect(target);
 
-        createAnalizerToGetValue(this.gain);
+        this.createAnalizerToGetValue(this.gain);
     }
 
 
     createAnalizerToGetValue(src){
         var analyser = this.context.createAnalyser();
         analyser.fftSize = 32;
-
 
         src.connect(analyser);
         this.analyser = analyser;
@@ -57,8 +56,8 @@ class Envelope {
 
     getCurrentValue(){
         var bufferLength = this.analyser.frequencyBinCount;
-        var dataArray = new Uint8Array(bufferLength);
-        this.analyser.getByteTimeDomainData(dataArray);
+        var dataArray = new Float32Array(bufferLength);
+        this.analyser.getFloatTimeDomainData(dataArray);
         return dataArray[bufferLength-1];
     }
 
@@ -72,8 +71,9 @@ class Envelope {
         let now = this.context.currentTime;
         let target = this.gain.gain;
         //env1
+        let v = this.getCurrentValue();
         target.cancelScheduledValues(now);
-        target.setValueAtTime(0, now);
+        target.setValueAtTime(v, now);
         target.linearRampToValueAtTime(1, now + p.a);
         target.exponentialRampToValueAtTime(p.s + globals.EXPZERO, now + p.a + p.d);
     }
@@ -82,13 +82,9 @@ class Envelope {
         let p = this.preset;
         let now = this.context.currentTime;
         let target = this.gain.gain;
+        let v = this.getCurrentValue();
         target.cancelScheduledValues(now);
         //Here we need the current value, as of now I have no way to obtain it, so we aprox:
-        //TODO make this better
-        let v = target.value;
-        if(v <= 0.01){
-            v = 1.0;
-        }
         target.setValueAtTime(v, now);
         target.linearRampToValueAtTime(globals.EXPZERO, now + p.r);
         target.linearRampToValueAtTime(0, now + p.r + globals.TIMEZERO); //this is to set the value to 0
