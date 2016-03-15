@@ -49,10 +49,6 @@ class Voice {
         }
     }
 
-    updatePreset(p){
-        this.setPreset(p);
-    }
-
     createNodes(dst){
         let ctx = this.context;
 

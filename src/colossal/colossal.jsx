@@ -32,8 +32,8 @@ var Colossal = React.createClass({
         var note = new Note('C2');
 
         for (var i=0; i < octaves*12; i++) {
-            let v = new Voice(this.props.ctx, this.outGain, this.state.preset);
-            v.updatePreset(this.state.preset);
+            let v = new Voice(this.props.ctx, this.outGain);
+            v.setPreset(this.state.preset);
             this.voices[note.signature] = v;
             note = note.minorSecond();
         }
@@ -63,7 +63,7 @@ var Colossal = React.createClass({
     },
     componentWillUpdate(nextProps, nextState){
         for(var key in this.voices) {
-            this.voices[key].updatePreset(nextState.preset);
+            this.voices[key].setPreset(nextState.preset);
         }
     },
     //RENDER
