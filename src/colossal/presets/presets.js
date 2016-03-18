@@ -1,4 +1,3 @@
-
 var Presets = {
     default: {
         gain: 0.2,
@@ -93,7 +92,7 @@ var Presets = {
                 a: 0.012,
                 d: 2.1,
                 s: 0.000001,
-                r: 2.1,
+                r: 1.5,
             },
         },
     },
