@@ -46,6 +46,7 @@ class Voice {
         if(signature == this.baseSignature){
             this.gate = false;
             this.env1.end();
+            this.filt1.end();
         }
     }
 
