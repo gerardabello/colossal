@@ -127,7 +127,7 @@ var Presets = {
                 q: 1.88,
                 gain: 1,
                 key: 1,
-                envgain: 5700,
+                envgain: 3200,
                 env: {
                     a: 0.03,
                     d: 0.26,
