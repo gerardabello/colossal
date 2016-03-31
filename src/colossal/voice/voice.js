@@ -41,12 +41,12 @@ class Voice {
 
     }
 
-    end(signature){
+    end(signature, hard){
         //We only stop the gate if the signature that tries to stop is the one that started the gate. Only used for MONO
-        if(signature == this.baseSignature){
+        if((this.gate && signature == this.baseSignature) || hard == true){
             this.gate = false;
-            this.env1.end();
-            this.filt1.end();
+            this.env1.end(hard);
+            this.filt1.end(hard);
         }
     }
 

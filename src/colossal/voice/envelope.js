@@ -78,10 +78,18 @@ class Envelope {
         target.exponentialRampToValueAtTime(p.s + globals.EXPZERO, now + p.a + p.d);
     }
 
-    end(){
+    end(hard){
         let p = this.preset;
         let now = this.context.currentTime;
         let target = this.gain.gain;
+
+
+        if(p == null || hard == true){
+            target.cancelScheduledValues(now);
+            target.linearRampToValueAtTime(0, now + globals.TIMEZERO);
+            return;
+        }
+
         let v = this.getCurrentValue();
         target.cancelScheduledValues(now);
         //Here we need the current value, as of now I have no way to obtain it, so we aprox:

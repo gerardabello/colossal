@@ -16,7 +16,7 @@ import Voice from './voice/voice.js';
 
 import Presets from './presets/presets.js';
 
-
+let monoVoice = 'C2';
 
 var Colossal = React.createClass({
     getInitialState: function() {
@@ -45,10 +45,16 @@ var Colossal = React.createClass({
     onChangePreset(name){
         this.setPreset(name);
     },
+    stopAllVoices(hard){
+        for(var key in this.voices) {
+            //Telling the voice to end it's basic signature ensures the voice will fully end. You can end a voice with a different signature and the envelope gate does not close (used for mono).
+            this.voices[key].end(this.voices[key].baseSignature, hard);
+        }
+    },
     startVoice(signature){
         let voice = signature;
         if(this.state.preset.mode == 'MONO'){
-            voice = 'C2';
+            voice = monoVoice;
         }
         if(this.voices[signature]){
             this.voices[voice].trigger(signature);
@@ -57,7 +63,7 @@ var Colossal = React.createClass({
     stopVoice(signature){
         let voice = signature;
         if(this.state.preset.mode == 'MONO'){
-            voice = 'C2';
+            voice = monoVoice;
         }
         if(this.voices[signature]){
             this.voices[voice].end(signature);
@@ -66,6 +72,7 @@ var Colossal = React.createClass({
     setPreset(name){
         var p = JSON.parse(JSON.stringify(Presets[name]));
         this.setState({presetname: name, preset: p});
+        this.stopAllVoices(true);
         //Object.assign(Presets[name], p); //We make a copy
     },
     componentDidUpdate(prevProps, prevState){

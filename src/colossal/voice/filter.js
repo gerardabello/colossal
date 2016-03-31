@@ -18,8 +18,8 @@ class Filter {
         this.setPreset(this.preset);
     }
 
-    end(){
-        this.env.end();
+    end(hard){
+        this.env.end(hard);
     }
 
     updatePreset(p){
