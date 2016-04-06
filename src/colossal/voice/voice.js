@@ -50,6 +50,10 @@ class Voice {
         }
     }
 
+    schedule(start,end,signature){
+
+    }
+
     createNodes(dst){
         let ctx = this.context;
 

@@ -19,6 +19,43 @@ import Presets from './presets/presets.js';
 let monoVoice = 'C2';
 
 var Colossal = React.createClass({
+    //SYNTH INTERFACE FUNCTIONS
+    stopAllVoices(hard){
+        for(var key in this.voices) {
+            //Telling the voice to end it's basic signature ensures the voice will fully end. You can end a voice with a different signature and the envelope gate does not close (used for mono).
+            this.voices[key].end(this.voices[key].baseSignature, hard);
+        }
+    },
+    startVoice(signature){
+        let voice = signature;
+        if(this.state.preset.mode == 'MONO'){
+            voice = monoVoice;
+        }
+        if(this.voices[signature]){
+            this.voices[voice].trigger(signature);
+        }
+    },
+    stopVoice(signature){
+        let voice = signature;
+        if(this.state.preset.mode == 'MONO'){
+            voice = monoVoice;
+        }
+        if(this.voices[signature]){
+            this.voices[voice].end(signature);
+        }
+    },
+    scheduleVoice(start, end, signature){
+        let voice = signature;
+        if(this.state.preset.mode == 'MONO'){
+            voice = monoVoice;
+        }
+        if(this.voices[signature]){
+            this.voices[voice].schedule(start, end, signature);
+        }
+    },
+    //END SYNTH INTERFACE FUNCTIONS
+
+
     getInitialState: function() {
         return {presetname: 'default'};
     },
@@ -45,30 +82,7 @@ var Colossal = React.createClass({
     onChangePreset(name){
         this.setPreset(name);
     },
-    stopAllVoices(hard){
-        for(var key in this.voices) {
-            //Telling the voice to end it's basic signature ensures the voice will fully end. You can end a voice with a different signature and the envelope gate does not close (used for mono).
-            this.voices[key].end(this.voices[key].baseSignature, hard);
-        }
-    },
-    startVoice(signature){
-        let voice = signature;
-        if(this.state.preset.mode == 'MONO'){
-            voice = monoVoice;
-        }
-        if(this.voices[signature]){
-            this.voices[voice].trigger(signature);
-        }
-    },
-    stopVoice(signature){
-        let voice = signature;
-        if(this.state.preset.mode == 'MONO'){
-            voice = monoVoice;
-        }
-        if(this.voices[signature]){
-            this.voices[voice].end(signature);
-        }
-    },
+
     setPreset(name){
         var p = JSON.parse(JSON.stringify(Presets[name]));
         this.setState({presetname: name, preset: p});
