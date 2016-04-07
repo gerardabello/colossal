@@ -51,7 +51,21 @@ class Voice {
     }
 
     schedule(start,end,signature){
+        let now = ctx.currentTime;
+        let dt = start-now;
+        let de = end-now;
 
+        if(start >= end || start<0 || end<0){
+            console.log("bad start and end times");
+            return;
+        }
+
+        //TODO Don't use timeout, transform all code to use 'setValueAtTime'-like functions
+        setTimeout(function(){ this.trigger(signature);
+            setTimeout(function(){
+                this.end(signature);
+            }.bind(this), de*1000);
+        }.bind(this), dt*1000);
     }
 
     createNodes(dst){
