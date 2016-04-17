@@ -59,7 +59,7 @@ class Envelope {
         var dataArray = new Float32Array(bufferLength);
         this.analyser.getFloatTimeDomainData(dataArray);
         let ret = dataArray[bufferLength-1];
-        if(ret == null){
+        if(ret == null || isNaN(ret)){
             return 0;
         }else{
             return ret;
