@@ -58,7 +58,12 @@ class Envelope {
         var bufferLength = this.analyser.frequencyBinCount;
         var dataArray = new Float32Array(bufferLength);
         this.analyser.getFloatTimeDomainData(dataArray);
-        return dataArray[bufferLength-1];
+        let ret = dataArray[bufferLength-1];
+        if(ret == null){
+            return 0;
+        }else{
+            return ret;
+        }
     }
 
 
