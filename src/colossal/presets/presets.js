@@ -96,6 +96,57 @@ var Presets = {
             },
         },
     },
+analogBass: {
+        name: 'Analog bass',
+        gain: 0.3,
+        mode: 'MONO',
+        triggerMode: 'multiple',
+        glide: 0.01,
+        glideMode: 'legato',
+        osc: {
+            mix: 0.75,
+            osc1: {
+                wave : {
+                    shape: 0,
+                },
+                detune: -1,
+                octave: 0,
+            },
+            osc2: {
+                wave : {
+                    shape: -0.039999999999999925,
+                },
+                detune: -0.995,
+                octave: 0,
+            },
+        },
+        filters: {
+            filt1: {
+                type: 'lowpass',
+                freq: 727.5,
+                q: 1,
+                gain: 1,
+                key: 1,
+                envgain: 8740,
+                env: {
+
+                    a: 0.00081,
+                    d: 0.13689,
+                    s: 0,
+                    r: 0.02601,
+                },
+            },
+        },
+        envelopes: {
+            env1: {
+                a: 0,
+                d: 1.27,
+                s: 0.0366,
+                r: 0.14222,
+            },
+        },
+    },
+
     scape: {
         name: 'Scape',
         gain: 0.3,
