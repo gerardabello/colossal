@@ -12,7 +12,7 @@ import Slider from './slider/slider.jsx';
 
 import './colossal.scss';
 
-import Voice from './voice/voice.js';
+import Voice from '../voice/voice.js';
 
 import Presets from './presets/presets.js';
 
@@ -59,11 +59,8 @@ var Colossal = React.createClass({
     getInitialState: function() {
         return {presetname: 'default'};
     },
-    componentWillMount: function() {
 
-        this.outGain = this.props.ctx.createGain();
-        this.outGain.connect(this.props.dstNode);
-
+    createVoices: function(){
         this.voices = {};
         let octaves = 4;
         var note = new Note('C2');
@@ -73,7 +70,24 @@ var Colossal = React.createClass({
             this.voices[note.signature] = v;
             note = note.minorSecond();
         }
+    },
+
+    destroyVoices: function(){
+        for (var key in this.voices) {
+            this.voices[key].destroy();
+            delete this.voices[key];
+        }
+    },
+
+    componentWillMount: function() {
+
+        this.outGain = this.props.ctx.createGain();
+        this.outGain.connect(this.props.dstNode);
+
+        this.createVoices();
+
         this.setPreset(this.state.presetname);
+
     },
     componentDidMount: function() {
         this.setPreset(this.state.presetname);
@@ -82,11 +96,12 @@ var Colossal = React.createClass({
     onChangePreset(name){
         this.setPreset(name);
     },
-
     setPreset(name){
         var p = JSON.parse(JSON.stringify(Presets[name]));
         this.setState({presetname: name, preset: p});
         this.stopAllVoices(true);
+        this.destroyVoices();
+        this.createVoices();
         //Object.assign(Presets[name], p); //We make a copy
     },
     componentDidUpdate(prevProps, prevState){

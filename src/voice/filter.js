@@ -11,6 +11,13 @@ class Filter {
         this.createNodes(src, dst);
     }
 
+    destroy(){
+        this.env.destroy();
+        this.envGain.disconnect();
+        this.bqf.disconnect();
+
+    }
+
     trigger(signature){
         this.env.trigger();
         //Key tracking with base 440Hz

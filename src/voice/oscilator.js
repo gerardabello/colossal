@@ -11,6 +11,12 @@ class Oscilator {
         this.osc.start(0);
     }
 
+    stop(){
+        this.osc.stop(0);
+        this.osc.disconnect();
+        this.oscGain.disconnect();
+    }
+
     createNodes(dst){
         let ctx = this.context;
 
@@ -103,6 +109,11 @@ class Oscilator {
         }
 
         return f;
+    }
+
+    destroy(){
+        this.osc.stop();
+        this.osc.disconnect();
     }
 
 }

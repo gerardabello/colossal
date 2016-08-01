@@ -1,4 +1,4 @@
-import globals from '../globals.js'
+import globals from './globals.js'
 
 class Envelope {
     //As the envelopes cannot change during a voice execution, we set it at constructor time
@@ -42,6 +42,13 @@ class Envelope {
         this.gain.connect(target);
 
         this.createAnalizerToGetValue(this.gain);
+    }
+
+    destroy(){
+        this.source.stop(0);
+        this.source.disconnect();
+        this.analyser.disconnect();
+        this.gain.disconnect();
     }
 
 

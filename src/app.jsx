@@ -1,6 +1,7 @@
 var React = require('react');
 
 import Colossal from './colossal/colossal.jsx';
+import Test from './test/test.jsx';
 import Keyboard from './keyboard/keyboard.jsx';
 import Oscilloscope from './oscilloscope/oscilloscope.jsx';
 

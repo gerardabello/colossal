@@ -1,4 +1,4 @@
-import globals from '../globals.js'
+import globals from './globals.js'
 
 class DualMixer {
     constructor(ctx, src1, src2, dst) {
@@ -8,6 +8,14 @@ class DualMixer {
         this.dst = dst;
 
         this.createNodes();
+    }
+
+    destroy(){
+        this.src.stop(0);
+        this.src.disconnect();
+        this.src1.disconnect();
+        this.src2.disconnect();
+        this.gain.disconnect();
     }
 
 
@@ -33,8 +41,8 @@ class DualMixer {
         gainNeg.gain.value = -1;
 
 
-        let src = this.createConstSrc(1.0);
-        src.connect(gainExp);
+        this.src = this.createConstSrc(1.0);
+        this.src.connect(gainExp);
         gainExp.connect(gainNeg);
         gainExp.connect(gain1.gain);
         gainNeg.connect(gain2.gain);

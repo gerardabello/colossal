@@ -2,7 +2,8 @@
 import Oscilator from './oscilator.js';
 import Envelope from './envelope.js';
 import Filter from './filter.js';
-import DualMixer from '../dual-mixer/dual-mixer.js';
+import DualMixer from './dual-mixer.js';
+import DefaultPreset from './preset.js';
 
 class Voice {
     constructor(ctx, dst) {
@@ -12,6 +13,25 @@ class Voice {
         this.startOsc();
 
         this.gate = false;
+
+        this.setPreset(DefaultPreset);
+    }
+
+    destroy(){
+        this.end("",true);
+        this.osc1.stop();
+        this.osc2.stop();
+        this.osc1.destroy();
+        this.osc2.destroy();
+
+        this.env1.destroy();
+        this.filt1.destroy();
+        this.mixer.destroy();
+
+        this.mainGain.disconnect();
+        this.osc1Mix.disconnect();
+        this.osc2Mix.disconnect();
+        this.envGain.disconnect();
     }
 
     trigger(signature){
@@ -101,7 +121,7 @@ class Voice {
         this.osc1.setPreset(p.osc.osc1);
         this.osc2.setPreset(p.osc.osc2);
 
-        this.mixer.exponentialRampToValueAtTime(p.osc.mix, now + 0.0012);
+        this.mixer.gain.gain.value = p.osc.mix;
 
         this.filt1.setPreset(p.filters.filt1);
         this.env1.setPreset(p.envelopes.env1);
