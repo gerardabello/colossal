@@ -31,16 +31,19 @@ var Colossal = React.createClass({
         if(this.state.preset.mode == 'MONO'){
             voice = monoVoice;
         }
-        if(this.voices[signature]){
-            this.voices[voice].trigger(signature);
+        if(this.voices[voice] == null){
+            this.voices[voice] = new Voice(this.props.ctx, this.outGain);
+            this.voices[voice].setPreset(this.state.preset);
         }
+
+        this.voices[voice].trigger(signature);
     },
     stopVoice(signature){
         let voice = signature;
         if(this.state.preset.mode == 'MONO'){
             voice = monoVoice;
         }
-        if(this.voices[signature]){
+        if(this.voices[voice]){
             this.voices[voice].end(signature);
         }
     },
@@ -60,18 +63,6 @@ var Colossal = React.createClass({
         return {presetname: 'default'};
     },
 
-    createVoices: function(){
-        this.voices = {};
-        let octaves = 4;
-        var note = new Note('C2');
-
-        for (var i=0; i < octaves*12; i++) {
-            let v = new Voice(this.props.ctx, this.outGain);
-            this.voices[note.signature] = v;
-            note = note.minorSecond();
-        }
-    },
-
     destroyVoices: function(){
         for (var key in this.voices) {
             this.voices[key].destroy();
@@ -84,12 +75,13 @@ var Colossal = React.createClass({
         this.outGain = this.props.ctx.createGain();
         this.outGain.connect(this.props.dstNode);
 
-        this.createVoices();
+        //this.createVoices();
 
         this.setPreset(this.state.presetname);
 
     },
     componentDidMount: function() {
+        this.voices = {};
         this.setPreset(this.state.presetname);
     },
     //HANDLERS
@@ -101,8 +93,6 @@ var Colossal = React.createClass({
         this.setState({presetname: name, preset: p});
         this.stopAllVoices(true);
         this.destroyVoices();
-        this.createVoices();
-        //Object.assign(Presets[name], p); //We make a copy
     },
     componentDidUpdate(prevProps, prevState){
         for(var key in this.voices) {
