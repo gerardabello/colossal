@@ -21,6 +21,9 @@ var Selector = React.createClass({
         };
     },
 
+    shouldComponentUpdate: function(nextProps, nextState){
+        return this.state.value != nextState.value;
+    },
 
     componentWillReceiveProps(nextProps){
         this.setState({value: this.getValueLink(nextProps).value});

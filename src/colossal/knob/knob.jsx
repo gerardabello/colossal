@@ -30,6 +30,10 @@ var Knob = React.createClass({
         this.setState({value: this.reverseLaw(this.getValueLink(nextProps).value)});
     },
 
+    shouldComponentUpdate: function(nextProps, nextState){
+        return this.state.value != nextState.value;
+    },
+
     handleChange(value) {
         if(value > 1) { value = 1; }
         if(value < 0) { value = 0; }
