@@ -9,6 +9,7 @@ pages:
   - mkdir .public
   - mkdir .public/build
   - cp index.html .public
+  - cp howitworks.html .public
   - cp build/bundle.js .public/build
   - mv .public public
   artifacts:
