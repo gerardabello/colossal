@@ -18,6 +18,7 @@
   "scripts": {
     "start": "electron main.js",
     "build": "webpack",
+    "buildprod": "webpack -p",
     "watch": "webpack-dev-server --hot --inline"
   },
   "dependencies": {

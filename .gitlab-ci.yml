@@ -5,7 +5,7 @@ pages:
   script:
   - npm update
   - npm install node-sass
-  - npm run build
+  - npm run buildprod
   - mkdir .public
   - mkdir .public/build
   - cp index.html .public
