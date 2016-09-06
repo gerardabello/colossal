@@ -1,6 +1,6 @@
 {
-  "name": "testSynth",
-  "version": "0.0.1",
+  "name": "colossal",
+  "version": "1.0.0",
   "author": "Gerard Abelló <gerardabello@gmail.com>",
   "main": "main.js",
   "devDependencies": {
@@ -18,7 +18,7 @@
   "scripts": {
     "start": "electron main.js",
     "build": "webpack",
-    "buildprod": "webpack -p",
+    "buildprod": "NODE_ENV=production webpack -p --config ./webpack.prod.config.js",
     "watch": "webpack-dev-server --hot --inline"
   },
   "dependencies": {
