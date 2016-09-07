@@ -1,7 +1,7 @@
 'use strict';
 import React from 'react';
 
-import Voice from '../voice/voice.js';
+import Voice from '../colossal/voice/voice.js';
 
 let styles = {
     root: {

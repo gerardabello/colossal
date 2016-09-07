@@ -12,7 +12,7 @@ import Slider from './slider/slider.jsx';
 
 import './colossal.scss';
 
-import Voice from '../voice/voice.js';
+import Voice from './voice/voice.js';
 
 import Presets from './presets/presets.js';
 
