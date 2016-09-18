@@ -1,6 +1,6 @@
 //BASE COLORS
 $back-color: #272727;
-$color: #CACACA;
+$color: #898989;;
 
 
 
@@ -101,7 +101,8 @@ $color: #CACACA;
             text-align: center;
             font-size: 26px;
             margin: 0;
-            color: rgba(255, 255, 255, 0.11);
+            color: rgb(26, 26, 26);
+            text-shadow: 0 1px 0 #3C3C3C;
         }
 
         &.disabled{

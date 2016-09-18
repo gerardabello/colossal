@@ -24,10 +24,16 @@ var Keyboard = React.createClass({
     },
     componentDidMount(){
         window.addEventListener('keydown', function(event) {
-            this.noteOn(keynotemap[event.keyCode]);
+            let signature = keynotemap[event.keyCode];
+            if(signature != null){
+                this.noteOn(signature);
+            }
         }.bind(this), false);
         window.addEventListener('keyup', function(event) {
-            this.noteOff(keynotemap[event.keyCode]);
+            let signature = keynotemap[event.keyCode];
+            if(signature != null){
+                this.noteOff(signature);
+            }
         }.bind(this), false);
     },
     //HANDLERS
