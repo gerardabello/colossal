@@ -98,7 +98,7 @@ var Slider = React.createClass({
 
             <div className="slider" >
             <div
-            className="knob"
+            className={"knob " + (this.state.dragging?"":"animated") }
             onMouseDown={this.onMouseDown}
             style={{
                 transform: 'translateY(' + (1-this.state.value)*(this.state.height-this.state.knobheight) + 'px)'

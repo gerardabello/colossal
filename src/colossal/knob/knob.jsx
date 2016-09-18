@@ -95,7 +95,7 @@ var Knob = React.createClass({
 
             <div className={'knob-surround ' + this.props.size} onMouseDown={this.onMouseDown} >
             <div
-            className="knob"
+            className={"knob " + (this.state.dragging?"":"animated") }
             style={{
                 transform: `rotate(${rdeg}deg)`
             }}
