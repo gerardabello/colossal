@@ -69,10 +69,10 @@ $black-height: 5px;
 
         &.white {
             background-color: #f6f6f6;
-            border: #DEDEDE 1px solid;
             height: $white-lenght;
-            box-shadow: #CCCCCC 0px $white-height 0px;
             flex: 1;
+            border: 1px solid #b5b5b5;
+            box-shadow: 0 $white-height 0 #868686;
         }
 
         &.black {
