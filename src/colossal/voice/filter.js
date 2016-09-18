@@ -54,7 +54,7 @@ class Filter {
         this.envGain.gain.value = p.envgain;
 
         this.bqf.type = p.type;
-        this.bqf.frequency.value = Math.max(0,p.freq + (this.freqOffset * p.key));
+        this.bqf.frequency.value = Math.min(22050,Math.max(0,p.freq + (this.freqOffset * p.key)));
         this.bqf.Q.value = p.q;
         this.bqf.gain.value = p.gain;
     }
