@@ -5,6 +5,8 @@ import Test from './test/test.jsx';
 import Keyboard from './keyboard/keyboard.jsx';
 import Oscilloscope from './oscilloscope/oscilloscope.jsx';
 
+import ContextWarning from './context-warning.jsx';
+
 let styles = {
     stack: {
         display: 'flex',
@@ -25,9 +27,14 @@ var App = React.createClass({
         let dstGainNode = audioCtx.createGain();
         dstGainNode.connect(audioCtx.destination);
 
+        audioCtx.onstatechange = function() {
+          this.setState({ctxStatus: audioCtx.state});
+        }.bind(this);
+
         this.setState({
             ctx: audioCtx,
             dstNode: dstGainNode,
+            ctxStatus: audioCtx.state,
         });
     },
     noteOff(signature){
@@ -37,6 +44,7 @@ var App = React.createClass({
         this.synth.startVoice(signature);
     },
     render: function() {
+
         return (
 			<div id="stack">
             <div id="instrument-panel">
@@ -46,6 +54,7 @@ var App = React.createClass({
                 </div>
             </div>
 			<Keyboard style={styles.keyboard} noteOn={this.noteOn} noteOff={this.noteOff} />
+      <ContextWarning show={this.state.ctxStatus !== 'running'}/>
 			</div>
 		);
     }
