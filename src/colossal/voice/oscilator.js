@@ -5,6 +5,7 @@ class Oscilator {
         this.context = ctx;
 
         this.createNodes(dst);
+
     }
 
     start(){
@@ -91,8 +92,14 @@ class Oscilator {
         if(glide == null){
             glide = now;
         }
-        this.osc.frequency.setValueAtTime(this.osc.frequency.value, now);
-        this.osc.frequency.linearRampToValueAtTime(this.getFreq(this.note, this.preset.detune), now+glide);
+
+        let f = this.getFreq(this.note, this.preset.detune);
+        if(this.lastFreq == null){
+          this.lastFreq = f;
+        }
+        this.osc.frequency.setValueAtTime(this.lastFreq, now);
+        this.osc.frequency.exponentialRampToValueAtTime(f, now+glide);
+        this.lastFreq = f;
     }
 
 

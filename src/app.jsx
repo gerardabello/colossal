@@ -43,6 +43,9 @@ var App = React.createClass({
     noteOn(signature){
         this.synth.startVoice(signature);
     },
+    shouldComponentUpdate(nextProps, nextState){
+        return nextState.ctxStatus !== this.state.ctxStatus;
+    },
     render: function() {
 
         return (

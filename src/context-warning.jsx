@@ -22,6 +22,7 @@ const styles ={
     fontSize: '12px',
     zIndex: '100',
     transition: 'opacity 0.3s ease',
+    pointerEvents:'none',
   },
   target:{
     width: '42px',
