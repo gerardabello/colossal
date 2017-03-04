@@ -2,10 +2,7 @@ language: node_js
 node_js:
   - "node"
 
-before_install:
-  - yarn
-
-install:
+script:
   - yarn run build:prod
 
 deploy:
