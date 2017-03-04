@@ -9,3 +9,4 @@ deploy:
   provider: surge
   project: ./build/
   domain: colossal.surge.sh 
+  skip_cleanup: true
