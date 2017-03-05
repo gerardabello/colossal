@@ -16,10 +16,9 @@
   },
   "scripts": {
     "clean": "rm -rf ./build",
-    "start": "electron main.js",
     "build": "yarn run clean && webpack && cp index.html build/",
     "build:prod": "yarn run clean && NODE_ENV=production webpack -p --config ./webpack.prod.config.js && cp index.html build/",
-    "watch": "webpack-dev-server --hot --inline"
+    "start": "webpack-dev-server --hot --inline"
   },
   "dependencies": {
     "deep-equal": "^1.0.1",
