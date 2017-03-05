@@ -5,17 +5,11 @@ Substractive synth using Webaudio API and React
 [DEMO](https://colossal.surge.sh)
 
 ## Screenshot
-![screenshot](screenshot.png)
+![screenshot](readme-assets/screenshot.png)
 
 ## How it works
 Colossal can work in polysynth or monosynth modes.
 
 Each voice has this structure:
+![routing](readme-assets/routing.png)
 
-```
-OSC --
-      |--> Mixer --> Filter --> Gain --> Output
-OSC --                 ^          ^
-                       |          |
-                    Envelope   Envelope 
-```
