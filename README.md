@@ -1,4 +1,4 @@
-# Colossal
+# Colossal ![build](https://travis-ci.org/gerardabello/colossal.svg?branch=master)
 Substractive synth using Webaudio API and React
 
 ## Demo
