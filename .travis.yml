@@ -3,7 +3,7 @@ node_js:
   - "node"
 
 script:
-  - yarn run build:prod
+  - yarn run build
 
 deploy:
   provider: surge
