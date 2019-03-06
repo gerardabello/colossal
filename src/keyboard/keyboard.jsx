@@ -109,12 +109,20 @@ const Key = styled.div`
 
 let keynotemap = {
   65: 'C3', // A
+  87: 'C#3', // W
   83: 'D3', // S
+  69: 'D#3', // E
   68: 'E3', // D
   70: 'F3', // F
+  84: 'F#3', // T
   71: 'G3', // G
+  89: 'G#3', // Y
   72: 'A3', // H
-  74: 'B3' // J
+  85: 'A#3', // U
+  74: 'B3', // J
+  75: 'C4', // K
+  79: 'C#4', // O
+  76: 'D4' // L
 }
 
 class Keyboard extends React.Component {
