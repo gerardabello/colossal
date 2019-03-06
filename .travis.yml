@@ -7,6 +7,6 @@ script:
 
 deploy:
   provider: surge
-  project: ./build/
+  project: ./dist/
   domain: colossal.surge.sh 
   skip_cleanup: true

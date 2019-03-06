@@ -4,6 +4,7 @@
   "author": "Gerard Abelló <gerardabello@gmail.com>",
   "devDependencies": {
     "@babel/core": "^7.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.3.4",
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
     "@babel/plugin-syntax-dynamic-import": "^7.0.0",
     "@babel/polyfill": "^7.0.0",
@@ -19,9 +20,8 @@
     "webpack-dev-server": "^3.1.0"
   },
   "scripts": {
-    "clean": "rm -rf ./build",
-    "build": "yarn run clean && webpack && cp index.html build/",
-    "build:prod": "yarn run clean && NODE_ENV=production webpack -p --config ./webpack.prod.config.js && cp index.html build/",
+    "clean": "rm -rf ./dist",
+    "build": "yarn run clean && webpack --mode production",
     "start": "webpack-dev-server --hot --inline"
   },
   "dependencies": {

@@ -33,21 +33,18 @@ const styles = {
   }
 }
 
-let ContextWarning = React.createClass({
+class ContextWarning extends React.Component {
+  state = {};
 
-  getInitialState () {
-    return ({})
-  },
-
-  mouseOver: function () {
+  mouseOver = () => {
     this.setState({hover: true})
-  },
+  };
 
-  mouseOut: function () {
+  mouseOut = () => {
     this.setState({hover: false})
-  },
+  };
 
-  render: function () {
+  render() {
     if (!this.props.show) {
       return (
         <div style={styles.root} />
@@ -77,6 +74,6 @@ let ContextWarning = React.createClass({
       </div>
     )
   }
-})
+}
 
 export default ContextWarning

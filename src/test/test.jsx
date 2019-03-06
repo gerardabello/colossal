@@ -9,31 +9,35 @@ let styles = {
   }
 }
 
-let Test = React.createClass({
-  getInitialState: function () {
-    return {}
-  },
-  componentDidMount: function () {
+class Test extends React.Component {
+  state = {};
+
+  componentDidMount() {
     this.outGain = this.props.ctx.createGain()
     this.outGain.connect(this.props.dstNode)
 
     this.create()
-  },
-  destroy: function () {
+  }
+
+  destroy = () => {
     this.v.destroy()
     this.v = null
-  },
-  create: function () {
+  };
+
+  create = () => {
     this.v = new Voice(this.props.ctx, this.outGain)
-  },
-  start: function () {
+  };
+
+  start = () => {
     this.v.trigger('C2')
-  },
-  stop: function () {
+  };
+
+  stop = () => {
     this.v.end('C2')
-  },
-    // RENDER
-  render: function () {
+  };
+  // RENDER
+
+  render() {
     return (
       <div style={styles.root}>
         <button onClick={this.start}>start</button>
@@ -43,6 +47,6 @@ let Test = React.createClass({
       </div>
     )
   }
-})
+}
 
 export default Test

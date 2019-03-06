@@ -28,11 +28,10 @@ const Canvas = styled.canvas`
 let backcolor = 'rgb(34, 56, 50)'
 let lightcolor = 'rgb(132, 223, 196)'
 
-let Oscilloscope = React.createClass({
-  getInitialState: function () {
-    return {}
-  },
-  drawTime: function () {
+class Oscilloscope extends React.Component {
+  state = {};
+
+  drawTime = () => {
     let drawVisual = requestAnimationFrame(this.drawTime)
 
     let canvasCtx = this.canvasCtx
@@ -84,8 +83,9 @@ let Oscilloscope = React.createClass({
     }
 
     canvasCtx.stroke()
-  },
-  drawFreq: function () {
+  };
+
+  drawFreq = () => {
     let drawVisual = requestAnimationFrame(this.drawFreq)
 
     let canvasCtx = this.canvasCtx
@@ -112,8 +112,9 @@ let Oscilloscope = React.createClass({
 
       x += barWidth
     }
-  },
-  componentDidMount: function () {
+  };
+
+  componentDidMount() {
     this.analyser = this.props.ctx.createAnalyser()
     this.props.node.connect(this.analyser)
 
@@ -128,15 +129,16 @@ let Oscilloscope = React.createClass({
     this.dataArray = new Uint8Array(this.bufferLength)
 
     this.drawTime()
-  },
+  }
+
   // RENDER
-  render: function () {
+  render() {
     return (
       <Root>
-        <Canvas width='700' height='180' />
+        <Canvas width='700' height='180' ref={element => { this.canvas = element }} />
       </Root>
     )
   }
-})
+}
 
 export default Oscilloscope

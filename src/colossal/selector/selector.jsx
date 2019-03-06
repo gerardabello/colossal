@@ -26,6 +26,7 @@ const Text = styled.div`
   text-align: center;
 `
 const Arrow = styled.div`
+  cursor: pointer;
   width: 14px;
   text-align: center;
 
@@ -34,14 +35,8 @@ const Arrow = styled.div`
   padding: 2px 2px;
 `
 
-let Selector = React.createClass({
-  getInitialState: function () {
-    return {
-      value: this.getValueLink(this.props).value
-    }
-  },
-
-  getValueLink: function (props) {
+class Selector extends React.Component {
+  getValueLink = (props) => {
     // Create an object that works just like the one
     // returned from `this.linkState` if we weren't passed
     // one; that way, we can always behave as if we're using
@@ -50,33 +45,33 @@ let Selector = React.createClass({
       value: props.value,
       requestChange: props.onChange
     }
-  },
+  };
 
-  shouldComponentUpdate: function (nextProps, nextState) {
+  shouldComponentUpdate(nextProps, nextState) {
     return this.state.value != nextState.value
-  },
+  }
 
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps(nextProps) {
     this.setState({value: this.getValueLink(nextProps).value})
-  },
+  }
 
-  handleChange (value) {
+  handleChange = (value) => {
     this.setState({
       value: value
     }, () => {
       this.getValueLink(this.props).requestChange(value)
     })
-  },
+  };
 
-  onToggle () {
+  onToggle = () => {
     // This only works if we have 2 values
     if (this.props.values.length > 2) {
       return
     }
     this.onNext()
-  },
+  };
 
-  onNext () {
+  onNext = () => {
     let ci = this.props.values.indexOf(this.state.value)
     let i = ci + 1
 
@@ -85,8 +80,9 @@ let Selector = React.createClass({
     }
 
     this.handleChange(this.props.values[i])
-  },
-  onPrevious () {
+  };
+
+  onPrevious = () => {
     let ci = this.props.values.indexOf(this.state.value)
     let i = ci - 1
 
@@ -95,9 +91,13 @@ let Selector = React.createClass({
     }
 
     this.handleChange(this.props.values[i])
-  },
+  };
 
-  render () {
+  state = {
+    value: this.getValueLink(this.props).value
+  };
+
+  render() {
     let arrowl = []
     let arrowr = []
 
@@ -119,6 +119,6 @@ let Selector = React.createClass({
       </Root>
     )
   }
-})
+}
 
 export default Selector

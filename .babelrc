@@ -5,16 +5,19 @@
       "@babel/preset-env",
       {
         "targets": {
-          "browsers": ["last 2 Chrome versions", "last 2 Firefox versions"]
+          "browsers": [
+            "last 2 Chrome versions",
+            "last 2 Firefox versions"
+          ]
         },
-        "useBuiltIns": "usage",
         "modules": false
       }
     ]
   ],
   "plugins": [
     "@babel/plugin-proposal-object-rest-spread",
-    "@babel/plugin-syntax-dynamic-import"
+    "@babel/plugin-syntax-dynamic-import",
+    "@babel/plugin-proposal-class-properties"
   ]
 }
 
