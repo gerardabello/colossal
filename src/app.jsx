@@ -1,12 +1,9 @@
 import React from 'react'
 
-import styled, { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle } from 'styled-components'
 import Colossal from './colossal/colossal.jsx'
-import Test from './test/test.jsx'
 import Keyboard from './keyboard/keyboard.jsx'
-//import Oscilloscope from './oscilloscope/oscilloscope.jsx'
-
-import ContextWarning from './context-warning.jsx'
+// import Oscilloscope from './oscilloscope/oscilloscope.jsx'
 
 const KeyboardWrapper = styled.div`
   height: 155px;
@@ -39,10 +36,10 @@ const InstrumentStack = styled.div`
   & > div {
     box-shadow: #000000 0 2px, #424242 0 -2px;
     margin: 2px;
-    }
-    `
+  }
+`
 
-    const GlobalStyle = createGlobalStyle`
+const GlobalStyle = createGlobalStyle`
 
     //this prevents selection
     :not(input):not(textarea),
@@ -64,64 +61,72 @@ const InstrumentStack = styled.div`
       margin:0;
     }
 
-    `;
+    `
 
-    let styles = {
-      stack: {
-        display: 'flex',
-        flexDirection: 'column',
-        height: '100%'
-      }
-    }
+let styles = {
+  stack: {
+    display: 'flex',
+    flexDirection: 'column',
+    height: '100%'
+  }
+}
 
-    class App extends React.Component {
-      state = {
-        ctx: null,
-        dstGainNode: null
-      };
+class App extends React.Component {
+  state = {
+    ctx: null,
+    dstGainNode: null
+  }
 
-      componentWillMount() {
-        let audioCtx = new (window.AudioContext || window.webkitAudioContext)()
-        let dstGainNode = audioCtx.createGain()
-        dstGainNode.connect(audioCtx.destination)
+  componentWillMount() {
+    let audioCtx = new (window.AudioContext || window.webkitAudioContext)()
+    let dstGainNode = audioCtx.createGain()
+    dstGainNode.connect(audioCtx.destination)
 
-        audioCtx.onstatechange = function () {
-          this.setState({ctxStatus: audioCtx.state})
-        }.bind(this)
+    audioCtx.onstatechange = function() {
+      this.setState({ ctxStatus: audioCtx.state })
+    }.bind(this)
 
-        this.setState({
-          ctx: audioCtx,
-          dstNode: dstGainNode,
-          ctxStatus: audioCtx.state
-        })
-      }
+    this.setState({
+      ctx: audioCtx,
+      dstNode: dstGainNode,
+      ctxStatus: audioCtx.state
+    })
+  }
 
-      noteOff = (signature) => {
-        this.synth.stopVoice(signature)
-      };
+  noteOff = signature => {
+    this.synth.stopVoice(signature)
+  }
 
-      noteOn = (signature) => {
-        this.synth.startVoice(signature)
-      };
+  noteOn = signature => {
+    this.synth.startVoice(signature)
+  }
 
-      render() {
-        return (
-        <Stack>
+  render() {
+    return (
+      <Stack>
         <GlobalStyle />
         <InstrumentPanel>
-        <InstrumentStack>
-        <Colossal ctx={this.state.ctx} dstNode={this.state.dstNode} ref={(ref) => this.synth = ref} />
-        {/*
+          <InstrumentStack>
+            <Colossal
+              ctx={this.state.ctx}
+              dstNode={this.state.dstNode}
+              ref={ref => (this.synth = ref)}
+            />
+            {/*
           <Oscilloscope ctx={this.state.ctx} node={this.state.dstNode} />
         */}
-        </InstrumentStack>
+          </InstrumentStack>
         </InstrumentPanel>
         <KeyboardWrapper>
-        <Keyboard style={styles.keyboard} noteOn={this.noteOn} noteOff={this.noteOff} />
+          <Keyboard
+            style={styles.keyboard}
+            noteOn={this.noteOn}
+            noteOff={this.noteOff}
+          />
         </KeyboardWrapper>
-        </Stack>
-        )
-      }
-    }
+      </Stack>
+    )
+  }
+}
 
-    export default App
+export default App

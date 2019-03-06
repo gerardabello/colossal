@@ -1,14 +1,14 @@
 import React from 'react'
-import styled from "styled-components";
+import styled from 'styled-components'
 
 let Note = require('octavian').Note
 
-const whiteLength = 100;
-const whiteHeight = 10;
+const whiteLength = 100
+const whiteHeight = 10
 
-const blackWidth = 16;
-const blackLength= 70;
-const blackHeight = 5;
+const blackWidth = 16
+const blackLength = 70
+const blackHeight = 5
 
 const Root = styled.div`
   background: rgb(51, 37, 28);
@@ -20,7 +20,6 @@ const Root = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-
 
   overflow: hidden;
 
@@ -46,7 +45,8 @@ const Container = styled.div`
 `
 
 const Key = styled.div`
-  transition: box-shadow 0.1s ease, height 0.1s ease, background-color 0.1s ease, color 0.1s ease;
+  transition: box-shadow 0.1s ease, height 0.1s ease, background-color 0.1s ease,
+    color 0.1s ease;
   display: inline-block;
   text-align: center;
 
@@ -54,9 +54,9 @@ const Key = styled.div`
   font-family: sans-serif;
   color: rgba(0, 0, 0, 0);
 
-
-
-  ${props => props.white && `
+  ${props =>
+    props.white &&
+    `
 
   background-color: #f6f6f6;
   height: ${whiteLength}px;
@@ -69,7 +69,9 @@ const Key = styled.div`
 
   `};
 
-  ${props => props.black && `
+  ${props =>
+    props.black &&
+    `
   display: inline-block;
   background-color: #212121;
   border: #464646 1px solid;
@@ -86,20 +88,24 @@ const Key = styled.div`
   }
   `};
 
-
-  ${props => props.white && props.pressed && `
+  ${props =>
+    props.white &&
+    props.pressed &&
+    `
   background-color: #e0e0e0;
   height: ${whiteLength + whiteHeight}px;
   box-shadow: #D6D6D6 0px 0px 0px;
   `};
 
-  ${props => props.black && props.pressed && `
+  ${props =>
+    props.black &&
+    props.pressed &&
+    `
   background-color: #1d1d1d;
   height: ${blackLength + blackHeight}px;
   box-shadow: #464646 0px 0px 0px;
   `};
 `
-
 
 let keynotemap = {
   65: 'C3', // A
@@ -112,41 +118,49 @@ let keynotemap = {
 }
 
 class Keyboard extends React.Component {
-  state = {pressedKeys: []};
+  state = { pressedKeys: [] }
 
   componentDidMount() {
-    window.addEventListener('keydown', function (event) {
-      let signature = keynotemap[event.keyCode]
-      if (signature != null) {
-        this.noteOn(signature)
-      }
-    }.bind(this), false)
-    window.addEventListener('keyup', function (event) {
-      let signature = keynotemap[event.keyCode]
-      if (signature != null) {
-        this.noteOff(signature)
-      }
-    }.bind(this), false)
+    window.addEventListener(
+      'keydown',
+      function(event) {
+        let signature = keynotemap[event.keyCode]
+        if (signature != null) {
+          this.noteOn(signature)
+        }
+      }.bind(this),
+      false
+    )
+    window.addEventListener(
+      'keyup',
+      function(event) {
+        let signature = keynotemap[event.keyCode]
+        if (signature != null) {
+          this.noteOff(signature)
+        }
+      }.bind(this),
+      false
+    )
   }
   // HANDLERS
 
-  noteOff = (signature) => {
+  noteOff = signature => {
     let index = this.state.pressedKeys.indexOf(signature)
     if (index > -1) {
       this.props.noteOff(signature)
       this.state.pressedKeys.splice(index, 1)
-      this.setState({pressedKeys: this.state.pressedKeys})
+      this.setState({ pressedKeys: this.state.pressedKeys })
     }
-  };
+  }
 
-  noteOn = (signature) => {
+  noteOn = signature => {
     let index = this.state.pressedKeys.indexOf(signature)
-    if (index == -1) {
+    if (index === -1) {
       this.props.noteOn(signature)
       this.state.pressedKeys.push(signature)
-      this.setState({pressedKeys: this.state.pressedKeys})
+      this.setState({ pressedKeys: this.state.pressedKeys })
     }
-  };
+  }
   // RENDER
 
   render() {
@@ -155,23 +169,27 @@ class Keyboard extends React.Component {
 
     let nkeys = []
     for (let i = 0; i < octaves * 12; i++) {
-      let pressed = this.state.pressedKeys.indexOf(note.signature) != -1
+      let pressed = this.state.pressedKeys.indexOf(note.signature) !== -1
       let black = note.modifier != null
       nkeys.push(
-        <Key 
+        <Key
           pressed={pressed}
           white={!black}
           black={black}
-          key={note.signature} type='button' onMouseDown={this.noteOn.bind(this, note.signature)} onMouseUp={this.noteOff.bind(this, note.signature)} onMouseLeave={this.noteOff.bind(this, note.signature)}>{note.signature}</Key>
+          key={note.signature}
+          type="button"
+          onMouseDown={this.noteOn.bind(this, note.signature)}
+          onMouseUp={this.noteOff.bind(this, note.signature)}
+          onMouseLeave={this.noteOff.bind(this, note.signature)}>
+          {note.signature}
+        </Key>
       )
       note = note.minorSecond()
     }
 
     return (
       <Root>
-        <Container>
-          {nkeys}
-        </Container>
+        <Container>{nkeys}</Container>
         <Helper>Press keys A to J or use virtual keyboard</Helper>
       </Root>
     )

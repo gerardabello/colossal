@@ -2,17 +2,14 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import Binder from 'react-binding'
-
 import styled from 'styled-components'
 
 const Root = styled.div`
-  background: #C7C7BF;
+  background: #c7c7bf;
   color: #161616;
   height: 200px;
   width: 1024px;
   position: relative;
-
 `
 
 const Canvas = styled.canvas`
@@ -29,10 +26,10 @@ let backcolor = 'rgb(34, 56, 50)'
 let lightcolor = 'rgb(132, 223, 196)'
 
 class Oscilloscope extends React.Component {
-  state = {};
+  state = {}
 
   drawTime = () => {
-    let drawVisual = requestAnimationFrame(this.drawTime)
+    window.requestAnimationFrame(this.drawTime)
 
     let canvasCtx = this.canvasCtx
     let HEIGHT = this.HEIGHT
@@ -52,7 +49,7 @@ class Oscilloscope extends React.Component {
 
     canvasCtx.beginPath()
 
-    let sliceWidth = WIDTH * 2.0 / bufferLength
+    let sliceWidth = (WIDTH * 2.0) / bufferLength
     let x = 0
 
     let startdraw = false
@@ -63,14 +60,17 @@ class Oscilloscope extends React.Component {
     for (let i = margin; i < bufferLength - margin; i++) {
       if (!startdraw) {
         // If we find a sample that has a positive derivative and crosses zero, we set it as a 'trigger' point and start drawing. If we find that we have already searched half the buffer just start drawing already cause we lost all hopes.
-        if ((dataArray[i - 1] < middle && dataArray[i] >= middle) || i > bufferLength / 2) {
+        if (
+          (dataArray[i - 1] < middle && dataArray[i] >= middle) ||
+          i > bufferLength / 2
+        ) {
           startdraw = true
         }
       }
 
       if (startdraw) {
         let v = dataArray[i] / 128.0
-        let y = v * HEIGHT / 2
+        let y = (v * HEIGHT) / 2
 
         if (i === 0) {
           canvasCtx.moveTo(x, y)
@@ -83,10 +83,10 @@ class Oscilloscope extends React.Component {
     }
 
     canvasCtx.stroke()
-  };
+  }
 
   drawFreq = () => {
-    let drawVisual = requestAnimationFrame(this.drawFreq)
+    window.requestAnimationFrame(this.drawFreq)
 
     let canvasCtx = this.canvasCtx
     let HEIGHT = this.HEIGTH
@@ -112,7 +112,7 @@ class Oscilloscope extends React.Component {
 
       x += barWidth
     }
-  };
+  }
 
   componentDidMount() {
     this.analyser = this.props.ctx.createAnalyser()
@@ -135,7 +135,13 @@ class Oscilloscope extends React.Component {
   render() {
     return (
       <Root>
-        <Canvas width='700' height='180' ref={element => { this.canvas = element }} />
+        <Canvas
+          width="700"
+          height="180"
+          ref={element => {
+            this.canvas = element
+          }}
+        />
       </Root>
     )
   }

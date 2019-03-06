@@ -1,23 +1,23 @@
 const Note = require('octavian').Note
 
 class Oscilator {
-  constructor (ctx, dst) {
+  constructor(ctx, dst) {
     this.context = ctx
 
     this.createNodes(dst)
   }
 
-  start () {
+  start() {
     this.osc.start(0)
   }
 
-  stop () {
+  stop() {
     this.osc.stop(0)
     this.osc.disconnect()
     this.oscGain.disconnect()
   }
 
-  createNodes (dst) {
+  createNodes(dst) {
     let ctx = this.context
 
     this.osc = ctx.createOscillator()
@@ -29,7 +29,7 @@ class Oscilator {
     this.oscGain.connect(dst)
   }
 
-  setPreset (p) {
+  setPreset(p) {
     this.preset = p
 
     this.calculatePeriodicWave(p.wave)
@@ -38,13 +38,16 @@ class Oscilator {
     let now = ctx.currentTime
 
     if (this.note) {
-      this.osc.frequency.setValueAtTime(this.getFreq(this.note, this.preset.detune), now)
+      this.osc.frequency.setValueAtTime(
+        this.getFreq(this.note, this.preset.detune),
+        now
+      )
     }
   }
 
-  calculatePeriodicWave (wp) {
+  calculatePeriodicWave(wp) {
     if (this.lastwavepreset != null) {
-            // This is to prevent updating the wave every frame
+      // This is to prevent updating the wave every frame
       if (Math.abs(this.lastwavepreset.shape - wp.shape) < 0.05) {
         return
       }
@@ -81,7 +84,7 @@ class Oscilator {
     this.osc.setPeriodicWave(wave)
   }
 
-  trigger (signature, glide) {
+  trigger(signature, glide) {
     this.note = new Note(signature)
     let ctx = this.context
     let now = ctx.currentTime
@@ -98,7 +101,7 @@ class Oscilator {
     this.lastFreq = f
   }
 
-  getFreq (note, detune) {
+  getFreq(note, detune) {
     let mod = note.modifier ? note.modifier : ''
     let notedw = new Note(note.letter + mod + (note.octave - 1))
     let noteup = new Note(note.letter + mod + (note.octave + 1))
@@ -113,11 +116,10 @@ class Oscilator {
     return f
   }
 
-  destroy () {
+  destroy() {
     this.osc.stop()
     this.osc.disconnect()
   }
-
 }
 
 export default Oscilator

@@ -14,7 +14,7 @@ const Root = styled.div`
   border: 1px solid #080808;
   background: #000000;
 
-  color: #A8F8F2;
+  color: #a8f8f2;
   font-family: monospace;
   font-size: 14px;
 
@@ -30,38 +30,43 @@ const Arrow = styled.div`
   width: 14px;
   text-align: center;
 
-  background: #1D1D1D;
+  background: #1d1d1d;
   border: 1px solid #252525;
   padding: 2px 2px;
 `
 
 class Selector extends React.Component {
-  getValueLink = (props) => {
+  getValueLink = props => {
     // Create an object that works just like the one
     // returned from `this.linkState` if we weren't passed
     // one; that way, we can always behave as if we're using
     // `valueLink`, even if we're using plain `value` and `onChange`.
-    return props.valueLink || {
-      value: props.value,
-      requestChange: props.onChange
-    }
-  };
+    return (
+      props.valueLink || {
+        value: props.value,
+        requestChange: props.onChange
+      }
+    )
+  }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return this.state.value != nextState.value
+    return this.state.value !== nextState.value
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({value: this.getValueLink(nextProps).value})
+    this.setState({ value: this.getValueLink(nextProps).value })
   }
 
-  handleChange = (value) => {
-    this.setState({
-      value: value
-    }, () => {
-      this.getValueLink(this.props).requestChange(value)
-    })
-  };
+  handleChange = value => {
+    this.setState(
+      {
+        value: value
+      },
+      () => {
+        this.getValueLink(this.props).requestChange(value)
+      }
+    )
+  }
 
   onToggle = () => {
     // This only works if we have 2 values
@@ -69,7 +74,7 @@ class Selector extends React.Component {
       return
     }
     this.onNext()
-  };
+  }
 
   onNext = () => {
     let ci = this.props.values.indexOf(this.state.value)
@@ -80,7 +85,7 @@ class Selector extends React.Component {
     }
 
     this.handleChange(this.props.values[i])
-  };
+  }
 
   onPrevious = () => {
     let ci = this.props.values.indexOf(this.state.value)
@@ -91,31 +96,28 @@ class Selector extends React.Component {
     }
 
     this.handleChange(this.props.values[i])
-  };
+  }
 
   state = {
     value: this.getValueLink(this.props).value
-  };
+  }
 
   render() {
     let arrowl = []
     let arrowr = []
 
     if (this.props.values.length > 2) {
-      arrowl = (<Arrow onClick={this.onPrevious}>{'<'}</Arrow>)
-      arrowr = (<Arrow onClick={this.onNext}>{'>'}</Arrow>)
+      arrowl = <Arrow onClick={this.onPrevious}>{'<'}</Arrow>
+      arrowr = <Arrow onClick={this.onNext}>{'>'}</Arrow>
     }
 
     return (
       <Root onClick={this.onToggle}>
         {arrowl}
 
-        <Text>
-          {this.state.value}
-        </Text>
+        <Text>{this.state.value}</Text>
 
         {arrowr}
-
       </Root>
     )
   }
