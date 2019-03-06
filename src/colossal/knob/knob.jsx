@@ -1,10 +1,75 @@
 import React from 'react'
-
-import './knob.scss'
+import styled from 'styled-components'
 
 import Maps from '../../maps.js'
 
-let Knob = React.createClass({
+const Root = styled.div`
+  ${props => props.size === 'small' && `
+  font-size: 8px;
+  width: $smallSize;
+  height: $smallSize;
+  `
+  }
+
+  ${props => props.size === 'big' && `
+  width: 65px;
+  height: 65px;
+  margin: 20px;
+  `
+  }
+
+  font-size: 10px;
+  position: relative;
+  background-color: grey;
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+  border: solid 2px #000000;
+  margin: 6px;
+  margin-bottom: 20px;
+  background: #353535;
+  background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #2F2F2F), color-stop(1, #383838));
+  box-shadow: inset 0 0.2em 0 0.1px rgba(255, 255, 255, 0.25), inset 0 -0.2em 0 0.1px rgba(0, 0, 0, 0.19), 0 0.6em 1.2em 0 black, 0 0 2px 1px rgba(255, 255, 255, 0.2), 0 0 20px -2px rgba(255, 255, 255, 0.25);
+
+`
+
+const Knob = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  transform: rotate(0deg);
+  z-index: 10;
+
+  ${props => props.animated && `
+  transition: 0.5s ease all;
+  `
+  }
+
+  &:before {
+    content: "";
+    position: absolute;
+    bottom: 10%;
+    left: 47%;
+    width: 10%;
+    height: 14%;
+    background-color: #A8F8F2;
+    border-radius: 50%;
+    box-shadow: 0 0 0.4em 0 #8ee7e0;
+  }
+`
+
+const Label = styled.span`
+  position: absolute;
+  width: 200%;
+  left: -50%;
+  top: 120%;
+  text-align: center;
+`
+
+
+
+const KnobComponent = React.createClass({
   getInitialState: function () {
     return {
       value: this.reverseLaw(this.getValueLink(this.props).value),
@@ -15,10 +80,10 @@ let Knob = React.createClass({
   },
 
   getValueLink: function (props) {
-        // Create an object that works just like the one
-        // returned from `this.linkState` if we weren't passed
-        // one; that way, we can always behave as if we're using
-        // `valueLink`, even if we're using plain `value` and `onChange`.
+    // Create an object that works just like the one
+    // returned from `this.linkState` if we weren't passed
+    // one; that way, we can always behave as if we're using
+    // `valueLink`, even if we're using plain `value` and `onChange`.
     return props.valueLink || {
       value: props.value,
       requestChange: props.onChange
@@ -91,19 +156,18 @@ let Knob = React.createClass({
 
     return (
 
-      <div className={'knob-surround ' + this.props.size} onMouseDown={this.onMouseDown} >
-        <div
-          className={'knob ' + (this.state.dragging ? '' : 'animated')}
+      <Root size={this.props.size} onMouseDown={this.onMouseDown} >
+        <Knob
           style={{
             transform: `rotate(${rdeg}deg)`
           }}
-             />
+        />
 
-        <span>{this.props.label}</span>
+      <Label>{this.props.label}</Label>
 
-      </div>
+    </Root>
     )
   }
 })
 
-export default Knob
+export default KnobComponent

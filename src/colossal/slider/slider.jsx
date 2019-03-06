@@ -1,9 +1,36 @@
 import React from 'react'
-const ReactDOM = require('react-dom')
-
-import './slider.scss'
+import ReactDOM from 'react-dom'
 
 import Maps from '../../maps.js'
+
+import styled from 'styled-components'
+
+const Root = styled.div`
+  margin: 8px;
+  flex: 0 0 25px;
+  box-shadow: rgba(0, 0, 0, 0.41) 0 0px 4px inset, #242424 0 0 0px 10px inset;
+  background-color: #080808;
+  border: 1px solid #0E0E0E;
+  border-radius: 4px;
+`
+
+const Knob = styled.div`
+  //for label
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  box-shadow: 0 0.2em 0 0.1px rgba(255, 255, 255, 0.25) inset, 0 -0.2em 0px 0.1px rgba(0, 0, 0, 0.19) inset, 0 0 10px rgba(0, 0, 0, 0.24), black 0 0 1px 1px;
+  background-color: #333333;
+  position: absolute;
+  width: $size;
+  height: $size*1.5;
+  border-radius: 5px;
+
+  ${props => props.animated ? `
+  transition: 0.5s ease all
+  `:``};
+`
 
 let Slider = React.createClass({
   componentWillUpdate: function () {
@@ -20,10 +47,10 @@ let Slider = React.createClass({
   },
 
   getValueLink: function (props) {
-        // Create an object that works just like the one
-        // returned from `this.linkState` if we weren't passed
-        // one; that way, we can always behave as if we're using
-        // `valueLink`, even if we're using plain `value` and `onChange`.
+    // Create an object that works just like the one
+    // returned from `this.linkState` if we weren't passed
+    // one; that way, we can always behave as if we're using
+    // `valueLink`, even if we're using plain `value` and `onChange`.
     return props.valueLink || {
       value: props.value,
       requestChange: props.onChange
@@ -94,18 +121,17 @@ let Slider = React.createClass({
   render () {
     return (
 
-      <div className='slider' >
-        <div
-          className={'knob ' + (this.state.dragging ? '' : 'animated')}
+      <Root>
+        <Knob
+          animated={this.state.dragging}
           onMouseDown={this.onMouseDown}
           style={{
             transform: 'translateY(' + (1 - this.state.value) * (this.state.height - this.state.knobheight) + 'px)'
           }}
-            >
+        >
           {this.props.label}
-        </div>
-
-      </div>
+        </Knob>
+      </Root>
     )
   }
 })

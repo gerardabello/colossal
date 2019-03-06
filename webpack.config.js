@@ -1,42 +1,32 @@
-let webpack = require('webpack')
-
-let path = require('path')
+const path = require('path')
+const webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
-  context: path.resolve(__dirname, 'src'),
-  entry: './main.jsx',
-
-  output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'build'),
-    publicPath: 'http://localhost:8080/'
+  devtool: 'source-map',
+  entry: {
+    bundle: './src/main.jsx'
   },
-
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: 'Colossal',
+      template: './index.template.html'
+    })
+  ],
   module: {
-
-    loaders: [
+    rules: [
       {
-        test: /\.jsx?$/,
-        exclude: /(node_modules|bower_components)/,
-        loader: 'babel', // 'babel-loader' is also a legal name to reference
-        query: {
-          presets: ['react', 'es2015']
-        }
-      },
-
-      {
-        test: /\.js?$/,
-        exclude: /(node_modules|bower_components)/,
-        loader: 'babel', // 'babel-loader' is also a legal name to reference
-        query: {
-          presets: ['es2015']
-        }
-      },
-
-            { test: /\.scss$/, loader: 'style-loader!css-loader!sass-loader' }
+        test: /\.(js|jsx)$/,
+        exclude: /(node_modules)/,
+        use: [
+          {
+            loader: 'babel-loader'
+          }
+        ]
+      }
     ]
   },
-  node: {
-    fs: 'empty'
+  devServer: {
+    port: 5050
   }
 }

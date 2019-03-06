@@ -4,8 +4,6 @@ import React from 'react'
 
 let Note = require('octavian').Note
 
-import './keyboard.scss'
-
 let keynotemap = {
   65: 'C3', // A
   83: 'D3', // S

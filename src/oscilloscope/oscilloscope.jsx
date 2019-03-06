@@ -4,7 +4,26 @@ import ReactDOM from 'react-dom'
 
 import Binder from 'react-binding'
 
-import './oscilloscope.scss'
+import styled from 'styled-components'
+
+const Root = styled.div`
+  background: #C7C7BF;
+  color: #161616;
+  height: 200px;
+  width: 1024px;
+  position: relative;
+
+`
+
+const Canvas = styled.canvas`
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  height: 180px;
+  width: 700px;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.5) 0 -2px 0px 2px, white 0 2px 0px 2px;
+`
 
 let backcolor = 'rgb(34, 56, 50)'
 let lightcolor = 'rgb(132, 223, 196)'
@@ -44,7 +63,7 @@ let Oscilloscope = React.createClass({
 
     for (let i = margin; i < bufferLength - margin; i++) {
       if (!startdraw) {
-            // If we find a sample that has a positive derivative and crosses zero, we set it as a 'trigger' point and start drawing. If we find that we have already searched half the buffer just start drawing already cause we lost all hopes.
+        // If we find a sample that has a positive derivative and crosses zero, we set it as a 'trigger' point and start drawing. If we find that we have already searched half the buffer just start drawing already cause we lost all hopes.
         if ((dataArray[i - 1] < middle && dataArray[i] >= middle) || i > bufferLength / 2) {
           startdraw = true
         }
@@ -110,12 +129,12 @@ let Oscilloscope = React.createClass({
 
     this.drawTime()
   },
-    // RENDER
+  // RENDER
   render: function () {
     return (
-      <div className='oscilloscope'>
-        <canvas className='canvas' width='700' height='180' />
-      </div>
+      <Root>
+        <Canvas width='700' height='180' />
+      </Root>
     )
   }
 })

@@ -1,6 +1,38 @@
 import React from 'react'
+import styled from 'styled-components'
 
-import './selector.scss'
+const Root = styled.div`
+  height: 22px;
+
+  margin: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  box-shadow: #363636 0 0 1px 1px;
+  border-radius: 4px;
+  border: 1px solid #080808;
+  background: #000000;
+
+  color: #A8F8F2;
+  font-family: monospace;
+  font-size: 14px;
+
+  overflow: hidden;
+`
+
+const Text = styled.div`
+  width: 100%;
+  text-align: center;
+`
+const Arrow = styled.div`
+  width: 14px;
+  text-align: center;
+
+  background: #1D1D1D;
+  border: 1px solid #252525;
+  padding: 2px 2px;
+`
 
 let Selector = React.createClass({
   getInitialState: function () {
@@ -10,10 +42,10 @@ let Selector = React.createClass({
   },
 
   getValueLink: function (props) {
-        // Create an object that works just like the one
-        // returned from `this.linkState` if we weren't passed
-        // one; that way, we can always behave as if we're using
-        // `valueLink`, even if we're using plain `value` and `onChange`.
+    // Create an object that works just like the one
+    // returned from `this.linkState` if we weren't passed
+    // one; that way, we can always behave as if we're using
+    // `valueLink`, even if we're using plain `value` and `onChange`.
     return props.valueLink || {
       value: props.value,
       requestChange: props.onChange
@@ -37,7 +69,7 @@ let Selector = React.createClass({
   },
 
   onToggle () {
-        // This only works if we have 2 values
+    // This only works if we have 2 values
     if (this.props.values.length > 2) {
       return
     }
@@ -70,21 +102,21 @@ let Selector = React.createClass({
     let arrowr = []
 
     if (this.props.values.length > 2) {
-      arrowl = (<div className='left arrow' onClick={this.onPrevious}>{'<'}</div>)
-      arrowr = (<div className='right arrow' onClick={this.onNext}>{'>'}</div>)
+      arrowl = (<Arrow onClick={this.onPrevious}>{'<'}</Arrow>)
+      arrowr = (<Arrow onClick={this.onNext}>{'>'}</Arrow>)
     }
 
     return (
-      <div className='selector' onClick={this.onToggle}>
+      <Root onClick={this.onToggle}>
         {arrowl}
 
-        <div className='text'>
+        <Text>
           {this.state.value}
-        </div>
+        </Text>
 
         {arrowr}
 
-      </div>
+      </Root>
     )
   }
 })

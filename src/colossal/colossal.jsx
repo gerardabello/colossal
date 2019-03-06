@@ -10,8 +10,6 @@ import Knob from './knob/knob.jsx'
 import Selector from './selector/selector.jsx'
 import Slider from './slider/slider.jsx'
 
-import './colossal.scss'
-
 import Voice from './voice/voice.js'
 
 import Presets from './presets/presets.js'
