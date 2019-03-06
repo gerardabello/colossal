@@ -26,8 +26,6 @@ let backcolor = 'rgb(34, 56, 50)'
 let lightcolor = 'rgb(132, 223, 196)'
 
 class Oscilloscope extends React.Component {
-  state = {}
-
   drawTime = () => {
     window.requestAnimationFrame(this.drawTime)
 
@@ -85,40 +83,10 @@ class Oscilloscope extends React.Component {
     canvasCtx.stroke()
   }
 
-  drawFreq = () => {
-    window.requestAnimationFrame(this.drawFreq)
-
-    let canvasCtx = this.canvasCtx
-    let HEIGHT = this.HEIGTH
-    let WIDTH = this.WIDTH
-
-    this.analyser.getByteFrequencyData(this.dataArray)
-
-    canvasCtx.fillStyle = backcolor
-    canvasCtx.fillRect(0, 0, WIDTH, HEIGHT)
-
-    canvasCtx.shadowBlur = 10
-    canvasCtx.shadowColor = lightcolor
-
-    let barWidth = 1
-    let barHeight
-    let x = 0
-
-    for (let i = 0; i < this.bufferLength; i++) {
-      barHeight = this.dataArray[i]
-
-      canvasCtx.fillStyle = lightcolor
-      canvasCtx.fillRect(x, HEIGHT - barHeight / 2, barWidth, barHeight / 2)
-
-      x += barWidth
-    }
-  }
-
   componentDidMount() {
     this.analyser = this.props.ctx.createAnalyser()
     this.props.node.connect(this.analyser)
 
-    this.canvas = ReactDOM.findDOMNode(this).getElementsByClassName('canvas')[0]
     this.canvasCtx = this.canvas.getContext('2d')
 
     this.WIDTH = this.canvas.width

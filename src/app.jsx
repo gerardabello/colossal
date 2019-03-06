@@ -3,7 +3,7 @@ import React from 'react'
 import styled, { createGlobalStyle } from 'styled-components'
 import Colossal from './colossal/colossal.jsx'
 import Keyboard from './keyboard/keyboard.jsx'
-// import Oscilloscope from './oscilloscope/oscilloscope.jsx'
+import Oscilloscope from './oscilloscope/oscilloscope.jsx'
 
 const KeyboardWrapper = styled.div`
   height: 155px;
@@ -112,9 +112,7 @@ class App extends React.Component {
               dstNode={this.state.dstNode}
               ref={ref => (this.synth = ref)}
             />
-            {/*
-          <Oscilloscope ctx={this.state.ctx} node={this.state.dstNode} />
-        */}
+            <Oscilloscope ctx={this.state.ctx} node={this.state.dstNode} />
           </InstrumentStack>
         </InstrumentPanel>
         <KeyboardWrapper>
