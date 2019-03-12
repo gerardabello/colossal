@@ -8,7 +8,8 @@ import styled from 'styled-components'
 const Root = styled.div`
   margin: 8px;
   flex: 0 0 25px;
-  box-shadow: rgba(0, 0, 0, 0.41) 0 0px 4px inset, #242424 0 0 0px 10px inset;
+  box-shadow: #00000047 0 5px 10px inset, rgba(0, 0, 0, 0.41) 0 0px 4px inset,
+    #242424 0 0 0px 10px inset, #ffffff0d 0 0px 5px 0px;
   background-color: #080808;
   border: 1px solid #0e0e0e;
   border-radius: 4px;
