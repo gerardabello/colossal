@@ -98,29 +98,6 @@ const Label = styled.span`
 `
 
 class KnobComponent extends React.Component {
-  getValueLink = props => {
-    // Create an object that works just like the one
-    // returned from `this.linkState` if we weren't passed
-    // one; that way, we can always behave as if we're using
-    // `valueLink`, even if we're using plain `value` and `onChange`.
-    return (
-      props.valueLink || {
-        value: props.value,
-        requestChange: props.onChange
-      }
-    )
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      value: this.reverseLaw(this.getValueLink(nextProps).value)
-    })
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return this.state.value !== nextState.value
-  }
-
   handleChange = value => {
     if (value > 1) {
       value = 1
@@ -128,14 +105,8 @@ class KnobComponent extends React.Component {
     if (value < 0) {
       value = 0
     }
-    this.setState(
-      {
-        value: value
-      },
-      () => {
-        this.getValueLink(this.props).requestChange(this.applyLaw(value))
-      }
-    )
+
+    this.props.onChange(this.applyLaw(value))
   }
 
   applyLaw = v => {
@@ -151,21 +122,10 @@ class KnobComponent extends React.Component {
   }
 
   onMouseDown = e => {
-    if (e.button === 2) {
-      let def = 0
-      if (def < this.props.min || def > this.props.max) {
-        def = this.props.min
-      }
-      if (this.props.defaultValue != null) {
-        def = this.props.defaultValue
-      }
-      this.handleChange(this.reverseLaw(def))
-      return
-    }
     this.setState({
       dragPoint: [e.screenX, e.screenY],
       dragging: true,
-      dragStartValue: this.state.value
+      dragStartValue: this.reverseLaw(this.props.value)
     })
   }
 
@@ -182,7 +142,6 @@ class KnobComponent extends React.Component {
   }
 
   state = {
-    value: this.reverseLaw(this.getValueLink(this.props).value),
     dragging: false,
     dragPoint: [0.0, 0.0],
     dragStartValue: 0
@@ -194,7 +153,7 @@ class KnobComponent extends React.Component {
   }
 
   render() {
-    let rdeg = 45 + this.valueToDeg(this.state.value)
+    let rdeg = 45 + this.valueToDeg(this.reverseLaw(this.props.value))
 
     return (
       <Root size={this.props.size}>

@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 
+import * as R from 'ramda'
+
 import Binder from 'react-binding'
 
 import Knob from './knob/knob.jsx'
@@ -124,7 +126,6 @@ const Root = styled.div`
 class Colossal extends React.Component {
   state = { presetname: 'default' }
 
-  // SYNTH INTERFACE FUNCTIONS
   stopAllVoices = hard => {
     for (let key in this.voices) {
       // Telling the voice to end it's basic signature ensures the voice will fully end. You can end a voice with a different signature and the envelope gate does not close (used for mono).
@@ -155,8 +156,6 @@ class Colossal extends React.Component {
     }
   }
 
-  // END SYNTH INTERFACE FUNCTIONS
-
   destroyVoices = () => {
     for (let key in this.voices) {
       this.voices[key].destroy()
@@ -168,8 +167,6 @@ class Colossal extends React.Component {
     this.outGain = this.props.ctx.createGain()
     this.outGain.connect(this.props.dstNode)
 
-    // this.createVoices();
-
     this.setPreset(this.state.presetname)
   }
 
@@ -177,7 +174,6 @@ class Colossal extends React.Component {
     this.voices = {}
     this.setPreset(this.state.presetname)
   }
-  // HANDLERS
 
   onChangePreset = name => {
     this.setPreset(name)
@@ -195,7 +191,17 @@ class Colossal extends React.Component {
       this.voices[key].setPreset(this.state.preset)
     }
   }
-  // RENDER
+
+  setPresetPath = path => value => {
+    const preset = this.state.preset
+    const lens = R.lensPath(path)
+    this.setState({ preset: R.set(lens, value, preset) })
+  }
+
+  getPresetPath = path => {
+    const preset = this.state.preset
+    return R.path(path, preset)
+  }
 
   render() {
     return (
@@ -211,22 +217,21 @@ class Colossal extends React.Component {
                   min={-1}
                   max={1}
                   law="linear"
-                  valueLink={Binder.bindToState(
-                    this,
-                    'preset',
-                    'osc.osc1.wave.shape'
-                  )}
+                  onChange={this.setPresetPath([
+                    'osc',
+                    'osc1',
+                    'wave',
+                    'shape'
+                  ])}
+                  value={this.getPresetPath(['osc', 'osc1', 'wave', 'shape'])}
                 />
                 <Knob
                   label="DETUNE"
                   min={-1}
                   max={1}
                   law="linear"
-                  valueLink={Binder.bindToState(
-                    this,
-                    'preset',
-                    'osc.osc1.detune'
-                  )}
+                  onChange={this.setPresetPath(['osc', 'osc1', 'detune'])}
+                  value={this.getPresetPath(['osc', 'osc1', 'detune'])}
                 />
               </Subsection>
             </OscSection>
@@ -238,22 +243,21 @@ class Colossal extends React.Component {
                   min={-1}
                   max={1}
                   law="linear"
-                  valueLink={Binder.bindToState(
-                    this,
-                    'preset',
-                    'osc.osc2.wave.shape'
-                  )}
+                  onChange={this.setPresetPath([
+                    'osc',
+                    'osc2',
+                    'wave',
+                    'shape'
+                  ])}
+                  value={this.getPresetPath(['osc', 'osc2', 'wave', 'shape'])}
                 />
                 <Knob
                   label="DETUNE"
                   min={-1}
                   max={1}
                   law="linear"
-                  valueLink={Binder.bindToState(
-                    this,
-                    'preset',
-                    'osc.osc2.detune'
-                  )}
+                  onChange={this.setPresetPath(['osc', 'osc2', 'detune'])}
+                  value={this.getPresetPath(['osc', 'osc2', 'detune'])}
                 />
               </Subsection>
             </OscSection>
@@ -288,40 +292,32 @@ class Colossal extends React.Component {
               max={22050}
               defaultValue={22050}
               law="log"
-              valueLink={Binder.bindToState(
-                this,
-                'preset',
-                'filters.filt1.freq'
-              )}
+              onChange={this.setPresetPath(['filters', 'filt1', 'freq'])}
+              value={this.getPresetPath(['filters', 'filt1', 'freq'])}
             />
             <Knob
               label="Q"
               min={1}
               max={20}
               law="pow"
-              valueLink={Binder.bindToState(this, 'preset', 'filters.filt1.q')}
+              onChange={this.setPresetPath(['filters', 'filt1', 'q'])}
+              value={this.getPresetPath(['filters', 'filt1', 'q'])}
             />
             <Knob
               label="GAIN"
               min={-20}
               max={20}
               law="pow"
-              valueLink={Binder.bindToState(
-                this,
-                'preset',
-                'filters.filt1.gain'
-              )}
+              onChange={this.setPresetPath(['filters', 'filt1', 'gain'])}
+              value={this.getPresetPath(['filters', 'filt1', 'gain'])}
             />
             <Knob
               label="KEY"
               min={0}
               max={1}
               law="linear"
-              valueLink={Binder.bindToState(
-                this,
-                'preset',
-                'filters.filt1.key'
-              )}
+              onChange={this.setPresetPath(['filters', 'filt1', 'key'])}
+              value={this.getPresetPath(['filters', 'filt1', 'key'])}
             />
           </Subsection>
 
@@ -332,11 +328,8 @@ class Colossal extends React.Component {
               min={-10000}
               max={10000}
               law="liner"
-              valueLink={Binder.bindToState(
-                this,
-                'preset',
-                'filters.filt1.envgain'
-              )}
+              onChange={this.setPresetPath(['filters', 'filt1', 'envgain'])}
+              value={this.getPresetPath(['filters', 'filt1', 'envgain'])}
             />
             <Knob
               label="A"
@@ -344,11 +337,8 @@ class Colossal extends React.Component {
               min={0}
               max={10}
               law="pow"
-              valueLink={Binder.bindToState(
-                this,
-                'preset',
-                'filters.filt1.env.a'
-              )}
+              onChange={this.setPresetPath(['filters', 'filt1', 'env', 'a'])}
+              value={this.getPresetPath(['filters', 'filt1', 'env', 'a'])}
             />
             <Knob
               label="D"
@@ -356,11 +346,8 @@ class Colossal extends React.Component {
               min={0}
               max={10}
               law="pow"
-              valueLink={Binder.bindToState(
-                this,
-                'preset',
-                'filters.filt1.env.d'
-              )}
+              onChange={this.setPresetPath(['filters', 'filt1', 'env', 'd'])}
+              value={this.getPresetPath(['filters', 'filt1', 'env', 'd'])}
             />
             <Knob
               label="S"
@@ -368,11 +355,8 @@ class Colossal extends React.Component {
               min={0}
               max={1}
               law="pow"
-              valueLink={Binder.bindToState(
-                this,
-                'preset',
-                'filters.filt1.env.s'
-              )}
+              onChange={this.setPresetPath(['filters', 'filt1', 'env', 's'])}
+              value={this.getPresetPath(['filters', 'filt1', 'env', 's'])}
             />
             <Knob
               label="R"
@@ -380,11 +364,8 @@ class Colossal extends React.Component {
               min={0}
               max={10}
               law="pow"
-              valueLink={Binder.bindToState(
-                this,
-                'preset',
-                'filters.filt1.env.r'
-              )}
+              onChange={this.setPresetPath(['filters', 'filt1', 'env', 'r'])}
+              value={this.getPresetPath(['filters', 'filt1', 'env', 'r'])}
             />
           </Subsection>
         </Filt1Section>
@@ -445,7 +426,8 @@ class Colossal extends React.Component {
             min={0}
             max={2}
             law="linear"
-            valueLink={Binder.bindToState(this, 'preset', 'glide')}
+            onChange={this.setPresetPath(['glide'])}
+            value={this.getPresetPath(['glide'])}
           />
         </GlideSection>
 
@@ -466,7 +448,8 @@ class Colossal extends React.Component {
             min={0}
             max={2}
             law="pow"
-            valueLink={Binder.bindToState(this, 'preset', 'gain')}
+            onChange={this.setPresetPath(['gain'])}
+            value={this.getPresetPath(['gain'])}
           />
         </OutSection>
       </Root>
