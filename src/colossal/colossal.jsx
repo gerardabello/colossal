@@ -3,8 +3,6 @@ import styled from 'styled-components'
 
 import * as R from 'ramda'
 
-import Binder from 'react-binding'
-
 import Knob from './knob/knob.jsx'
 import Selector from './selector/selector.jsx'
 import Slider from './slider/slider.jsx'
@@ -196,6 +194,7 @@ class Colossal extends React.Component {
     const preset = this.state.preset
     const lens = R.lensPath(path)
     this.setState({ preset: R.set(lens, value, preset) })
+    JSON.stringify(preset)
   }
 
   getPresetPath = path => {
@@ -267,7 +266,8 @@ class Colossal extends React.Component {
             min={0}
             max={1}
             law="linear"
-            valueLink={Binder.bindToState(this, 'preset', 'osc.mix')}
+            onChange={this.setPresetPath(['osc', 'mix'])}
+            value={this.getPresetPath(['osc', 'mix'])}
           />
         </Oscillators>
         <Filt1Section>
@@ -282,7 +282,8 @@ class Colossal extends React.Component {
               'notch',
               'allpass'
             ]}
-            valueLink={Binder.bindToState(this, 'preset', 'filters.filt1.type')}
+            onChange={this.setPresetPath(['filters', 'filt1', 'type'])}
+            value={this.getPresetPath(['filters', 'filt1', 'type'])}
           />
 
           <Subsection horitzontal center>
@@ -378,14 +379,16 @@ class Colossal extends React.Component {
               min={0}
               max={10}
               law="pow"
-              valueLink={Binder.bindToState(this, 'preset', 'envelopes.env1.a')}
+              onChange={this.setPresetPath(['envelopes', 'env1', 'a'])}
+              value={this.getPresetPath(['envelopes', 'env1', 'a'])}
             />
             <Slider
               label="D"
               min={0}
               max={10}
               law="pow"
-              valueLink={Binder.bindToState(this, 'preset', 'envelopes.env1.d')}
+              onChange={this.setPresetPath(['envelopes', 'env1', 'd'])}
+              value={this.getPresetPath(['envelopes', 'env1', 'd'])}
             />
             <Slider
               label="S"
@@ -393,14 +396,16 @@ class Colossal extends React.Component {
               max={1}
               law="pow"
               defaultValue={1}
-              valueLink={Binder.bindToState(this, 'preset', 'envelopes.env1.s')}
+              onChange={this.setPresetPath(['envelopes', 'env1', 's'])}
+              value={this.getPresetPath(['envelopes', 'env1', 's'])}
             />
             <Slider
               label="R"
               min={0}
               max={10}
               law="pow"
-              valueLink={Binder.bindToState(this, 'preset', 'envelopes.env1.r')}
+              onChange={this.setPresetPath(['envelopes', 'env1', 'r'])}
+              value={this.getPresetPath(['envelopes', 'env1', 'r'])}
             />
           </Subsection>
         </EnvSection>
@@ -408,18 +413,21 @@ class Colossal extends React.Component {
         <ModeSection>
           <Selector
             values={['MONO', 'POLY']}
-            valueLink={Binder.bindToState(this, 'preset', 'mode')}
+            onChange={this.setPresetPath(['mode'])}
+            value={this.getPresetPath(['mode'])}
           />
         </ModeSection>
 
         <GlideSection disabled={this.state.preset.mode !== 'MONO'}>
           <Selector
             values={['multiple', 'single']}
-            valueLink={Binder.bindToState(this, 'preset', 'triggerMode')}
+            onChange={this.setPresetPath(['triggerMode'])}
+            value={this.getPresetPath(['triggerMode'])}
           />
           <Selector
             values={['always', 'legato']}
-            valueLink={Binder.bindToState(this, 'preset', 'glideMode')}
+            onChange={this.setPresetPath(['glideMode'])}
+            value={this.getPresetPath(['glideMode'])}
           />
           <Knob
             label="GLIDE"

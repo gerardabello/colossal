@@ -242,6 +242,99 @@ const Presets = {
         r: 4
       }
     }
+  },
+  'square hills': {
+    gain: 0.2,
+    mode: 'POLY',
+    triggerMode: 'multiple',
+    glide: 0,
+    glideMode: 'legato',
+    osc: {
+      mix: 0.5,
+      osc1: { wave: { shape: 0 }, detune: 0.030000000000000027, octave: 0 },
+      osc2: { wave: { shape: -1 }, detune: 0.02400000000000002, octave: 0 }
+    },
+    filters: {
+      filt1: {
+        type: 'highpass',
+        freq: 169.564782003794,
+        q: 1,
+        gain: 0,
+        key: 1,
+        envgain: 10000,
+        env: { a: 0, d: 0.06561000000000003, s: 0, r: 0.7952400000000002 }
+      }
+    },
+    envelopes: {
+      env1: { a: 0.012, d: 2.2952287855431095, s: 0, r: 0.21516113955624527 }
+    }
+  },
+  'eastern string': {
+    gain: 0.2,
+    mode: 'POLY',
+    triggerMode: 'multiple',
+    glide: 0,
+    glideMode: 'legato',
+    osc: {
+      mix: 0.5,
+      osc1: { wave: { shape: 0.02400000000000002 }, detune: 1, octave: 0 },
+      osc2: { wave: { shape: -1 }, detune: 1, octave: 0 }
+    },
+    filters: {
+      filt1: {
+        type: 'lowpass',
+        freq: 3883.9970309807695,
+        q: 1,
+        gain: 0,
+        key: 1,
+        envgain: 10000,
+        env: { a: 0, d: 0.06561000000000003, s: 0, r: 0.7952400000000002 }
+      }
+    },
+    envelopes: {
+      env1: {
+        a: 0.006574621959237348,
+        d: 0.6143618964131782,
+        s: 0,
+        r: 0.3919044692669402
+      }
+    }
+  },
+  'alien tongue': {
+    gain: 0.2,
+    mode: 'MONO',
+    triggerMode: 'multiple',
+    glide: 0,
+    glideMode: 'legato',
+    osc: {
+      mix: 0.7040816326530612,
+      osc1: { wave: { shape: 1 }, detune: 1, octave: 0 },
+      osc2: { wave: { shape: -1 }, detune: -1, octave: 0 }
+    },
+    filters: {
+      filt1: {
+        type: 'lowpass',
+        freq: 1055.3498919105455,
+        q: 20,
+        gain: 20,
+        key: 1,
+        envgain: 10000,
+        env: {
+          a: 0.42024999999999973,
+          d: 0.45368999999999987,
+          s: 0,
+          r: 0.056249999999999994
+        }
+      }
+    },
+    envelopes: {
+      env1: {
+        a: 0.006574621959237348,
+        d: 3.0864197530864192,
+        s: 0,
+        r: 1.9121555751606225
+      }
+    }
   }
 }
 

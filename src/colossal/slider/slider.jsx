@@ -44,31 +44,6 @@ const Knob = styled.div`
 `
 
 class Slider extends React.Component {
-  componentWillUpdate() {}
-
-  getValueLink = props => {
-    // Create an object that works just like the one
-    // returned from `this.linkState` if we weren't passed
-    // one; that way, we can always behave as if we're using
-    // `valueLink`, even if we're using plain `value` and `onChange`.
-    return (
-      props.valueLink || {
-        value: props.value,
-        requestChange: props.onChange
-      }
-    )
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return this.state.value !== nextState.value
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      value: this.reverseLaw(this.getValueLink(nextProps).value)
-    })
-  }
-
   handleChange = value => {
     if (value > 1) {
       value = 1
@@ -76,14 +51,8 @@ class Slider extends React.Component {
     if (value < 0) {
       value = 0
     }
-    this.setState(
-      {
-        value: value
-      },
-      () => {
-        this.getValueLink(this.props).requestChange(this.applyLaw(value))
-      }
-    )
+
+    this.props.onChange(this.applyLaw(value))
   }
 
   applyLaw = v => {
@@ -95,18 +64,10 @@ class Slider extends React.Component {
   }
 
   onMouseDown = e => {
-    if (e.button === 2) {
-      let def = this.props.min
-      if (this.props.defaultValue != null) {
-        def = this.props.defaultValue
-      }
-      this.handleChange(this.reverseLaw(def))
-      return
-    }
     this.setState({
       dragPoint: [e.screenX, e.screenY],
       dragging: true,
-      dragStartValue: this.state.value
+      dragStartValue: this.reverseLaw(this.props.value)
     })
   }
 
@@ -123,15 +84,12 @@ class Slider extends React.Component {
   }
 
   state = {
-    value: this.reverseLaw(this.getValueLink(this.props).value),
     dragging: false,
     dragPoint: [0.0, 0.0],
     dragStartValue: 0,
     height: 1,
     knobheight: 1
   }
-
-  componentWillMount() {}
 
   componentDidMount() {
     window.addEventListener('mousemove', this.handleMoveAll)
@@ -155,7 +113,7 @@ class Slider extends React.Component {
           style={{
             transform:
               'translateY(' +
-              (1 - this.state.value) *
+              (1 - this.reverseLaw(this.props.value)) *
                 (this.state.height - this.state.knobheight) +
               'px)'
           }}>

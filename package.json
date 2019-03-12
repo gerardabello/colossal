@@ -40,8 +40,6 @@
     "octavian": "^2.2.0",
     "ramda": "^0.26.1",
     "react": "^16.8.4",
-    "react-addons-linked-state-mixin": "^15.6.2",
-    "react-binding": "^0.9.1",
     "react-dom": "^16.8.4",
     "styled-components": "^4.1.3"
   }
