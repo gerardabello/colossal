@@ -7,6 +7,10 @@ module.exports = {
   entry: {
     bundle: './src/main.jsx'
   },
+  output: {
+    chunkFilename: '[name]-[chunkhash].js',
+    filename: '[hash]-[name]-entry.js'
+  },
   plugins: [
     new HtmlWebpackPlugin({
       title: 'Colossal',
