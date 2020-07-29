@@ -6,6 +6,7 @@ ignore
 
 # Webpack build directory
 build
+dist
 
 # Packaged app
 bin
